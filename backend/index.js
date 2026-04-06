@@ -32,6 +32,13 @@ const authRoutes = require('./routes/auth');
 // Ex: POST /api/auth/register | POST /api/auth/login
 app.use('/api/auth', authRoutes);
 
+// Importa as rotas de sessões
+const sessoesRoutes = require('./routes/sessoes');
+
+// Registra as rotas de sessões com o prefixo /api/sessoes
+// Ex: POST /api/sessoes | GET /api/sessoes
+app.use('/api/sessoes', sessoesRoutes);
+
 // Rota raiz para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.json({ message: 'Immerly API is running' });
