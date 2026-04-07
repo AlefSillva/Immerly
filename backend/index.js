@@ -24,13 +24,15 @@ pool.query('SELECT NOW()', (err, res) => {
         console.log('Database connected at:', res.rows[0].now);
     }
 });
+//-----------------------------------------------
 
-// Importa as rotas de autenticação (register e login)
+// Importa as rotas de autenticação (registro e login)
 const authRoutes = require('./routes/auth');
 
 // Registra as rotas de autenticação com o prefixo /api/auth
 // Ex: POST /api/auth/register | POST /api/auth/login
 app.use('/api/auth', authRoutes);
+//-----------------------------------------------
 
 // Importa as rotas de sessões
 const sessoesRoutes = require('./routes/sessoes');
@@ -38,6 +40,13 @@ const sessoesRoutes = require('./routes/sessoes');
 // Registra as rotas de sessões com o prefixo /api/sessoes
 // Ex: POST /api/sessoes | GET /api/sessoes
 app.use('/api/sessoes', sessoesRoutes);
+//-----------------------------------------------
+
+// Importa as rotas de métricas
+const metricasRoutes = require('./routes/metricas');
+
+app.use('/api/metricas', metricasRoutes);
+//-----------------------------------------------
 
 // Rota raiz para verificar se o servidor está rodando
 app.get('/', (req, res) => {
