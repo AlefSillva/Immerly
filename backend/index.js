@@ -48,6 +48,14 @@ const metricasRoutes = require('./routes/metricas');
 app.use('/api/metricas', metricasRoutes);
 //-----------------------------------------------
 
+// Importa as rotas de metas
+const metasRoutes = require('./routes/metas');
+
+app.use('/api/metas', metasRoutes);
+//-----------------------------------------------
+
+
+//*************************************************************
 // Rota raiz para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.json({ message: 'Immerly API is running' });
