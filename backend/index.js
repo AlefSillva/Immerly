@@ -45,17 +45,26 @@ app.use('/api/sessoes', sessoesRoutes);
 // Importa as rotas de métricas
 const metricasRoutes = require('./routes/metricas');
 
+// Registra as rotas de métricas com o prefixo /api/metricas
 app.use('/api/metricas', metricasRoutes);
 //-----------------------------------------------
 
 // Importa as rotas de metas
 const metasRoutes = require('./routes/metas');
 
+// Registra as rotas de metas com o prefixo /api/metas
 app.use('/api/metas', metasRoutes);
 //-----------------------------------------------
 
+// Importa as rotas de recursos
+const recursosRoutes = require('./routes/recursos');
+
+// Registra as rotas de recursos com o prefixo /api/recursos
+app.use('/api/recursos', recursosRoutes);
+
 
 //*************************************************************
+
 // Rota raiz para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.json({ message: 'Immerly API is running' });
@@ -69,3 +78,4 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
+//*************************************************************

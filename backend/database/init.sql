@@ -29,7 +29,7 @@ CREATE TABLE recursos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(200) NOT NULL,
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ( 'listening', 'speaking', 'reading', 'writing', 'grammar', 'vocabulary', 'reference' )),
-    nivel VARCHAR(2) NOT NULL CHECK (nivel IN ('A1', 'A2', 'B1', 'B2', 'C1')),
+    nivel VARCHAR(2) CHECK (nivel IN ('A1', 'A2', 'B1', 'B2', 'C1')),
     descricao TEXT,
     link_externo VARCHAR(500) NOT NULL
 );
