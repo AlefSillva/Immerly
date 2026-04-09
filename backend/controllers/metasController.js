@@ -1,11 +1,16 @@
+const { validarCamposMetas } = require('../utils/metasValidator');
+
 const pool = require('../config/db');
 
 const criarMeta = async (req, res) => {
     const id_usuario = req.usuarioId;
     const { meta_semanal, meta_mensal } = req.body;
 
-    if ( !meta_semanal || !meta_mensal ) {
-        return res.status(400).json({ message: 'Meta semanal e meta mensal são obrigatórios.' });
+    const validacao = validarCamposMetas(meta_semanal, meta_mensal);
+
+    // Se a validação falhar, retorna um erro com a mensagem apropriada
+    if ( !validacao.valido ) {
+        return res.status(400).json({ message: validacao.mensagem });
     }
 
     try {
@@ -16,10 +21,12 @@ const criarMeta = async (req, res) => {
             [id_usuario]
         );
 
+        // Se já existir uma meta para o usuário, retorna um erro informando que ele deve usar PUT para atualizar
         if ( metaExistente.rows.length > 0 ) {
             return res.status(409).json({ message: 'Você já possui uma meta. Use PUT para atualizá-la.' });
         }
 
+        // Insere a nova meta no banco de dados
         const result = await pool.query(
             `INSERT INTO metas (id_usuario, meta_semanal, meta_mensal, data_atualizacao)
             VALUES ($1, $2, $3, NOW())
@@ -27,6 +34,7 @@ const criarMeta = async (req, res) => {
             [id_usuario, meta_semanal, meta_mensal]
         );
 
+        // Retorna a meta criada
         res.status(201).json({ meta: result.rows[0] });
 
     } catch (err) { 
@@ -39,14 +47,15 @@ const atualizarMeta = async (req, res) => {
     const id_usuario = req.usuarioId;
     const { meta_semanal, meta_mensal } = req.body;
 
-    if (!meta_semanal || !meta_mensal) {
-        return res.status(400).json({ message: 'Meta semanal e meta mensal são obrigatórios.' });
+    const validacao = validarCamposMetas(meta_semanal, meta_mensal);
+
+    // Se a validação falhar, retorna um erro com a mensagem apropriada
+    if ( !validacao.valido ) {
+        return res.status(400).json({ message: validacao.mensagem });
     }
 
-    if (meta_semanal < 0 || meta_mensal < 0) {
-        return res.status(400).json({ message: 'Meta semanal e meta mensal devem ser maiores que zero.' });
-    } 
 
+    // Atualiza a meta do usuário no banco de dados
     try {
         const result = await pool.query(
             `UPDATE metas
