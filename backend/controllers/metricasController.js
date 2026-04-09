@@ -55,20 +55,38 @@ const obter = async (req, res) => {
         );
 
         let streak = 0;
-        const dias = streakResult.rows.map(r => r.dia.toISOString().split('T')[0]);
-        const hoje = new Date().toISOString().split('T')[0];
 
-        if (dias.length > 0 && dias[0] === hoje) {
-            streak = 1;
-            for (let i = 1; i < dias.length; i++) {
-                const diaAnterior = new Date(dias[i - 1]);
-                const diaAtual = new Date(dias[i]);
-                const diferenca = (diaAnterior - diaAtual) / (1000 * 60 * 60 * 24);
+        // Converte as datas para o formato YYYY-MM-DD e ajusta para o horário local
+        const dias = streakResult.rows.map(r => {
+            const d = new Date(r.dia);
 
-                if (diferenca === 1) {
-                    streak++
-                } else {
-                    break;
+            return new Date( d.getTime() - d.getTimezoneOffset() * 60000 ).toISOString().split('T')[0];
+        });
+
+        // Verifica o streak considerando o horário local
+        const agora = new Date();
+        const hoje = new Date(agora.getTime() - agora.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+        
+        const ontemData = new Date(agora);
+        ontemData.setDate(ontemData.getDate() - 1);
+
+        const ontem = new Date(ontemData.getTime() - ontemData.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+
+        if (dias.length > 0 ) {
+
+            if (dias[0] === hoje || dias[0] == ontem) {
+                streak = 1;
+
+                for (let i = 1; i < dias.length; i++) {
+                    const dataMaisRecente = new Date(dias[i - 1]);
+                    const dataAnterior = new Date(dias[i]);
+                    const diferenca = Math.round((dataMaisRecente - dataAnterior) / (1000 * 60 * 60 * 24));
+
+                    if (diferenca === 1) {
+                        streak++
+                    } else {
+                        break;
+                    }
                 }
             }
         }
