@@ -61,7 +61,13 @@ const recursosRoutes = require('./routes/recursos');
 
 // Registra as rotas de recursos com o prefixo /api/recursos
 app.use('/api/recursos', recursosRoutes);
+//-----------------------------------------------
 
+// Importa as rotas de Comprehensible Input
+const ciRoutes = require('./routes/ci');
+
+// Registra as rotas de CI com o prefixo /api/ci
+app.use('/api/ci', ciRoutes);
 
 //*************************************************************
 
