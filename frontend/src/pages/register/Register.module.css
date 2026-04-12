@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: var(--cor-supericie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    text-align: center;
+    margin-top: -1rem;
+}
+
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.input {
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: var(--cor-primaria);
+    outline: none;
+}
+
+.botao {
+    background-color: var(--cor-primaria);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--raio-borda);
+    margin-top: 0.9rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.botao:hover {
+    opacity: 0.8;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.link {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.link a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: 600;
+}

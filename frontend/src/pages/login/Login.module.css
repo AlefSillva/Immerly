@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .card {
@@ -39,19 +39,17 @@
 
 .label {
     font-size: 0.85rem;
-    flex-direction: column;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
+    color: var(--cor-texto-suave);
 }
 
 .input {
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-fundo);    
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
     color: var(--cor-texto);
     font-size: 0.95rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s;    
 }
 
 .input:focus {
@@ -61,11 +59,11 @@
 
 .botao {
     background-color: var(--cor-primaria);
-    color: #FFF;
+    color: #ffffff;
     border: none;
     border-radius: var(--raio-borda);
     margin-top: 0.9rem;
-    padding: 0.6rem 0.7rem;
+    padding: 0.6rem 1rem;
     font-size: 1rem;
     font-weight: 600;
     transition: opacity 0.2s;

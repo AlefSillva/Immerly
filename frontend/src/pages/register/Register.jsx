@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import api from '../../services/api';
 import styles from './Register.module.css';
 
 function Register() {
@@ -21,7 +21,8 @@ function Register() {
         setErro('');
 
         try {
-            await api.post('auth/register', form);
+            await api.post('/auth/register', form);
+            alert('Conta criada com sucesso!')
             navigate('/login');
         
         } catch (err) {
@@ -40,10 +41,10 @@ function Register() {
                         <label className={styles.label}>Nome</label>
                         <input
                             className={styles.input}
-                            type="text"
+                            type='text'
                             name='nome'
                             value={form.nome}
-                            onchange={handleChange}
+                            onChange={ handleChange }
                             placeholder='Seu nome'
                             required
                         />
@@ -75,14 +76,14 @@ function Register() {
                         />
                     </div>
 
-                    {erro && <p className={styles.erro}>{erro} </p>}
+                    { erro && <p className={ styles.erro }>{ erro }</p> }
                     
-                    <button className={styles.botao} type='submit'>
+                    <button className={ styles.botao } type='submit'>
                         Criar conta
                     </button>
                 </form>
 
-                <p className={styles.Link}>
+                <p className={ styles.link }>
                     Já tem uma conta? <Link to='/login'>Entrar</Link>
                 </p>
             </div>
