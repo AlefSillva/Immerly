@@ -10,6 +10,12 @@ dotenv.config();
 // Cria a instância do servidor Express
 const app = express();
 
+// Importa o middleware CORS para permitir requisições do frontend
+const cors = require('cors');
+
+// Configura o CORS para aceitar requisições do frontend (ajuste a origem conforme necessário)
+app.use(cors());
+
 // Permite que o servidor entenda requisições com corpo em JSON
 app.use(express.json());
 
