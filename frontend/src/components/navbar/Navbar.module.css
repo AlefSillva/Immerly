@@ -1,0 +1,80 @@
+.navbar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.link {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #f1f1f1;
+}
+
+.openbtn {
+    position: fixed;
+    top: 20px;       
+    left: 20px;
+    z-index: 2;
+    font-size: 28px;
+    cursor: pointer;
+    color: #818181;
+    border: none;
+    background-color: transparent;
+}
+
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    border: none;
+    background-color: transparent;
+    color: #818181;
+}
+
+.openbtn:hover, .closebtn:hover {
+    color: #f1f1f1;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    bottom: 20px;
+    gap: 5px;
+    padding: 8px 8px 8px 32px;
+    font-size: 22px;
+    color: var(--cor-text-suave);
+}
+
+.logoutButton {
+    text-decoration: none;
+    font-size: 22px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    color: #f1f1f1;
+}
