@@ -30,6 +30,10 @@ function Login() {
             // Salva o token no localStorage para o interceptador do Axios usar
             localStorage.setItem('token', resposta.data.token);
             navigate('/dashboard');
+
+            localStorage.setItem('usuario', JSON.stringify(resposta.data.usuario));
+            navigate('/dashboard');
+
         } catch (err) {
             setErro(err.response?.data?.message || 'Email ou senha incorretos.');
         }

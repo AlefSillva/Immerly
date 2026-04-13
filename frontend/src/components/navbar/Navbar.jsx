@@ -34,7 +34,7 @@ function Navbar({ user }) {
                     &times;
             </button>
                 
-            <Link to="/" className={ styles.link }>Dashboard</Link>
+            <Link to="/dashboard" className={ styles.link }>Dashboard</Link>
             <Link to="/sessoes" className={ styles.link }>Registrar Sessão</Link>
             <Link to="/metas" className={ styles.link }>Metas</Link>
             <Link to="/recursos" className={ styles.link }>Biblioteca</Link>
