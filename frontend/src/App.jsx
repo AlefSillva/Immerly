@@ -4,6 +4,7 @@ import Login from './pages/login/Login';
 import RotaPrivada from './components/RotaPrivada';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
+import Sessoes from './pages/sessoes/Sessoes';
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <BrowserRouter>
+        <Sessoes />
       
       <Routes>
         <Route path="/register" element={<Register />} />

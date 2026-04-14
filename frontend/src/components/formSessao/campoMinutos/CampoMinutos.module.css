@@ -1,0 +1,42 @@
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    /* max-width: 100px; */
+}
+
+.label {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    background-color: var(--cor-texto);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.input:focus{
+    border-color: var(--cor-primaria);
+}
+
+.input {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    flex: 1;
+    outline: none;
+}
+
+.sufixo {
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+    border-left: 1px solid var(--cor-borda);
+}

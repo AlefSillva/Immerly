@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 1.5rem;
+
+}
+
+.titulo {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+}
+
+.subtitulo {
+    font-size: 1rem;
+    color: var(--cor-texto-suave);
+    margin-top: -1rem;
+}

@@ -1,0 +1,26 @@
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.select {
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+.select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}

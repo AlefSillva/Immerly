@@ -1,0 +1,16 @@
+.botao {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: var(--raio-borda);
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.botao:hover {
+    opacity: 0.85;
+}

@@ -1,0 +1,21 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-supericie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 2.5rem;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: 0.85rem;
+}
+
+.sucesso {
+    color: var(--cor-sucesso);
+    font-size: 0.85rem;
+}
