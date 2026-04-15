@@ -1,6 +1,6 @@
 import styles from './CampoSelect.module.css';
 
-function CampoSelect({ label, name, value, onChange, options }) { 
+function CampoSelect({ label, name, value, onChange, options, required }) { 
     return (
         <div className={ styles.grupo }>
             <label className={styles.label}>{label}</label>
@@ -9,7 +9,7 @@ function CampoSelect({ label, name, value, onChange, options }) {
                 name={ name }
                 value={ value }
                 onChange={onChange}
-                required
+                required={ required }
             >
                 <option value="">Selecione uma opção</option>
                 {options?.map((opcao) => (

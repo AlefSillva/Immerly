@@ -1,6 +1,6 @@
 import styles from './CampoData.module.css';
 
-function CampoData({ label, name, value, onChange }) { 
+function CampoData({ label, name, value, onChange, required }) { 
     return (
         <div className={ styles.grupo }>
             <label className={ styles.label }>{ label }</label>
@@ -9,8 +9,8 @@ function CampoData({ label, name, value, onChange }) {
                 type="date" 
                 name={ name } 
                 value={ value } 
-                onChange={onChange} 
-                required
+                onChange={ onChange } 
+                required={ required }
             />
         </div>
     );

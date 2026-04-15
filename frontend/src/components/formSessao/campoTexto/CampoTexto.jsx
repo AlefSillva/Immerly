@@ -1,6 +1,6 @@
 import styles from './CampoTexto.module.css';
 
-function CampoTexto({ label, name, value, onChange, placeholder }) {
+function CampoTexto({ label, name, value, onChange, placeholder, required }) {
     return (
         <div className={ styles.grupo }>
             <label className={styles.label}>{label}</label>
@@ -11,7 +11,7 @@ function CampoTexto({ label, name, value, onChange, placeholder }) {
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                required
+                required={ required }
             />
         </div>
     );

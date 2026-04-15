@@ -1,6 +1,6 @@
 import styles from './CampoMinutos.module.css';
 
-function CampoMinutos({ label, name, value, onChange }) { 
+function CampoMinutos({ label, name, value, onChange, required }) { 
     return (
         <div className={styles.grupo}>
             <label className={ styles.label }>{ label }</label>
@@ -13,7 +13,7 @@ function CampoMinutos({ label, name, value, onChange }) {
                 min="1"
                 max="600"
                 placeholder='ex: 30'
-                required
+                required={ required }
             /><span className={ styles.sufixo }>min</span>
         </div>
     );
