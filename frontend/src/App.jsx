@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/register/Register'
 import Login from './pages/login/Login';
 import RotaPrivada from './components/RotaPrivada';
@@ -12,20 +12,35 @@ function App() {
 
   return (
     <BrowserRouter>
-        <Sessoes />
       
       <Routes>
+        {/* Rota padrão */}
+        <Route path="/" element={<Navigate to="/login" replace/>} />
+        
+        { /* Rotas públicas */ }
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         
-
+        { /* Rota Privada: Dashboard */ }
         <Route path="/dashboard" element={ 
           <RotaPrivada>
-            <Layout user={ user }>
+            <Layout user={user}>
               <Dashboard />
             </Layout>
           </RotaPrivada>
         } />
+
+        { /* Rota Privada: Sessões */}
+        <Route path="/sessoes" element={
+          <RotaPrivada>
+            <Layout user={ user }>
+              <Sessoes />
+            </Layout>
+          </RotaPrivada>
+        }
+        />
+
+        
       </Routes>
     </BrowserRouter>
   )
