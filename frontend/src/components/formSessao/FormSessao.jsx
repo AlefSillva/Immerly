@@ -9,13 +9,13 @@ import Botao from './botao/Botao';
 import styles from './FormSessao.module.css';
 
 const opcoesTipo = [
-    { value: 'listening', label: 'Listening' },
-    { value: 'speaking', label: 'Speaking' },
-    { value: 'reading', label: 'Reading' },
-    { value: 'writing', label: 'Writing' },
-    { value: 'grammar', label: 'Grammar' },
-    { value: 'vocabulary', label: 'Vocabulary' },
-    { value: 'reference', label: 'Reference' },
+    { value: 'filme', label: 'Filme' },
+    { value: 'serie', label: 'Serie' },
+    { value: 'podcast', label: 'Podcast' },
+    { value: 'video', label: 'Video' },
+    { value: 'livro', label: 'Livro' },
+    { value: 'musica', label: 'Musica' },
+    { value: 'artigo', label: 'Artigo' },
 ];
 
 const opcoesNivel = [
@@ -27,10 +27,10 @@ const opcoesNivel = [
 ];
 
 const opcoesGrauCompreensao = [
-    { value: 25, label: 'Entendi pouco (0-25%)' },
-    { value: 50, label: 'Entendi metade (26-50%)' },
-    { value: 75, label: 'Entendi quase tudo (51-75%)' },
-    { value: 100, label: 'Entendi tudo (76-100%)' },
+    { value: 25, label: 'Entendi pouco' },
+    { value: 50, label: 'Entendi metade' },
+    { value: 75, label: 'Entendi quase tudo' },
+    { value: 100, label: 'Entendi tudo' },
 ];
 
 function FormSessao() { 

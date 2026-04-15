@@ -1,9 +1,43 @@
-.dashboard {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
     width: 100%;
     height: 100vh;
-    color: black;
+    gap: 1.5rem;
+}
+
+.titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+}
+
+.subtitulo {
+    font-size: 1rem;
+    color: var(--cor-texto-suave);
+    margin-top: -1rem;
+}
+
+.mensagem {
+    font-size: 1rem;
+    color: var(--cor-texto-suave);
+    font-style: italic;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: 0.85rem;
+}
+
+.carregando {
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
 }
