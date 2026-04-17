@@ -30,32 +30,32 @@ function Dashboard() {
             
             {metricas ? (
                 <>
-                    <p className={styles.mensagem}>{metricas.mensagem}</p>
+                    <p className={styles.mensagem}>{metricas.mensagem_motivacional}</p>
                     
                     <div className={styles.grid}>
                         <CardMetrica
-                            titulo=""
+                            titulo="Total de horas"
                             valor={(metricas.total_horas ?? 0).toFixed(1)}
                             sufixo="h"
                         />
                         <CardMetrica
-                            titulo=""
-                            valor={(metricas.media_semanal ?? 0).toFixed(1)}
+                            titulo="Média Semanal"
+                            valor={(metricas.media_semanal_horas ?? 0).toFixed(1)}
                             sufixo="h"
                         />
                         <CardMetrica
-                            titulo=""
-                            valor={(metricas.media_mensal ?? 0).toFixed(1)}
+                            titulo="Média mensal"
+                            valor={(metricas.media_mensal_horas ?? 0).toFixed(1)}
                             sufixo="h"
                         />
                         <CardMetrica
-                            titulo=""
-                            valor={metricas.streak}
+                            titulo="Streak atual"
+                            valor={metricas.streak_dias}
                             sufixo="dias"
                         />
                         <CardMetrica
-                            titulo=""
-                            valor={(metricas.projecao_4_semanas ?? 0).toFixed(1)}
+                            titulo="Projeção 4 semanas"
+                            valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)}
                             sufixo="h"
                         />
                     </div>
