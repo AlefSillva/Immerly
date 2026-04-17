@@ -5,4 +5,8 @@
 
 main {
     flex: 1;
+    padding: 2rem;
+    padding-left: 3.5rem;
+    max-width: 100%;
+    overflow-x: hidden;
 }
