@@ -17,7 +17,6 @@
 }
 
 body {
-    display: flex;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     font-family: 'Segoe UI', sans-serif;
