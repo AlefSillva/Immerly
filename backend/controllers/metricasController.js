@@ -125,7 +125,7 @@ const obter = async (req, res) => {
     }
 };
 
-const historico = async() => {
+const historico = async(req, res) => {
     const id_usuario = req.usuarioId;
 
     try {
