@@ -125,4 +125,42 @@ const obter = async (req, res) => {
     }
 };
 
-module.exports = { obter };
+const historico = async() => {
+    const id_usuario = req.usuarioId;
+
+    try {
+        // Horas por dia nas últimas 4 semanas
+        const porDiaResult = await pool.query(
+            `SELECT
+                DATE(data) as dia,
+                ROUND(SUM(duracao_minutos) / 60.0, 1) as horas
+            FROM sessoes
+            WHERE id_usuario = $1
+                AND data >= NOW() - INTERVAL '28 days'
+            GROUP BY DATE(data)
+            ORDER BY dia ASC`,
+            [id_usuario]
+        );
+
+        // Distribuição por tipo
+        const porTipoResult = await pool.query(
+            `SELECT
+                tipo,
+                ROUND(SUM(duracao_minutos) / 60.0, 1) as horas
+            FROM sessoes
+            WHERE id_usuario = $1
+            GROUP BY tipo
+            ORDER BY horas DESC`,
+            [id_usuario]
+        );
+
+        res.json({
+            por_dia: porDiaResult.rows,
+            por_tipo: porTipoResult.rows
+        });
+
+    } catch (err) {
+        res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+    }
+};
+module.exports = { obter, historico };
