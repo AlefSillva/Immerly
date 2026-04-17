@@ -27,10 +27,11 @@ const opcoesNivel = [
 ];
 
 const opcoesGrauCompreensao = [
-    { value: 25, label: 'Entendi pouco' },
-    { value: 50, label: 'Entendi metade' },
-    { value: 75, label: 'Entendi quase tudo' },
-    { value: 100, label: 'Entendi tudo' },
+    { value: 1, label: 'Entendi pouco (0-25%)' },
+    { value: 2, label: 'Metade (26-50%)' },
+    { value: 3, label: 'A maioria (51-75%)' },
+    { value: 4, label: 'Quase tudo (76-90%)' },
+    { value: 5, label: 'Tudo (91-100%)' },
 ];
 
 function FormSessao() { 
