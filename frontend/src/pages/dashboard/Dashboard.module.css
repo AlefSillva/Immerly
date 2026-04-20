@@ -2,8 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow-x: hidden;
+    background-color: aliceblue;
 }
 
 .titulo {
@@ -22,35 +24,39 @@
 
 .mensagem {
     font-size: 1.2rem;
-    color: white;
     font-style: italic;
+    color: var(--cor-primaria);
+    font-weight: 600;
     text-align: center;
     margin-bottom: 10px;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: auto auto auto auto auto;
     gap: 1rem;
+    justify-content: center;
 }
 
 .graficos {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: auto auto;
+    gap: 1.5rem;
+    margin-top: 50px;
+    justify-content: center;
 }
 
 .grafico {
     background-color: var(--cor-superficie);
-    border: 1px solid var(--cor-borda);
+    border: 1px solid white;
     border-radius: var(--raio-borda);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
-
+    width: 600px;
     overflow: hidden;
+    box-shadow: 1px 5px 8px 0px #6b63ff3b;
 }
 
 .tituloGrafico {
