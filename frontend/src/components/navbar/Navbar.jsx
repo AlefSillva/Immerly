@@ -41,15 +41,19 @@ function Navbar({ user }) {
             <Link to="/ci" className={ styles.link }>Comprehensible Input</Link>
                 
             <div className={ styles.userInfo }>
-                <span>{ user?.nome }</span>
+
                 
                 {isOpen && (
-                    <button
+                    
+                    <>
+                    <span>{ user?.nome }</span> 
+                            <button
                         onClick={handleLogout}
                         className={ styles.logoutButton }
-                >
-                    Sair
-                </button>
+                    >
+                        Sair
+                    </button>
+                        </>
                 )}
             </div>
         
