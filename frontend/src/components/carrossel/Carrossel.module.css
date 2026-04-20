@@ -1,0 +1,30 @@
+
+.secao {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+} 
+
+.titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cor-texto);
+} 
+
+.faixa {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    scroll-behavior: smooth
+}
+
+.faixa::-webkit-scrollbar-track {
+    background: var(--cor-borda);
+    border-radius: 999px;
+}
+
+.faixa::-webkit-scrollbar-thumb {
+    background: var(--cor-primaria);
+    border-radius: 999px;
+}
