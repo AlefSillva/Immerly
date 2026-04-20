@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+}
+
+.subtitulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    margin-top: -1rem;
+}
+
+.secoes {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: 0.85rem;
+}
