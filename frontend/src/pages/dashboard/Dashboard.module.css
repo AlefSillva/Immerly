@@ -10,18 +10,22 @@
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--cor-primaria);
+    text-align: center;
 }
 
 .subtitulo {
     font-size: 0.9rem;
     color: var(--cor-texto-suave);
     margin-top: -1rem;
+    text-align: center;
 }
 
 .mensagem {
-    font-size: 1rem;
-    color: var(--cor-texto-suave);
+    font-size: 1.2rem;
+    color: white;
     font-style: italic;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .grid {
