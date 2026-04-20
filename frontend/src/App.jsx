@@ -5,6 +5,7 @@ import RotaPrivada from './components/RotaPrivada';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
 import Sessoes from './pages/sessoes/Sessoes';
+import Biblioteca from  './pages/biblioteca/Biblioteca'
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -40,7 +41,17 @@ function App() {
         }
         />
 
-        
+        { /* Rota Privada: Biblioteca de Recursos*/}
+        <Route path='/recursos' element={
+          <RotaPrivada>
+            <Layout user={user}>
+              <Biblioteca />
+            </Layout>
+          </RotaPrivada>
+        }
+
+        />
+
       </Routes>
     </BrowserRouter>
   )
