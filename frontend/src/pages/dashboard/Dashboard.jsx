@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import CardMetrica from "../../components/cardMetrica/CardMetrica";
+import CardMetrica from "../../components/cards/cardMetrica/CardMetrica";
 import {
   BarChart,
   Bar,
