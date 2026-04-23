@@ -9,6 +9,7 @@ const CORES_NIVEL = {
 }
 
 function CardRecurso({ nome, tipo, nivel, descricao, link_externo }) {
+
     const corNivel = CORES_NIVEL[nivel] || '#6c63ff';
 
     return (

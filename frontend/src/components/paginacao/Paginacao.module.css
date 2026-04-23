@@ -1,0 +1,60 @@
+.paginacaoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.seta {
+    background: none;
+    border: none;
+    color: var(--cor-primaria);
+    font-size: 1.5rem;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.seta:hover:not(.desativado) {
+    transform: scale(1.2);
+}
+
+.desativa {
+    display: flex;
+    list-style: none;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.listaBolinhas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+}
+
+.bolinha {
+    display: flex;
+    background-color: var(--cor-texto-suave);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3 ease;
+}
+
+.selecionada {
+    background-color: var(--cor-primaria);
+    transform: scale(1.3);
+}

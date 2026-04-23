@@ -13,7 +13,7 @@
 
 .faixa {
     display: flex;
-    gap: 1rem;
+    gap: 1.85rem;
     overflow-x: auto;
     padding-bottom: 0.75rem;
     scroll-behavior: smooth

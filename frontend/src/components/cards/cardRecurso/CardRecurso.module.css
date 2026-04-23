@@ -64,4 +64,6 @@
 
 .link:hover {
     opacity: 0.75;
+    color: #DE6449;
+    font-weight: 700;
 }
