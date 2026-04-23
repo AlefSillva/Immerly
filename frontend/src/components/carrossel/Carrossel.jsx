@@ -9,14 +9,14 @@ function Carrossel({ titulo, recursos }) {
             <h2 className={ styles.titulo }>{ titulo }</h2>
 
             <div className={styles.faixa}>
-                {recursos.map((recuurso) => (
+                {recursos.map((recurso) => (
                     <CardRecurso
-                        key={recuurso.id}
-                        nome={recursos.nome}
-                        tipo={recursos.tipo}
-                        nivel={recursos.nivel}
-                        descricao={recursos.descricao}
-                        link_externo={recursos.link_externo}
+                        key={recurso.id}
+                        nome={recurso.nome}
+                        tipo={recurso.tipo}
+                        nivel={recurso.nivel}
+                        descricao={recurso.descricao}
+                        link_externo={recurso.link_externo}
                     />
                 ))}
             </div>

@@ -6,8 +6,8 @@
 
 :root {
     --cor-primaria: #6c63ff;
-    --cor-fundo: #0f0f0f;
-    --cor-supericie: #1a1a1a;
+    --cor-fundo: aliceblue;
+    --cor-superficie: #1a1a1a;
     --cor-borda: #2a2a2a;
     --cor-texto: #ffffff;
     --cor-texto-suave: #a0a0a0;
@@ -17,7 +17,7 @@
 }
 
 body {
-    background-color: aliceblue;;
+    background-color: var(--cor-fundo);
     color: var(--cor-texto);
     font-family: 'Segoe UI', sans-serif;
     min-height: 100vh;

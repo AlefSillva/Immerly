@@ -1,5 +1,5 @@
 .card {
-    background-color: var(--cor-superficie);
+    background-color: #612940;
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 1.25rem;
@@ -44,7 +44,7 @@
 .nome {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--cor-texto);
+    color: var(--cor-texto-suave);
     line-height: 1.3;
 }
 
