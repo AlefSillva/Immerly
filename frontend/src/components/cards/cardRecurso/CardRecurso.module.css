@@ -1,6 +1,6 @@
 .card {
-    background-color: #612940;
-    border: 1px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+    border: 1px solid white;
     border-radius: var(--raio-borda);
     padding: 1.25rem;
     display: flex;
@@ -10,6 +10,7 @@
     max-width: 220px;
     transition: border-color 0.2s, transform 0.2s;
     flex-shrink: 0;
+    box-shadow: 1px 5px 8px 0px #6b63ff5b;
 }
 
 .card:hover {
@@ -44,8 +45,12 @@
 .nome {
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--cor-texto-suave);
+    color: var(--cor-primaria);
     line-height: 1.3;
+}
+
+.descricao {
+    color: #0C1713;
 }
 
 .link {
