@@ -8,6 +8,8 @@
     --cor-primaria: #6c63ff;
     --cor-secundaria: #676F54;
     --cor-superficie: #E5D4C0;
+    --cor-fundo: #E5DAFB;
+    --cor-itens: #FF521B;
     --cor-borda: white;
     --cor-texto: #ffffff;
     --cor-texto-suave: #2A4849;
@@ -17,7 +19,10 @@
 }
 
 body {
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-fundo);
+    background-image: url('../../assets/fundo\ immerly.png');
+    background-position: center;
+    background-size: cover;
     color: var(--cor-texto);
     font-family: 'Segoe UI', sans-serif;
     min-height: 100vh;

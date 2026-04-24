@@ -4,59 +4,65 @@
     gap: 1.5rem;
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
-    background-color: var(--cor-fundo);
+    padding-top: 2rem;
+    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo\ immerly.png');
+    background-position: center;
+    background-size: cover;
+    
 }
 
 .titulo {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--cor-primaria);
     text-align: center;
 }
 
 .subtitulo {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--cor-texto-suave);
-    margin-top: -1rem;
+    margin-top: -1.5rem;
     text-align: center;
 }
 
 .mensagem {
     font-size: 1.2rem;
     font-style: italic;
-    color: var(--cor-primaria);
+    color: var(--cor-texto-suave);
     font-weight: 600;
     text-align: center;
-    margin-bottom: 10px;
+    margin-top: 1rem;
 }
 
 .grid {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
+    margin-top: 3rem;
 }
 
 .graficos {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 1.5rem;
-    margin-top: 50px;
     justify-content: center;
+    gap: 3.5rem;
+    margin-top: 20px;
+    height: auto;
+    
 }
 
 .grafico {
     background-color: var(--cor-superficie);
-    border: 1px solid white;
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 600px;
+    width: 520px;
     overflow: hidden;
-    box-shadow: 1px 5px 8px 0px #6b63ff3b;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6)
 }
 
 .tituloGrafico {

@@ -17,12 +17,12 @@ import styles from "./Dashboard.module.css";
 
 const CORES = [
   "#6c63ff",
-  "#a78bfa",
-  "#7c3aed",
-  "#4f46e5",
-  "#818cf8",
-  "#c4b5fd",
-  "#ddd6fe",
+  "#FF7A4D",
+  "#676F54",
+  "#2A4849",
+  "#FFA380",
+  "#FFCCB8",
+  "#FFEDE6",
 ];
 
 function Dashboard() {
