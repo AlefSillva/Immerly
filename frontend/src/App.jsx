@@ -1,11 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Meta } from 'react-router-dom';
 import Register from './pages/register/Register'
 import Login from './pages/login/Login';
 import RotaPrivada from './components/RotaPrivada';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
 import Sessoes from './pages/sessoes/Sessoes';
-import Biblioteca from  './pages/biblioteca/Biblioteca'
+import Biblioteca from './pages/biblioteca/Biblioteca'
+import Metas from './pages/metas/Metas'
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -48,9 +49,18 @@ function App() {
               <Biblioteca />
             </Layout>
           </RotaPrivada>
-        }
+        } />
 
-        />
+        {/* Rota Privada: Metas */}
+        <Route path='/metas' element={
+          <RotaPrivada>
+            <Layout user={user}>
+              <Metas />
+            </Layout>
+          </RotaPrivada>
+        } />
+          
+        
 
       </Routes>
     </BrowserRouter>

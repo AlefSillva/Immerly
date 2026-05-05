@@ -6,16 +6,22 @@
 } 
 
 .titulo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--cor-texto);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--cor-supoerficie);
+    background-color: var(--cor-secundaria);
+    border: 1px solid var(--cor-texto);
+    border-radius: 10px;
+    padding: 0.35rem;
+    margin: 0 auto;
+    box-shadow: -1px 2px 7px 0px #5c5c5c;
 } 
 
 .faixa {
     display: flex;
     gap: 1.85rem;
     overflow-x: auto;
-    padding-bottom: 0.75rem;
+    padding: 0.75rem;
     scroll-behavior: smooth
 }
 

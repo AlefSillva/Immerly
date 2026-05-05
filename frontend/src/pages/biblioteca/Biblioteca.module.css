@@ -3,26 +3,36 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    width: 100%;
+    width: 100vw;
+    min-height: 100vh;
     text-align: center;
+    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('/src/assets/fundo-immerly-biblioteca.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .titulo {
-    font-size: 1.8rem;
+    padding: 2rem 0 0 0;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--cor-primaria);
+    text-align: center;
 }
 
 .subtitulo {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
     color: var(--cor-texto-suave);
     margin-top: -1rem;
+    text-align: center;
 }
 
 .secoes {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .erro {
