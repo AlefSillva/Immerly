@@ -53,6 +53,8 @@ function FormMetas() {
         setTemMeta(true);
       }
       setSucesso("Meta Salva com sucesso!");
+      setForm({ meta_semanal: '', meta_mensal: '' });
+      setTimeout(() => setSucesso(''), 3000);
     } catch (err) {
       setErro(err.response?.data?.message || "Erro ao salvar meta.");
     }
