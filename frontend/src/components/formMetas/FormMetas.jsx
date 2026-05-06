@@ -20,8 +20,8 @@ function FormMetas() {
         const resposta = await api.get("/metas");
         if (resposta.data.meta) {
           setForm({
-            meta_semanal: resposta.data.meta.meta_semanal,
-            meta_mensal: resposta.data.meta.meta_mensal,
+            meta_semanal: parseFloat(resposta.data.meta.meta_semanal),
+            meta_mensal: parseFloat(resposta.data.meta.meta_mensal),
           });
           setTemMeta(true);
         }
@@ -46,7 +46,10 @@ function FormMetas() {
 
     try {
       if (temMeta) {
-        await api.put("metas", form);
+        await api.put("/metas", form);
+
+      } else {
+        await api.post('/metas', form);
         setTemMeta(true);
       }
       setSucesso("Meta Salva com sucesso!");
