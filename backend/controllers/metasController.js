@@ -23,7 +23,7 @@ const criarMeta = async (req, res) => {
 
         // Se já existir uma meta para o usuário, retorna um erro informando que ele deve usar PUT para atualizar
         if ( metaExistente.rows.length > 0 ) {
-            return res.status(409).json({ message: 'Você já possui uma meta. Use PUT para atualizá-la.' });
+            return res.status(409).json({ message: 'Você já possui uma meta cadastrada. Atualize os campos e clique em Salvar.' });
         }
 
         // Insere a nova meta no banco de dados
@@ -76,8 +76,9 @@ const atualizarMeta = async (req, res) => {
     }
 };
 
+
 const buscarMeta = async (req, res) => {
-    const id_usuario = req.id_usuario;
+    const id_usuario = req.usuarioId;
 
     try {
         const result = await pool.query(
