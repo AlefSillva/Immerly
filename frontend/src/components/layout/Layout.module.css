@@ -9,7 +9,7 @@ main {
     max-width: 100%;
     overflow-x: hidden;
     background-color: var(--cor-superficie);
-    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('/src/assets/fundo-immerly.png');
+    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
     background-position: center;
     background-size: cover;
 }
