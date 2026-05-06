@@ -76,4 +76,24 @@ const atualizarMeta = async (req, res) => {
     }
 };
 
-module.exports = { criarMeta, atualizarMeta };
+const buscarMeta = async (req, res) => {
+    const id_usuario = req.id_usuario;
+
+    try {
+        const result = await pool.query(
+            'SELECT * FROM  metas WHERE id_usuario = $1',
+            [id_usuario]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Nenhuma meta encontrada.' });
+        }
+
+        res.json({ meta: result.rows[0] });
+
+    } catch (err) {
+        res.status(500).json({ message: 'Erro interno do servidor', error: err.message })
+    }
+};
+
+module.exports = { criarMeta, atualizarMeta, buscarMeta };
