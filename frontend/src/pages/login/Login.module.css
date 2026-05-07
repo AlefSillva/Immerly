@@ -1,32 +1,45 @@
 .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    width: 100%;
     min-height: 100vh;
     background-image: url('../../assets/fundo-immerly.png');
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    overflow: hidden;
 }
+
+.subcontainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background-color: rgba(248, 246, 234, 0.76);
+}
+
 
 .card {
     background-color: var(--cor-superficie);
     border: 1px solid #ffffff;
     border-radius: var(--raio-borda);
-    padding: 2.5rem;
+    padding: 1.75rem 2.5rem;
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6)
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.15)
 }
 
 .titulo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #FF521B;
-    text-decoration: solid white;
+    color: var(--cor-texto-suave);
     text-align: center;
 }
 
@@ -45,45 +58,49 @@
 
 .label {
     font-size: 0.90rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--cor-texto-suave);
     margin-top: 1rem;
 }
 
 .input {
-    background-color: #c2b19d;    
+    background-color: var(--cor-fundo-input);    
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
     height: fit-content;
-    color: var(--cor-texto);
+    color: var(--cor-texto-suave);
     font-size: 0.95rem;
     font-weight: 500;
     transition: border-color 0.2s;  
 }
 
 .input:focus {
-    border-color: #ffffff;
-    box-shadow:0 0px 16px 0 rgb(109, 84, 84);
+    border-color: var(--cor-primaria);
+    box-shadow:0 0px 16px 0 var(--cor-texto);
     outline: none;
 }
 
 .botao {
-    background-color: #FF521B;
+    background-color: var(--cor-itens);
     color: #ffffff;
     border: none;
     border-radius: var(--raio-borda);
-    margin-top: 0.9rem;
+    margin: 0.9rem 0;
     padding: 0.6rem 1rem;
     font-size: 1rem;
     font-weight: 600;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
     cursor: pointer;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6)
 }
 
 .botao:hover {
-    opacity: 0.8;
+    background-color: var(--cor-primaria);
+}
+
+.botao:active {
+    transform: scale(0.95);
 }
 
 .erro {
@@ -94,12 +111,16 @@
 
 .link {
     text-align: center;
-    font-size: 0.90rem;
+    font-size: 0.9rem;
     color: var(--cor-texto-suave);
 }
 
 .link a {
-    color: #FF521B;
+    color: var(--cor-primaria);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+}
+
+.link a:hover {
+    color: var(--cor-itens);
 }

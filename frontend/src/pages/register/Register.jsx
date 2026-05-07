@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './Register.module.css';
+import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
 
 function Register() {
     const navigate = useNavigate();
@@ -31,63 +32,64 @@ function Register() {
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.card}>
-                <h1 className={styles.titulo}>Immerly</h1>
-                <p className={styles.subtitulo}>Crie sua conta e comece a trackear sua imersão</p>
+        <>
+            <NavbarPublica />
+            <div className={styles.container}>
+            <div className={ styles.subcontainer }>
+                <div className={styles.card}>
+                    <h1 className={styles.titulo}>Registro</h1>
+                    <p className={styles.subtitulo}>Crie sua conta e comece a trackear sua imersão</p>
                 
-                <form onSubmit={handleSubmit}>
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Nome</label>
-                        <input
-                            className={styles.input}
-                            type='text'
-                            name='nome'
-                            value={form.nome}
-                            onChange={ handleChange }
-                            placeholder='Seu nome'
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Email</label>
-                        <input
-                            className={styles.input}
-                            type="email"
-                            name='email'
-                            value={form.email}
-                            onChange={handleChange}
-                            placeholder='seu@email.com'
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Senha</label>
-                        <input
-                            className={styles.input}
-                            type="password"
-                            name='senha'
-                            value={form.senha}
-                            onChange={handleChange}
-                            placeholder='Sua senha'
-                            required
-                        />
-                    </div>
-
-                    { erro && <p className={ styles.erro }>{ erro }</p> }
-                    
-                    <button className={ styles.botao } type='submit'>
-                        Criar conta
-                    </button>
-                </form>
-
-                <p className={ styles.link }>
-                    Já tem uma conta? <Link to='/login'>Entrar</Link>
-                </p>
+                    <form onSubmit={handleSubmit}>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Nome</label>
+                            <input
+                                className={styles.input}
+                                type='text'
+                                name='nome'
+                                value={form.nome}
+                                onChange={ handleChange }
+                                placeholder='Seu nome'
+                                required
+                            />
+                        </div>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Email</label>
+                            <input
+                                className={styles.input}
+                                type="email"
+                                name='email'
+                                value={form.email}
+                                onChange={handleChange}
+                                placeholder='seu@email.com'
+                                required
+                            />
+                        </div>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Senha</label>
+                            <input
+                                className={styles.input}
+                                type="password"
+                                name='senha'
+                                value={form.senha}
+                                onChange={handleChange}
+                                placeholder='Sua senha'
+                                required
+                            />
+                        </div>
+                        { erro && <p className={ styles.erro }>{ erro }</p> }
+                
+                        <button className={ styles.botao } type='submit'>
+                            Criar conta
+                        </button>
+                    </form>
+                    <p className={ styles.link }>
+                        Já tem uma conta? <Link to='/login'>Entrar</Link>
+                    </p>
+                </div>
             </div>
         </div>
+        </>
     );
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api'
+import NavbarPublica from '../../components/NavbarPublica/NavbarPublica';
 import styles from './Login.module.css'
 
 function Login() {
@@ -40,51 +41,53 @@ function Login() {
     };
 
     return (
-        <div className={ styles.container }>
-            <div className={ styles.card }>
-                <h1 className={ styles.titulo }>Immerly</h1>
-                <p className={styles.subtitulo}>Bem-vindo(a) de volta</p>
-                
-                <form onSubmit={handleSubmit}>
-                    <div className={ styles.grupo }> 
-                        <label className={ styles.label }>Email</label>
-                        <input 
-                            className={ styles.input }
-                            type="email" 
-                            name="email"
-                            value={ form.email }
-                            onChange={ handleChange }
-                            placeholder='seu@email.com'
-                            required
-                        />
-                    </div>
-
-                    <div className={ styles.grupo }>
-                        <label className={ styles.label }>Senha</label>
-                        <input 
-                            className={ styles.input }
-                            type="password" 
-                            name="senha"
-                            value={ form.senha }
-                            onChange={ handleChange }
-                            placeholder='Sua senha'
-                            required
-                        />
-                    </div>
-
-                    {/* Exibe a mensagem de erro, se houver */}
-                    { erro && <p className={styles.erro}>{ erro }</p> }
+        <>
+            <NavbarPublica />
+            <div className={ styles.container }>
+                <div className={ styles.subcontainer }>
+                    <div className={ styles.card }>
+                        <h1 className={ styles.titulo }>Entrar</h1>
+                        <p className={styles.subtitulo}>Bem-vindo(a) de volta</p>
                     
-                    <button className={ styles.botao }>
-                        Entrar
-                    </button>
-                </form>
-
-                <p className={ styles.link }>
-                    Não tem uma conta? <Link to="/register">Criar conta</Link>
-                </p>
+                        <form onSubmit={handleSubmit}>
+                            <div className={ styles.grupo }>
+                                <label className={ styles.label }>Email</label>
+                                <input
+                                    className={ styles.input }
+                                    type="email"
+                                    name="email"
+                                    value={ form.email }
+                                    onChange={ handleChange }
+                                    placeholder='seu@email.com'
+                                    required
+                                />
+                            </div>
+                            <div className={ styles.grupo }>
+                                <label className={ styles.label }>Senha</label>
+                                <input
+                                    className={ styles.input }
+                                    type="password"
+                                    name="senha"
+                                    value={ form.senha }
+                                    onChange={ handleChange }
+                                    placeholder='Sua senha'
+                                    required
+                                />
+                            </div>
+                            {/* Exibe a mensagem de erro, se houver */}
+                            { erro && <p className={styles.erro}>{ erro }</p> }
+                    
+                            <button className={ styles.botao }>
+                                Entrar
+                            </button>
+                        </form>
+                        <p className={ styles.link }>
+                            Não tem uma conta? <Link to="/register">Criar conta</Link>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

@@ -1,0 +1,75 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    width: 100%;
+    border-bottom: 1px solid var(--cor-borda);
+    background-color: var(--cor-texto-suave);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-superficie);
+}
+
+.navLinks {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.linkEntrar {
+    color: var(--cor-texto);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.linkEntrar:hover {
+    color: var(--cor-superficie);
+}
+
+.linkLogin {
+    background-color: var(--cor-itens);
+    color: var(--cor-texto);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--raio-borda);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: backgroundcolor 0.2s;
+}
+
+.linkLogin:hover {
+    background-color: var(--cor-primaria);
+}
+
+.linkRegistrar {
+    background-color: var(--cor-itens);
+    color: var(--cor-texto);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--raio-borda);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: backgroundcolor 0.2s;
+}
+
+.linkRegistrar:hover {
+    background-color: var(--cor-primaria);
+}
+
+.linkHome {
+    color: var(--cor-texto);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.linkHome:hover {
+    color: var(--cor-superficie);
+}
