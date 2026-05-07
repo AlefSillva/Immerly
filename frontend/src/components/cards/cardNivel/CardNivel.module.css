@@ -1,0 +1,73 @@
+.card {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 604px;
+    height: 212px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+}
+
+.nivel {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.descricao {
+    font-size: 0.9rem;
+    font-weight: 1rem;
+    color: var(--cor-texto-suave);
+    margin-top: -0.5rem;
+}
+
+.barra {
+    height: 8px;
+    background-color: var(--cor-borda);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.preenchimento {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+
+.rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.proximo {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.maximo {
+    font-size: 0.8rem;
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.total {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--cor-texto-suave);
+}

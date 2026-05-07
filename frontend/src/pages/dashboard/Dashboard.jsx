@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import CardMetrica from "../../components/cards/cardMetrica/CardMetrica";
+import CardNivel from "../../components/cards/cardNivel/CardNivel"
 import {
   BarChart,
   Bar,
@@ -73,32 +74,52 @@ function Dashboard() {
         <>
           <p className={styles.mensagem}>{metricas.mensagem_motivacional}</p>
 
+
           <div className={styles.grid}>
-            <CardMetrica
-              titulo="Total de horas"
-              valor={(metricas.total_horas ?? 0).toFixed(1)}
-              sufixo="h"
-            />
-            <CardMetrica
-              titulo="Média Semanal"
-              valor={(metricas.media_semanal_horas ?? 0).toFixed(1)}
-              sufixo="h"
-            />
-            <CardMetrica
-              titulo="Média mensal"
-              valor={(metricas.media_mensal_horas ?? 0).toFixed(1)}
-              sufixo="h"
-            />
-            <CardMetrica
-              titulo="Streak atual"
-              valor={metricas.streak_dias}
-              sufixo="dias"
-            />
-            <CardMetrica
-              titulo="Projeção 4 semanas"
-              valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)}
-              sufixo="h"
-            />
+            <div className={styles.nivel}>
+              <CardNivel totalHoras={metricas.total_horas} />
+            </div>
+            
+
+            <div className={styles.totalHoras}>
+                <CardMetrica
+                titulo="Total de horas"
+                valor={(metricas.total_horas ?? 0).toFixed(1)}
+                sufixo="h"
+                />
+            </div>
+
+            <div className={styles.mediaSemanal}>
+                <CardMetrica
+                titulo="Média Semanal"
+                valor={(metricas.media_semanal_horas ?? 0).toFixed(1)}
+                sufixo="h"
+                />
+            </div>
+
+            <div className={styles.mensal}>
+                <CardMetrica
+                titulo="Média mensal"
+                valor={(metricas.media_mensal_horas ?? 0).toFixed(1)}
+                sufixo="h"
+                />
+            </div>
+
+            <div className={styles.streak}>
+                <CardMetrica
+                titulo="Streak atual"
+                valor={metricas.streak_dias}
+                sufixo="dias"
+                />
+            </div>
+
+            <div className={ styles.projecao}>
+                <CardMetrica
+                titulo="Projeção 4 semanas"
+                valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)}
+                sufixo="h"
+                />
+            </div>
           </div>
 
           <div className={styles.graficos}>

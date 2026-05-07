@@ -4,7 +4,7 @@
     gap: 1.5rem;
     width: 100vw;
     min-height: 100vh;
-    padding: 2rem 0;    
+    padding: 2rem 0;
 }
 
 .titulo {
@@ -32,12 +32,45 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    justify-content: center;
-    margin-top: 2rem;
-    width: 100%;
-    gap: 1.6rem;
+    grid-template-columns: auto auto auto;
+    grid-template-areas:
+        "nivel    nivel  totalHoras"
+        "nivel    nivel  mediaSemanal"
+        "projecao mensal streak ";
+    width: 780px;
+    height: 330px;
+    margin: 0 auto;
+    gap: 0.5rem
 }
+
+.nivel {
+    grid-area: nivel;
+    /* grid-column: 1 ; */
+    justify-self: start;
+}
+
+.totalHoras {
+    grid-area: totalHoras;
+    grid-auto-rows: max-content;
+}
+
+.mediaSemanal {
+    grid-area: mediaSemanal;
+}
+
+.mensal {
+    grid-area: mensal;
+}
+
+
+.streak {
+    grid-area: streak;
+}
+
+.projecao {
+    grid-area: projecao;
+}
+
 
 .graficos {
     display: grid;
@@ -59,7 +92,7 @@
     width: 520px;
     height: auto;
     overflow: hidden;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.6)
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6)
 }
 
 .tituloGrafico {
