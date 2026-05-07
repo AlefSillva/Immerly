@@ -20,11 +20,6 @@
 
 body {
     background-color: var(--cor-fundo);
-    background-image: url('../../assets/fundo\ immerly.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     color: var(--cor-texto);
     font-family: 'Segoe UI', sans-serif;
     min-height: 100%;

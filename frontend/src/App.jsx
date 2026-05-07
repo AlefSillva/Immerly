@@ -7,6 +7,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Sessoes from './pages/sessoes/Sessoes';
 import Biblioteca from './pages/biblioteca/Biblioteca'
 import Metas from './pages/metas/Metas'
+import Landing from './pages/landing/Landing';
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -17,11 +18,14 @@ function App() {
       
       <Routes>
         {/* Rota padrão */}
-        <Route path="/" element={<Navigate to="/login" replace/>} />
+        <Route path="/" element={<Navigate to="/landing" replace/>} />
         
         { /* Rotas públicas */ }
         <Route path="/register" element={<Register />} />
+
         <Route path="/login" element={<Login />} />
+
+        <Route path='/landing' element={<Landing />} />
         
         { /* Rota Privada: Dashboard */ }
         <Route path="/dashboard" element={ 
@@ -60,7 +64,6 @@ function App() {
           </RotaPrivada>
         } />
           
-        
 
       </Routes>
     </BrowserRouter>

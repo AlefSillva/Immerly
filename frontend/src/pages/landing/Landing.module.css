@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../../assets/fundo-immerly.png');
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.mainContent {
+    flex: 1;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 5rem 3rem;
+    margin: 0 auto;
+    background-image: none;
+    background-color: rgba(248, 246, 234, 0.76);
+}
+
+.mainTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.titulo {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--cor-texto-suave);
+}
+
+.destaque {
+    color: var(--cor-itens);
+    font-size: 2rem;
+}
+
+.subtitulo {
+    font-size: 1.1rem;
+    color:var(--cor-texto-suave);
+    line-height: 1.6;
+}
+
+.botoes {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btnPrimario {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    text-decoration: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--raio-borda);
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.btnPrimario:hover {
+    opacity: 0.85;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btnSecundario {
+    background-color: transparent;
+    color: var(--cor-secundaria);
+    border: 2px solid var(--cor-texto-suave);
+    border-radius: var(--raio-borda);
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.btnSecundario:hover {
+    background-color: var(--cor-itens);
+    color: var(--cor-texto);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mainCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.card {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+    border-color: var(--cor-primaria);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cardIcone {
+    font-size: 1.75rem;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--cor-primaria);
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.4;
+}
