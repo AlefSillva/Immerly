@@ -40,6 +40,14 @@ function NavbarPublica() {
                         </Link>
                     </>
                 )}
+
+                {location.pathname === '/ci' && (
+                    <>
+                        <Link to='/landing' className={styles.linkHome}>Home</Link>
+                        <Link to='/login' className={styles.linkEntrar}>Login</Link>
+                        <Link to='/register' className={styles.linkRegistrar}>Cadastre-se</Link>
+                    </>
+                )}
             </div>
         </nav>
     );

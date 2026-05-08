@@ -1,6 +1,6 @@
 .card {
     background-color: var(--cor-superficie);
-    border: 1px solid white;
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 1.25rem;
     display: flex;
@@ -10,12 +10,13 @@
     max-width: 220px;
     transition: box-shadow 0.2s, transform 0.3s;
     flex-shrink: 0;
-    box-shadow: 1px 5px 8px 0px #0000005b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
-    box-shadow: 0px 5px 10px 2px rgb(255, 145, 0);
-    transform: translateY(-10px);
+    border-color: var(--cor-primaria);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .topo {

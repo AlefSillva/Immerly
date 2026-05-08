@@ -8,6 +8,7 @@ import Sessoes from './pages/sessoes/Sessoes';
 import Biblioteca from './pages/biblioteca/Biblioteca'
 import Metas from './pages/metas/Metas'
 import Landing from './pages/landing/Landing';
+import Ci from './pages/ci/Ci';
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -22,10 +23,9 @@ function App() {
         
         { /* Rotas públicas */ }
         <Route path="/register" element={<Register />} />
-
         <Route path="/login" element={<Login />} />
-
         <Route path='/landing' element={<Landing />} />
+        <Route path='/ci' element={<Ci />} />
         
         { /* Rota Privada: Dashboard */ }
         <Route path="/dashboard" element={ 
@@ -63,6 +63,7 @@ function App() {
             </Layout>
           </RotaPrivada>
         } />
+
           
 
       </Routes>

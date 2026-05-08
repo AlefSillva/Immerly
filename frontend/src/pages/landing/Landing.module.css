@@ -86,7 +86,7 @@
 .btnSecundario:hover {
     background-color: var(--cor-itens);
     color: var(--cor-texto);
-    transform: translateY(-5px);
+    transform: translateY(-5px), scçale(0.95);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
