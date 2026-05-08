@@ -109,4 +109,5 @@
 .carregando {
     color: var(--cor-texto-suave);
     font-size: 0.9rem;
+    text-align: center;
 }

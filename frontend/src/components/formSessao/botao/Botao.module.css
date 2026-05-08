@@ -1,16 +1,20 @@
 .botao {
-    background-color: var(--cor-primaria);
-    color: white;
+    background-color: var(--cor-itens);
+    color: #ffffff;
     border: none;
     border-radius: var(--raio-borda);
-    padding: 0.85rem;
+    margin: 1.5rem 0 0 0;
+    padding: 0.6rem 1rem;
     font-size: 1rem;
     font-weight: 600;
-    transition: opacity 0.2s;
-    width: 100%;
-    margin-top: 0.5rem;
+    transition: background-color 0.2s, transform 0.1s;
+    cursor: pointer;
 }
 
 .botao:hover {
-    opacity: 0.85;
+    background-color: var(--cor-primaria);
+}
+
+.botao:active {
+    transform: scale(0.95);
 }

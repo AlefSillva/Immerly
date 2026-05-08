@@ -5,22 +5,27 @@
 }
 
 .label {
-    font-size: 0.85rem;
+    font-size: 0.90rem;
+    font-weight: 500;
     color: var(--cor-texto-suave);
+    margin-top: 1rem;
 }
 
+
 .select {
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-fundo-input);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
-    color: var(--cor-texto);
+    color: var(--cor-texto-suave);
     font-size: 0.95rem;
     transition: border-color 0.2s;
     cursor: pointer;
 }
 
 .select:focus {
-    outline: none;
     border-color: var(--cor-primaria);
+    box-shadow:0 0px 16px 0 var(--cor-texto);
+    outline: none;
 }
+
