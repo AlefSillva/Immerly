@@ -11,6 +11,7 @@ function NavbarPublica() {
             <div className={styles.navLinks}>
                 {location.pathname === '/landing' && (
                     <>
+                        <Link to='/ci' className={styles.linkCi}>Pagina CI</Link>
                         <Link to='/login' className={styles.linkEntrar}>
                             Login
                         </Link>
