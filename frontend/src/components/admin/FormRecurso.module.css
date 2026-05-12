@@ -1,0 +1,86 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--cor-superficie);
+    border-radius: var(--raio-borda);
+    border: 1px solid var(--cor-borda);
+    width: 100%;
+    max-width: 1200px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+.subtitulo {
+    color: var(--cor-texto-suave);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.input,
+.select {
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: border-color 0.2s;
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.input:focus,
+.select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}
+
+.botoesForm {
+    display: flex;
+    gap: 1rem;
+}
+
+.botaoSalvar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: var(--raio-borda);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.botaoSalvar:hover {
+    opacity: 0.85;
+}
+
+.botaoCancelar {
+    background-color: transparent;
+    color: var(--cor-texto-suave);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.botaoCancelar:hover {
+    opacity: 0.75;
+}
+
+.sucesso {
+    color: var(--cor-sucesso);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
