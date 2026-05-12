@@ -55,7 +55,7 @@ const login = async (req, res) => {
             { expiresIn: '7d' }
         );
 
-        res.json({ token, usuario: { id: usuario.rows[0].id, nome: usuario.rows[0].nome, email: usuario.rows[0].email } });
+        res.json({ token, usuario: { id: usuario.rows[0].id, nome: usuario.rows[0].nome, email: usuario.rows[0].email, is_admin: usuario.rows[0].is_admin } });
 
     } catch (err) {
         res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });

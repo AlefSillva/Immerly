@@ -74,6 +74,15 @@ const ciRoutes = require('./routes/ci');
 
 // Registra as rotas de CI com o prefixo /api/ci
 app.use('/api/ci', ciRoutes);
+//-----------------------------------------------
+
+// Importa as rotas de administração
+const adminRoutes = require('./routes/admin');
+
+// Registra as rotas de admin com o prefixo /api/admin
+app.use('/api/admin', adminRoutes);
+//-----------------------------------------------
+
 
 //*************************************************************
 
