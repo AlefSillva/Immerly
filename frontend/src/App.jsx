@@ -9,6 +9,8 @@ import Biblioteca from './pages/biblioteca/Biblioteca'
 import Metas from './pages/metas/Metas'
 import Landing from './pages/landing/Landing';
 import Ci from './pages/ci/Ci';
+import RotaAdmin from './components/RotaAdmin';
+import Admin from './pages/admin/Admin';
 
 function App() {
   const usuario = localStorage.getItem('usuario');
@@ -18,6 +20,15 @@ function App() {
     <BrowserRouter>
       
       <Routes>
+        {/* Rota Admin: protegida por autenticação + permissão de admin */}
+        <Route path="/admin" element={
+            <RotaAdmin>
+                <Layout user={user}>
+                    <Admin />
+                </Layout>
+            </RotaAdmin>
+        } />
+
         {/* Rota padrão */}
         <Route path="/" element={<Navigate to="/landing" replace/>} />
         

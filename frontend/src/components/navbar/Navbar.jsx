@@ -39,10 +39,12 @@ function Navbar({ user }) {
             <Link to="/metas" className={ styles.link }>Metas</Link>
             <Link to="/recursos" className={ styles.link }>Biblioteca</Link>
             <Link to="/ci" className={ styles.link }>Comprehensible Input</Link>
+            {user?.is_admin && (
+                <Link to="/admin" className={ styles.link }>⚙️ Admin</Link>
+            )}
                 
             <div className={ styles.userInfo }>
 
-                
                 {isOpen && (
                     
                     <>

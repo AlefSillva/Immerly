@@ -11,4 +11,5 @@ main {
     background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }

@@ -1,0 +1,78 @@
+.tabela {
+    width: 100%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    background-color: var(--cor-superficie);
+    border-radius: var(--raio-borda);
+    overflow: hidden;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+.tabela th {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.tabela td {
+    padding: 0.75rem 1rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--cor-fundo);
+}
+
+.tabela tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela tr:hover td {
+    background-color: var(--cor-fundo);
+}
+
+.tabela a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tabela a:hover {
+    text-decoration: underline;
+}
+
+.acoes {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.botaoEditar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: var(--raio-borda);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.botaoEditar:hover {
+    opacity: 0.85;
+}
+
+.botaoDeletar {
+    background-color: var(--cor-erro);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: var(--raio-borda);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.botaoDeletar:hover {
+    opacity: 0.85;
+}
