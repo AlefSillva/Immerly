@@ -21,9 +21,11 @@ function Ci() {
         buscarCI();
     }, []);
 
+    const token = localStorage.getItem('token');
+
     return (
         <div className={styles.container}>
-            <NavbarPublica />
+            {!token && <NavbarPublica />}
 
             { erro && <p className={styles.erro}>{erro}</p> }
         
@@ -36,6 +38,21 @@ function Ci() {
 
                     <div className={ styles.formula }>
                         <span className={styles.formulaTexto}>{conteudo.formula}</span>
+                    </div>
+
+                    <div>
+                        <h2 className={ styles.secaoTituloVideo}>O criador da teoria</h2>
+                        <div className={styles.videoWrappers}>
+                            <iframe
+                                width="100%"
+                                height="400"
+                                src="https://www.youtube.com/embed/fnUc_W3xE1w"
+                                title="Stephen Krashen - Language Acquisition and Comprehensible Input"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            />
+                        </div>
                     </div>
 
                     <div className={ styles.secao }>
@@ -68,13 +85,15 @@ function Ci() {
                             ))}
                         </div>
 
-                        <div className={styles.cta}>
+                        {!token && (
+                            <div className={styles.cta}>
                             <h2>Pronto para começar sua imersão?</h2>
                             <p>Registre suas sessões e acompanhe sua evolução com o Immerly.</p>
                             <Link to="/register" className={styles.ctaBotao}>
                                 Criar conta grátis
                             </Link>
                         </div>
+                        )}
                     </div>
                 </main>
             )}

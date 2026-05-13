@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
-    background-image: url('../../assets/fundo-immerly.png');
+    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
     background-attachment: fixed;
     background-size: cover;
 }

@@ -36,7 +36,19 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path='/landing' element={<Landing />} />
-        <Route path='/ci' element={<Ci />} />
+
+        {/* Rota Ci privada */}
+        <Route path='/ci' element={
+          localStorage.getItem('token') ? (
+            <RotaPrivada>
+            <Layout user={user}>
+              <Ci />
+            </Layout>
+          </RotaPrivada>
+          ) : (
+              <Ci />
+          )
+        }/>
         
         { /* Rota Privada: Dashboard */ }
         <Route path="/dashboard" element={ 

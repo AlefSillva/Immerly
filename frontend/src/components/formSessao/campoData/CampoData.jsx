@@ -5,7 +5,7 @@ function CampoData({ label, name, value, onChange, required }) {
         <div className={ styles.grupo }>
             <label className={ styles.label }>{ label }</label>
             <input 
-                className={ styles.select }
+                className={ styles.input }
                 type="date" 
                 name={ name } 
                 value={ value } 

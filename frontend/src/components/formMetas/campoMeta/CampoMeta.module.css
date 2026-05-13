@@ -22,7 +22,7 @@
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
-    color: var(--cor-texto);
+    color: var(--cor-texto-suave);
     font-size: 0.95rem;
     font-weight: 500;
     transition: border-color 0.2s;  
