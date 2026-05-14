@@ -34,7 +34,7 @@ const opcoesGrauCompreensao = [
     { value: 5, label: 'Tudo (91-100%)' },
 ];
 
-function FormSessao() { 
+function FormSessao({ onSucesso}) { 
     const [ form, setForm ] = useState({
         nome_conteudo: '',
         tipo: '',
@@ -59,6 +59,7 @@ function FormSessao() {
         try {
             await api.post('/sessoes', form);
             setSucesso('Sessão registrada com sucesso!');
+            if (onSucesso) onSucesso();
             setForm({
                 nome_conteudo: '',
                 tipo: '',

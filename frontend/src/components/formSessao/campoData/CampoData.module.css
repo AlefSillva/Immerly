@@ -8,17 +8,18 @@
 
 .label {
     font-size: 0.90rem;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--cor-texto-suave);
-    margin-top: 1rem;
+    margin-top: 1.3rem;
 }
 
 .input {
     background-color: var(--cor-fundo-input);    
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
-    padding: 0.75rem;
-    margin-bottom: 1rem;
+    padding: 0.60rem 1rem;
+    margin-bottom: 0.5rem;
+    height: fit-content;
     color: var(--cor-texto-suave);
     font-size: 0.95rem;
     font-weight: 500;
