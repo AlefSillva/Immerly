@@ -94,14 +94,24 @@ function FormSessao({ onSucesso}) {
                 required
             />
 
-            <CampoMinutos
-                label="Duração (minutos)"
-                name="duracao_minutos"
-                value={form.duracao_minutos}
-                onChange={handleChange}
-                placeholder={"ex: 30"}
-                required
-            />
+            <div className={ styles.dataDuracao}>
+                <CampoMinutos
+                    label="Duração (minutos)"
+                    name="duracao_minutos"
+                    value={form.duracao_minutos}
+                    onChange={handleChange}
+                    placeholder={"ex: 30"}
+                    required
+                />
+                <CampoData
+                    label="Data"
+                    name="data"
+                    value={form.data}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
 
             <CampoSelect
                 label="Nível Estimado do Conteúdo"
@@ -121,14 +131,7 @@ function FormSessao({ onSucesso}) {
                 required
             />
 
-            <CampoData
-                label="Data"
-                name="data"
-                value={form.data}
-                onChange={handleChange}
-                required
-            />
-
+            
             { erro && <p className={styles.erro}>{erro}</p>}
             {sucesso && <p className={styles.sucesso}>{sucesso}</p>}
             

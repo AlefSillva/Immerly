@@ -146,7 +146,7 @@ function Dashboard() {
             {dadosPorTipo && dadosPorTipo.length > 0 && (
               <div className={styles.grafico}>
                 <h2 className={styles.tituloGrafico}>Distribuição por tipo</h2>
-                <ResponsiveContainer width="100%" height={250}>
+                <ResponsiveContainer width='100%' height={250}>
                   <PieChart>
                     <Pie
                       data={dadosPorTipo}

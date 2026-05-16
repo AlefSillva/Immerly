@@ -71,3 +71,9 @@
     font-weight: 500;
     color: var(--cor-texto-suave);
 }
+
+@media (max-width: 768px) {
+    .card {
+        width: 340px;
+    }
+}

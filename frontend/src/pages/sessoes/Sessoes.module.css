@@ -26,3 +26,9 @@
     color: var(--cor-primaria);
     margin-bottom: -1rem;
 }
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 400px;
+    }
+}

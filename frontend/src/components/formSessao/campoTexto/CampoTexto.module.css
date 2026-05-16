@@ -29,3 +29,14 @@
     box-shadow:0 0px 16px 0 var(--cor-texto);
     outline: none;
 }
+
+@media (max-width: 768px) {
+
+    .label  {
+        margin-top: 0;
+    }
+
+    .input {
+        padding: 0.5rem;
+    }
+}

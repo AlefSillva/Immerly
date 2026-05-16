@@ -31,3 +31,21 @@
     box-shadow:0 0px 16px 0 var(--cor-texto);
     outline: none;
 }
+
+@media (max-width: 768px) {
+
+    .grupo {
+        height: 50px;
+    }
+
+    .label {
+        text-align: center;
+        margin: 0;
+    }
+
+    .input {
+        padding: 0.45rem;
+        margin: 0;
+        width: 90%;
+    }
+}

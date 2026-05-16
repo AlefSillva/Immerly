@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     text-align: center;
     background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('/src/assets/fundo-immerly-biblioteca.png');
@@ -86,4 +86,18 @@
     color: var(--cor-texto);
     border-color: var(--cor-borda);
     font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    .secoes {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
 }

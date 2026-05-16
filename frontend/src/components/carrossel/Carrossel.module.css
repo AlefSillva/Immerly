@@ -34,3 +34,14 @@
     background: var(--cor-primaria);
     border-radius: 999px;
 }
+
+@media (max-width: 768px) {
+    .faixa {
+        padding: 0.75rem 1rem 0.75rem 2rem;
+        scroll-snap-type: x mandatory;
+    }
+
+    .faixa > * {
+        scroll-snap-align: start;
+    }
+}

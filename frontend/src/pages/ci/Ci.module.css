@@ -228,3 +228,31 @@
     padding: 2rem;
     text-align: center;
 }
+
+
+@media (max-width: 768px) {
+    .conteudo {
+        padding: 2rem 1.5rem;
+    }
+
+    .titulo {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .formulaTexto {
+        font-size: 1.1rem;
+    }
+
+    .hero {
+        text-align: center;
+    }
+
+    .descricao {
+        text-align: justify;
+    }
+
+    .videoWrappers iframe {
+        height: 220px;
+    }
+}

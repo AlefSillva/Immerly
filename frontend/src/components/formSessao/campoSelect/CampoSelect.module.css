@@ -29,3 +29,16 @@
     outline: none;
 }
 
+@media (max-width: 768px) {
+    .grupo {
+        /* height: 40px; */
+    }
+
+    .select {
+        padding: 0.5rem;
+    }
+
+    .label {
+        margin-top: 0;
+    }
+}
