@@ -17,3 +17,9 @@
 .botao:hover {
     background-Color: var(--cor-primaria);
 }
+
+@media (max-width: 768px) {
+    .botao {
+        width: 10rem;
+    }
+}

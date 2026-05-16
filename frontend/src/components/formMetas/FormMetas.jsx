@@ -4,7 +4,7 @@ import CampoMeta from "../formMetas/campoMeta/CampoMeta";
 import BotaoMetas from "../botoes/BotaoMetas";
 import styles from "./FormMetas.module.css";
 
-function FormMetas() {
+function FormMetas({ onSucesso }) {
   const [form, setForm] = useState({
     meta_semanal: "",
     meta_mensal: "",
@@ -53,8 +53,9 @@ function FormMetas() {
         setTemMeta(true);
       }
       setSucesso("Meta Salva com sucesso!");
-      setForm({ meta_semanal: '', meta_mensal: '' });
-      setTimeout(() => setSucesso(''), 3000);
+      if (onSucesso) onSucesso(); 
+      setForm({ meta_semanal: '', meta_mensal: '' }); 
+      setTimeout(() => setSucesso(''), 3000); 
     } catch (err) {
       setErro(err.response?.data?.message || "Erro ao salvar meta.");
     }

@@ -69,3 +69,11 @@
     color: var(--cor-texto-suave);
     font-weight: 600;
 }
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+    }
+}

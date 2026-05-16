@@ -6,48 +6,51 @@ import styles from './Metas.module.css';
 
 function Metas() {
     const [metricas, setMetricas] = useState(null);
-    const [meta, setMeta ] =useState(null)
+    const [meta, setMeta] = useState({ meta_semanal: 0, meta_mensal: 0 });
+
+    const buscarDados = async () => {
+        try {
+            const [resMetricas, resMeta] = await Promise.all([
+                api.get('/metricas'),
+                api.get('/metas')
+            ]);
+            setMetricas(resMetricas.data);
+            // Se tiver meta definida usa ela, senão mantém 0
+            if (resMeta.data.meta) {
+                setMeta(resMeta.data.meta);
+            }
+        } catch (err) {
+            console.error(err.response?.data?.message || '');
+        }
+    };
 
     useEffect(() => {
-        const buscarDados = async () => {
-            try {
-                const [resMetricas, resMeta] = await Promise.all([
-                    api.get('/metricas'),
-                    api.get('/metas')
-                ]);
-                setMetricas(resMetricas.data);
-                setMeta(resMeta.data.meta);
-            } catch (err) {
-                err.response?.data?.message || ""
-            }
-        };
-
         buscarDados();
     }, []);
     
     return (
-        <div className={ styles.container }>
+        <div className={styles.container}>
             <h1 className={styles.titulo}>Metas</h1>
             <p className={styles.subtitulo}>Defina e acompanhe suas metas de imersão</p>
             
-            {metricas && meta && (
-                <div className={ styles.progresso }>
-                    <ProgressoMeta 
-                        label = "Meta Semanal"
-                        atual = { metricas.media_semanal_horas }
-                        meta = { parseFloat(meta.meta_semanal) }
-                        cor = "#6c63ff"
-                    />
-                    <ProgressoMeta 
-                        label = "Meta Mensal"
-                        atual = { metricas.media_mensal_horas }
-                        meta = { parseFloat(meta.meta_mensal) }
-                        cor = "#6c63ff"
-                    />
-                </div>
-            )}
+            {/* Cards sempre visíveis — mostram 0h se meta não definida */}
+            <div className={styles.progresso}>
+                <ProgressoMeta 
+                    label="Meta Semanal"
+                    atual={metricas?.media_semanal_horas ?? 0}
+                    meta={parseFloat(meta.meta_semanal) || 0}
+                    cor="#6c63ff"
+                />
+                <ProgressoMeta 
+                    label="Meta Mensal"
+                    atual={metricas?.media_mensal_horas ?? 0}
+                    meta={parseFloat(meta.meta_mensal) || 0}
+                    cor="#6c63ff"
+                />
+            </div>
 
-            <FormMetas />
+            {/* onSucesso rebusca os dados após salvar a meta */}
+            <FormMetas onSucesso={buscarDados} />
         </div>
     )
 }
