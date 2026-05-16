@@ -22,9 +22,10 @@ function Register() {
         setErro('');
 
         try {
-            await api.post('/auth/register', form);
-            alert('Conta criada com sucesso!')
-            navigate('/login');
+            const resposta = await api.post('/auth/register', form);
+            localStorage.setItem('token', resposta.data.token);
+            localStorage.setItem('usuario', JSON.stringify(resposta.data.usuario));
+            navigate('/metas');
         
         } catch (err) {
             setErro(err.response?.data?.message || 'Erro ao criar conta.');

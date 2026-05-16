@@ -23,7 +23,22 @@ const register = async (req, res) => {
             [nome, email, senhaCriptografada]
         );
 
-        res.status(201).json({ message: 'Usuário criado com sucesso!', usuario: novoUsuario.rows[0] })
+        const token = jwt.sign(
+            { id: novoUsuario.rows[0].id },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
+
+        res.status(201).json({ 
+            message: 'Usuário criado com sucesso!',
+            token,
+            usuario: { 
+                id: novoUsuario.rows[0].id, 
+                nome: novoUsuario.rows[0].nome, 
+                email: novoUsuario.rows[0].email,
+                is_admin: false
+            }
+        });
 
     } catch (err) {
         res.status(500).json({ message: 'Erro interno do servidor', error: err.message })
