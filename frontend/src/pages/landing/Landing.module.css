@@ -129,3 +129,73 @@
     color: var(--cor-texto-suave);
     line-height: 1.4;
 }
+
+/* Mobile */
+@media (width < 769px) {
+    .mainContent {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .titulo {
+        font-size: 2rem;
+    }
+
+    .destaque {
+        font-size: 1.5rem;
+    }
+
+    .subtitulo {
+        font-size: 1rem;
+    }
+
+    .botoes {
+        margin-top: 10px;
+    }
+
+    .btnPrimario,
+    .btnSecundario {
+        text-align: center;
+        width: 250px;
+    }
+
+    .mainCards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .mainContent {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+    }
+
+    .mainCards {
+        grid-template-columns: 1fr 1fr;
+        padding: 1rem;
+        margin: 0 auto;
+    }
+
+    .card {
+        max-width: 300px;
+    }
+
+    .btnPrimario,
+    .btnSecundario {
+        text-align: center;
+        width: 250px;
+    }
+
+    .botoes {
+        margin-top: 10px;
+        justify-content: center;
+    }
+    
+}
