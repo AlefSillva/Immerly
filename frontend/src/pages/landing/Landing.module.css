@@ -86,7 +86,7 @@
 .btnSecundario:hover {
     background-color: var(--cor-itens);
     color: var(--cor-texto);
-    transform: translateY(-5px), scçale(0.95);
+    transform: translateY(-5px) scale(0.95);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -132,9 +132,15 @@
 
 /* Mobile */
 @media (width < 769px) {
+    .container {
+        min-width: 320px;
+        width: 100vw;
+    }
+
     .mainContent {
+        min-width: 320px;
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1rem;
         padding: 2rem 1.5rem;
     }
 
@@ -162,13 +168,21 @@
 
     .mainCards {
         grid-template-columns: 1fr;
+        min-width: 320px;
+        width: 100%;
     }
 }
 
 /* Tablet */
-@media (max-width: 1024px) {
+@media (width < 1024px) {
+    .container {
+        min-width: 320px;
+        width: 100%;
+    }
+
+
     .mainContent {
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
         gap: 2rem;
         padding: 2rem 1.5rem;
     }
@@ -178,13 +192,19 @@
     }
 
     .mainCards {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         padding: 1rem;
         margin: 0 auto;
+        min-width: 320px;
+        width: 90%;
     }
 
     .card {
-        max-width: 300px;
+        min-width: 220px;
+        height: auto;
+        max-width: 380px;
+        padding: 1rem;
+        margin: 0 auto;
     }
 
     .btnPrimario,
@@ -198,4 +218,10 @@
         justify-content: center;
     }
     
+}
+
+@media (width >= 1024px) {
+    .mainCards {
+        grid-template-columns: 1fr 1fr;
+    }
 }
