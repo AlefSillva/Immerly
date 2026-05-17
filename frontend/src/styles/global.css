@@ -21,18 +21,5 @@
 
 body {
     background-color: var(--cor-fundo);
-    color: var(--cor-texto);
     font-family: 'Segoe UI', sans-serif;
-    min-height: 100%;
-    width: 100%;
-}
-
-input {
-    font-family: inherit;
-    height: 100vh;
-}
-
-button {
-    cursor: pointer;
-    font-family: inherit;
 }

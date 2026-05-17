@@ -1,14 +1,12 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     min-height: 100vh;
     background-image: url('../../assets/fundo-immerly.png');
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    overflow: hidden;
 }
 
 .subcontainer {
@@ -33,7 +31,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.15)
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15)
 }
 
 .titulo {
@@ -64,7 +62,7 @@
 }
 
 .input {
-    background-color: var(--cor-fundo-input);    
+    background-color: var(--cor-fundo-input);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
@@ -73,12 +71,12 @@
     color: var(--cor-texto-suave);
     font-size: 0.95rem;
     font-weight: 500;
-    transition: border-color 0.2s;  
+    transition: border-color 0.2s;
 }
 
 .input:focus {
     border-color: var(--cor-primaria);
-    box-shadow:0 0px 16px 0 var(--cor-texto);
+    box-shadow: 0 0px 16px 0 var(--cor-texto);
     outline: none;
 }
 
@@ -123,4 +121,39 @@
 
 .link a:hover {
     color: var(--cor-itens);
+}
+
+@media (max-width: 768px) {
+
+    .subcontainer {
+        display: flex;
+        align-items: start;
+        width: 100%;
+    }
+
+    .titulo {
+        margin: 0;
+        padding: 0;
+        font-size: 1.5rem;
+    }
+
+    .subtitulo {
+        margin-top: -0.70rem;
+    }
+
+    .card {
+        margin-top: 4rem;
+        gap: 0.75rem;
+        height: 400px;
+        width: 300px;
+        padding: 1.5rem;
+    }
+
+    .grupo {
+        gap: 0.3rem;
+    }
+
+    .botao {
+        margin: 0.5rem 0 1rem 0;
+    }
 }

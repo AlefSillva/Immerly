@@ -1,8 +1,8 @@
-.navbar {
+.navbarPublica {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 2.5rem;
     width: 100%;
     border-bottom: 1px solid var(--cor-borda);
     background-color: var(--cor-texto-suave);
@@ -84,4 +84,30 @@
 
 .linkHome:hover {
     color: var(--cor-superficie);
+}
+
+@media (max-width: 768px) {
+    .navbarPublica {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--cor-superficie);
+    }
+
+    .linkHome {
+        color: var(--cor-texto);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+    .linkRegistrar {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
 }

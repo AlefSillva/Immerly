@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api'
-import NavbarPublica from '../../components/NavbarPublica/NavbarPublica';
+import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
 import styles from './Login.module.css'
 
 function Login() {

@@ -3,9 +3,9 @@ import styles from './NavbarPublica.module.css';
 
 function NavbarPublica() {
     const location = useLocation();
-
+    
     return (
-        <nav className={styles.navbar}>
+        <nav className={styles.navbarPublica}>
             <span className={styles.logo}>Immerly</span>
             
             <div className={styles.navLinks}>
