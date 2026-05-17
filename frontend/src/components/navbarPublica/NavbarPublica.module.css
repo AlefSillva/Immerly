@@ -86,7 +86,7 @@
     color: var(--cor-superficie);
 }
 
-@media (max-width: 768px) {
+@media (width < 769px) {
     .navbarPublica {
         padding: 1rem;
     }
@@ -105,9 +105,13 @@
         transition: color 0.2s;
     }
 
+    .linkEntrar {
+        font-size: 0.9rem;
+    }
+
     .linkRegistrar {
         font-size: 0.9rem;
-        padding: 0.5rem;
+        padding: 0.4rem;
     }
 
 }

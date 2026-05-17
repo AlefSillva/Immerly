@@ -63,7 +63,7 @@
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .secaoTituloVideo {
@@ -180,13 +180,14 @@
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2.5rem;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    gap: 1rem;
+    width: 600px;
 }
 
 .cta h2 {
@@ -229,15 +230,20 @@
     text-align: center;
 }
 
-
-@media (max-width: 768px) {
+/* Mobile */
+@media (width < 769px) {
     .conteudo {
-        padding: 2rem 1.5rem;
+        padding: 2rem;
+        min-width: 320px;
     }
 
     .titulo {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         text-align: center;
+    }
+
+    .descricao{
+        font-size: 1rem;
     }
 
     .formulaTexto {
@@ -252,7 +258,85 @@
         text-align: justify;
     }
 
+    .videoWrappers {
+        height: 280px;
+    }
+
     .videoWrappers iframe {
-        height: 220px;
+        min-width: 283px;
+        height: 100%;
+        max-height: auto;
+    }
+
+    .linkCard {
+        font-size: 0.9rem;
+        background-color: var(--cor-superficie);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio-borda);
+        padding: 1rem 1.25rem;
+    }
+
+    .cta {
+        min-width: 280px;
+        width: 283px;
+        padding: 1rem;
+    }
+
+    .cta h2 {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--cor-primaria);
+    }
+
+    .cta p {
+        font-size: 0.9rem;
+        color: var(--cor-texto-suave);
+    }
+
+    .ctaBotao {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        font-weight: 500;
+    }
+}
+
+/* Tablet */
+@media (width < 1024px) {
+    .descricao {
+        text-align: justify;
+    }
+
+    .videoWrappers {
+        height: 400px;
+    }
+
+    .videoWrappers iframe {
+        min-width: 283px;
+        height: 100%;
+        max-height: auto;
+    }
+
+    .cta {
+        min-width: 283px;
+        width: 400px;
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+
+    .cta h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--cor-primaria);
+    }
+
+    .cta p {
+        font-size: 0.9rem;
+        color: var(--cor-texto-suave);
+    }
+
+    .ctaBotao {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+        font-weight: 500;
     }
 }
