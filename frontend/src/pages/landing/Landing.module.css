@@ -1,7 +1,10 @@
 .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    min-width: 300px;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
     background-attachment: fixed;
@@ -10,15 +13,11 @@
 
 .mainContent {
     flex: 1;
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 1200px;
-    padding: 5rem 3rem;
-    margin: 0 auto;
-    background-image: none;
+    padding: 1.5rem;
     background-color: rgba(248, 246, 234, 0.76);
 }
 
@@ -26,92 +25,90 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
 }
 
 .titulo {
-    font-size: 3rem;
+    font-size: 1.8rem;
     font-weight: 800;
     line-height: 1.2;
+    text-align: center;
     color: var(--cor-texto-suave);
 }
 
 .destaque {
     color: var(--cor-itens);
-    font-size: 2rem;
+    font-size: 1.3rem;
+    display: block;
 }
 
 .subtitulo {
-    font-size: 1.1rem;
-    color:var(--cor-texto-suave);
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
     line-height: 1.6;
+    text-align: justify;
 }
 
 .botoes {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btnPrimario,
+.btnSecundario {
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: var(--raio-borda);
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, transform 0.2s;
+    width: 100%;
+    text-align: center;
 }
 
 .btnPrimario {
     background-color: var(--cor-primaria);
     color: var(--cor-texto);
-    text-decoration: none;
-    padding: 0.85rem 1.75rem;
-    border-radius: var(--raio-borda);
-    font-size: 1rem;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.2s, transform 0.2s;
-}
-
-.btnPrimario:hover {
-    opacity: 0.85;
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btnSecundario {
     background-color: transparent;
     color: var(--cor-secundaria);
     border: 2px solid var(--cor-texto-suave);
-    border-radius: var(--raio-borda);
-    padding: 0.85rem 1.75rem;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.2s, transform 0.2s;
 }
 
+.btnPrimario:hover,
 .btnSecundario:hover {
-    background-color: var(--cor-itens);
-    color: var(--cor-texto);
-    transform: translateY(-5px) scale(0.95);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
 }
 
 .mainCards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
+    width: 100%;
+    max-width: 100%;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
     gap: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.2s, transform 0.2s;
+    width: 100%;
 }
 
 .card:hover {
     border-color: var(--cor-primaria);
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cardIcone {
@@ -130,22 +127,34 @@
     line-height: 1.4;
 }
 
-/* Mobile */
-@media (width < 769px) {
+@media (min-width: 576px) and (max-width: 768px) {
     .container {
-        min-width: 320px;
-        width: 100vw;
+        min-width: 100%;
+        width: 100%;
+        min-width: 0;
     }
 
     .mainContent {
-        min-width: 320px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         grid-template-columns: 1fr;
         gap: 1rem;
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
+        justify-items: center;
+        box-sizing: border-box;
+    }
+
+    .mainTexto {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .titulo {
+        width: 60%;
         font-size: 2rem;
+        text-align: left;
     }
 
     .destaque {
@@ -154,74 +163,307 @@
 
     .subtitulo {
         font-size: 1rem;
+        text-align: justify;
+        width: 85%;
     }
 
     .botoes {
-        margin-top: 10px;
+        width: 100%;
+        max-width: 100%;
+        flex-direction: row;
+        gap: 0.9rem;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
     }
 
     .btnPrimario,
     .btnSecundario {
         text-align: center;
-        width: 250px;
+        max-width: 240px;
+        box-sizing: border-box;
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
     }
 
     .mainCards {
-        grid-template-columns: 1fr;
-        min-width: 320px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
         width: 100%;
+        min-width: 0;
+        gap: 1rem;
+        margin: 0 auto;
+    }
+
+    .card {
+        max-width: 100%;
+
     }
 }
 
-/* Tablet */
-@media (width < 1024px) {
-    .container {
-        min-width: 320px;
-        width: 100%;
-    }
-
-
-    .mainContent {
-        grid-template-columns:1fr;
-        gap: 2rem;
-        padding: 2rem 1.5rem;
-    }
-
+@media (min-width: 768px) and (max-width: 992px){
     .titulo {
         font-size: 2.5rem;
     }
 
+    .botoes {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 1rem;
+        max-width: 500px;  
+    }
+
+    .btnPrimario {
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0.9rem 1rem;
+        font-size: 0.85rem;
+    }
+
     .mainCards {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-        margin: 0 auto;
-        min-width: 320px;
-        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0 1.5rem;
     }
 
     .card {
-        min-width: 220px;
-        height: auto;
-        max-width: 380px;
-        padding: 1rem;
-        margin: 0 auto;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 300px;
+        width: 100%;
+        min-height: 100vh;
+        background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
+        background-attachment: fixed;
+        background-size: cover;
+        overflow-x: hidden;
     }
 
-    .btnPrimario,
-    .btnSecundario {
-        text-align: center;
-        width: 250px;
+    .mainContent {
+        flex: 1;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        width: 100%;
+        max-width: 100%;
+        padding: 5rem 3rem;
+        margin: 0 auto;
+        background-image: none;
+        background-color: rgba(248, 246, 234, 0.76);
+    }
+
+    .mainTexto {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .titulo {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--cor-texto-suave);
+    }
+
+    .destaque {
+        color: var(--cor-itens);
+        font-size: 2rem;
+    }
+
+    .subtitulo {
+        font-size: 1.1rem;
+        color: var(--cor-texto-suave);
+        line-height: 1.6;
     }
 
     .botoes {
-        margin-top: 10px;
-        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
     }
-    
+
+    .btnPrimario {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto);
+        text-decoration: none;
+        padding: 0.85rem 1.75rem;
+        border-radius: var(--raio-borda);
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btnPrimario:hover {
+        opacity: 0.85;
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btnSecundario {
+        background-color: transparent;
+        color: var(--cor-secundaria);
+        border: 2px solid var(--cor-texto-suave);
+        border-radius: var(--raio-borda);
+        padding: 0.85rem 1.75rem;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btnSecundario:hover {
+        background-color: var(--cor-itens);
+        color: var(--cor-texto);
+        transform: translateY(-5px) scale(0.95);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .mainCards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card {
+        background-color: var(--cor-superficie);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio-borda);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+        border-color: var(--cor-primaria);
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cardIcone {
+        font-size: 1.75rem;
+    }
+
+    .card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--cor-primaria);
+    }
+
+    .card p {
+        font-size: 0.85rem;
+        color: var(--cor-texto-suave);
+        line-height: 1.4;
+    }
 }
 
-@media (width >= 1024px) {
+@media (min-width: 992px) and (max-width: 1024px) {
+
+    .titulo {
+        text-align: left;
+    }
+
+    .botoes {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 0;  
+    }
+
+    .btnPrimario {
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto);
+        text-decoration: none;
+        padding: 0.7rem 1.75rem;
+        border-radius: var(--raio-borda);
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btnSecundario {
+        padding: 0.7rem 1.75rem;
+    }
+
     .mainCards {
+        display: grid;
         grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .card {
+        background-color: var(--cor-superficie);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio-borda);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        height: 220px;
+        width: 220px;
+        gap: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .titulo {
+        text-align: left;
+    }
+
+    .mainContent {
+        max-width: 1200px;
+    }
+
+    .mainTexto {
+        padding: 1.7rem 0; 
+    }
+
+    .botoes {
+        justify-content: start;
+    }
+
+    .btnPrimario {
+        padding: 0.95rem 1.75rem;
+    }
+
+    .btnSecundario {
+        padding: 0.8rem;
+    }
+
+    .mainCards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .card {
+        min-height: 220px;
+        height: fit-content;
+        min-width: 250px;
     }
 }
