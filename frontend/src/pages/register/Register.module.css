@@ -19,31 +19,32 @@
     width: 100%;
     max-width: 1200px;
     background-color: rgba(248, 246, 234, 0.76);
+    padding: 2rem;
 }
 
 .card {
     background-color: var(--cor-superficie);
     border: 1px solid #ffffff;
     border-radius: var(--raio-borda);
-    padding: 2.5rem;
+    padding: 1.5rem;
     width: 100%;
-    max-width: 420px;
-    height: fit-content;
+    max-width: 400px;
+    height: 474px;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     box-shadow:0 8px 16px 0 rgba(0,0,0,0.6)
 }
 
 .titulo {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--cor-texto-suave);
     text-align: center;
 }
 
 .subtitulo {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--cor-texto-suave);
     text-align: center;
     margin-top: -1.2rem;
@@ -52,7 +53,7 @@
 .grupo {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.4rem;
 }
 
 .label {
@@ -67,10 +68,9 @@
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
     height: fit-content;
     color: var(--cor-texto-suave);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: border-color 0.2s;  
 }
@@ -86,12 +86,12 @@
     color: #ffffff;
     border: none;
     border-radius: var(--raio-borda);
-    margin: 0.9rem 0;
     padding: 0.6rem 1rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: background-color 0.2s, transform 0.1s;
     cursor: pointer;
+    margin-top: 1rem;
 }
 
 .botao:hover {
@@ -124,8 +124,8 @@
     color: var(--cor-itens);
 }
 
-@media (max-width: 768px) {
-    
+@media (min-width: 768px) {
+
     .subcontainer {
         align-items: baseline;
     }
@@ -164,3 +164,4 @@
         font-size: 0.9rem;
     }
 }
+

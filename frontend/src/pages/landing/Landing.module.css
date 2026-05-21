@@ -25,6 +25,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding: 1rem;
 
 }
 
@@ -54,6 +55,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
+    max-width: 400px;
 }
 
 .btnPrimario,
@@ -210,15 +212,17 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-self: center;
         margin-bottom: 1rem;
-        max-width: 500px;  
+        width: 500px;
+        max-width: 100%;  
     }
 
     .btnPrimario {
         text-align: center;
         box-sizing: border-box;
-        padding: 0.9rem 1rem;
-        font-size: 0.85rem;
+        padding: 0.95rem 1rem;
+        font-size: 0.75rem;
     }
 
     .mainCards {
@@ -294,9 +298,9 @@
         background-color: var(--cor-primaria);
         color: var(--cor-texto);
         text-decoration: none;
-        padding: 0.85rem 1.75rem;
+        padding: 0.4rem 1.75rem;
         border-radius: var(--raio-borda);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 500;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: border-color 0.2s, transform 0.2s;
@@ -371,7 +375,7 @@
     }
 }
 
-@media (min-width: 992px) and (max-width: 1024px) {
+@media (min-width: 993px) and (max-width: 1024px) {
 
     .titulo {
         text-align: left;
@@ -392,7 +396,7 @@
         text-decoration: none;
         padding: 0.7rem 1.75rem;
         border-radius: var(--raio-borda);
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: 500;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: border-color 0.2s, transform 0.2s;
@@ -400,6 +404,7 @@
 
     .btnSecundario {
         padding: 0.7rem 1.75rem;
+        font-size: 0.5rem;
     }
 
     .mainCards {
@@ -427,7 +432,7 @@
 
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
     .titulo {
         text-align: left;
     }
@@ -444,9 +449,7 @@
         justify-content: start;
     }
 
-    .btnPrimario {
-        padding: 0.95rem 1.75rem;
-    }
+    
 
     .btnSecundario {
         padding: 0.8rem;

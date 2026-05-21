@@ -12,7 +12,7 @@ function NavbarPublica() {
                 {location.pathname === '/landing' && (
                     <>
                         <Link to='/ci' className={styles.linkCi}>Pagina CI</Link>
-                        <Link to='/login' className={styles.linkEntrar}>
+                        <Link to='/login' className={styles.linkLogin}>
                             Login
                         </Link>
                         <Link to='/register' className={styles.linkRegistrar}>
