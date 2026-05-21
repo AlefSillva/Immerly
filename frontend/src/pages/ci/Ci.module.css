@@ -1,5 +1,7 @@
 .container {
+    min-width: 320px;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,11 +15,11 @@
 .conteudo {
     flex: 1;
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 3rem 8rem;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    align-items: center;
+    gap: 2.5rem;
     width: 100%;
     background-image: none;
     background-color: rgba(248, 246, 234, 0.76);
@@ -31,38 +33,42 @@
 }
 
 .titulo {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--cor-texto-suave);
 }
 
 .descricao {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--cor-texto-suave);
     line-height: 1.7;
+    max-width: 720px;
 }
 
 .formula {
     border: 2px solid var(--cor-texto-suave);
     border-radius: var(--raio-borda);
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 720px;
 }
 
 .formulaTexto {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: var(--cor-texto-suave);
 }
 
 .videoWrappers {
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid var(--cor-borda);
+    height: auto;
+}
+
+.videoWrappers iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: var(--raio-borda);
-    overflow: hidden;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -71,7 +77,6 @@
     font-weight: 700;
     color: var(--cor-texto-suave);
     text-align: center;
-    margin-bottom: 1rem;
 }
 
 .secao {
@@ -79,6 +84,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
+    max-width: 720px;
 }
 
 .secaoTitulo {
@@ -92,6 +98,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    width: 100%;
 }
 
 .principioCard {
@@ -134,7 +141,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    width: 90%;
+    width: 100%;
 }
 
 .linkCard {
@@ -181,17 +188,17 @@
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 1rem;
-    width: 600px;
+    width: 100%;
 }
 
 .cta h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--cor-primaria);
 }
@@ -205,10 +212,10 @@
     background-color: var(--cor-itens);
     color: var(--cor-texto);
     border-radius: var(--raio-borda);
-    padding: 0.85rem 1.75rem;
+    padding: 0.65rem 1.55rem;
     text-decoration: none;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: border-color 0.2s, transform 0.1s;
 }
@@ -230,11 +237,10 @@
     text-align: center;
 }
 
-/* Mobile */
-@media (width < 769px) {
+@media (min-width: 576px)  {
     .conteudo {
-        padding: 2rem;
-        min-width: 320px;
+        padding: 1.5rem;
+        max-width: 700px;
     }
 
     .titulo {
@@ -242,7 +248,7 @@
         text-align: center;
     }
 
-    .descricao{
+    .descricao {
         font-size: 1rem;
     }
 
@@ -258,14 +264,10 @@
         text-align: justify;
     }
 
-    .videoWrappers {
-        height: 280px;
-    }
-
     .videoWrappers iframe {
-        min-width: 283px;
-        height: 100%;
-        max-height: auto;
+        width: 100%;
+        height: auto;
+
     }
 
     .linkCard {
@@ -276,14 +278,9 @@
         padding: 1rem 1.25rem;
     }
 
-    .cta {
-        min-width: 280px;
-        width: 283px;
-        padding: 1rem;
-    }
 
     .cta h2 {
-        font-size: 0.7rem;
+        font-size: 1.1rem;
         font-weight: 600;
         color: var(--cor-primaria);
     }
@@ -291,6 +288,7 @@
     .cta p {
         font-size: 0.9rem;
         color: var(--cor-texto-suave);
+        text-align: justify;
     }
 
     .ctaBotao {
@@ -300,43 +298,43 @@
     }
 }
 
-/* Tablet */
-@media (width < 1024px) {
-    .descricao {
-        text-align: justify;
+@media (min-width: 768px) and (max-width: 991px) {
+    .conteudo {
+        padding: 1.5rem 3rem;
+        max-width: 700px;
+    }
+
+    .formula {
+        max-width: 600px;
+    }
+
+    .principios {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 992px) {
+    .conteudo {
+        max-width: 1000px;
+    }
+
+    .formula {
+        padding: 2rem;
+    }
+
+    .formulaTexto {
+        font-size: 1.5rem;
     }
 
     .videoWrappers {
-        height: 400px;
+        max-width: 720px;
     }
 
-    .videoWrappers iframe {
-        min-width: 283px;
-        height: 100%;
-        max-height: auto;
+    .titulo {
+        font-size: 2rem;
     }
 
-    .cta {
-        min-width: 283px;
-        width: 400px;
-        max-width: 95%;
-        padding: 1.5rem;
-    }
-
-    .cta h2 {
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: var(--cor-primaria);
-    }
-
-    .cta p {
-        font-size: 0.9rem;
-        color: var(--cor-texto-suave);
-    }
-
-    .ctaBotao {
-        font-size: 0.9rem;
-        padding: 0.6rem;
-        font-weight: 500;
+    .descricao {
+        font-size: 1.2rem;
     }
 }

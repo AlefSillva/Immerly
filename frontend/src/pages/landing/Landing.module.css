@@ -375,7 +375,7 @@
     }
 }
 
-@media (min-width: 993px) and (max-width: 1024px) {
+@media (min-width: 993px) and (max-width: 1023px) {
 
     .titulo {
         text-align: left;
@@ -432,13 +432,14 @@
 
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
     .titulo {
         text-align: left;
     }
 
     .mainContent {
         max-width: 1200px;
+        align-items: flex-start;
     }
 
     .mainTexto {
@@ -449,10 +450,13 @@
         justify-content: start;
     }
 
-    
+    .btnPrimario {
+        font-size: 0.9rem;
+    }    
 
     .btnSecundario {
         padding: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .mainCards {

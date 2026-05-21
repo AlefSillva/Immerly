@@ -40,12 +40,10 @@ function Ci() {
                         <span className={styles.formulaTexto}>{conteudo.formula}</span>
                     </div>
 
-                    <div>
                         <h2 className={ styles.secaoTituloVideo}>O criador da teoria</h2>
+                        
                         <div className={styles.videoWrappers}>
                             <iframe
-                                width="100%"
-                                height="400"
                                 src="https://www.youtube.com/embed/fnUc_W3xE1w"
                                 title="Stephen Krashen - Language Acquisition and Comprehensible Input"
                                 frameBorder="0"
@@ -53,7 +51,7 @@ function Ci() {
                                 allowFullScreen
                             />
                         </div>
-                    </div>
+                        
 
                     <div className={ styles.secao }>
                         <h2 className={ styles.secaoTitulo }>Princípios fundamentais</h2>

@@ -35,7 +35,7 @@ function App() {
         { /* Rotas públicas */ }
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/landing' element={<Landing />} />
+        <Route path="/landing" element={<Landing />} />
 
         {/* Rota Ci privada */}
         <Route path='/ci' element={
