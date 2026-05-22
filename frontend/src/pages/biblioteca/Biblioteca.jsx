@@ -68,7 +68,7 @@ function Biblioteca() {
     return ( 
         <div className={styles.container}>
             <h1 className={styles.titulo}>Biblioteca</h1>
-            <p className={styles.subtitulo}>Recursos curados para sua imersão</p>
+            <p className={styles.subtitulo}>Recursos para ajudar na sua imersão</p>
 
             {erro && <p className={styles.erro}>{erro}</p>}
 

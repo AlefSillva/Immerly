@@ -3,31 +3,50 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
+    max-width: 100vw;
+    padding: 1rem;
 } 
 
 .titulo {
     font-size: 1rem;
     font-weight: 800;
-    color: var(--cor-supoerficie);
-    background-color: var(--cor-secundaria);
-    border: 1px solid var(--cor-texto);
-    border-radius: 10px;
-    padding: 0.35rem;
+    color: var(--cor-texto);
+    background-image: linear-gradient( to right, transparent, var(--cor-texto-suave) 50%, transparent) ;
+    padding: 0.45rem;
+    min-width: 100%;
     margin: 0 auto;
-    box-shadow: -1px 2px 7px 0px #5c5c5c;
 } 
+
+.paginacao {
+    display: none;
+}
 
 .faixa {
     display: flex;
-    gap: 1.85rem;
+    justify-content: flex-start;
+    gap: 1.5rem;
     overflow-x: auto;
-    padding: 0.75rem;
-    scroll-behavior: smooth
+    padding: 0.75rem 1rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.faixa > * {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+        box-sizing: border-box;
+    }
+
+.faixa::-webkit-scrollbar {
+    height: 6px;
 }
 
 .faixa::-webkit-scrollbar-track {
     background: var(--cor-borda);
     border-radius: 999px;
+    
 }
 
 .faixa::-webkit-scrollbar-thumb {
@@ -35,13 +54,9 @@
     border-radius: 999px;
 }
 
-@media (max-width: 768px) {
-    .faixa {
-        padding: 0.75rem 1rem 0.75rem 2rem;
-        scroll-snap-type: x mandatory;
-    }
+@media (min-width: 768px) {
 
-    .faixa > * {
-        scroll-snap-align: start;
+    .paginacao {
+        display: block;
     }
 }

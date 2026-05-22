@@ -71,9 +71,8 @@
     font-weight: 700;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) and (max-width: 768px) {
     .card {
-        min-width: 80vw;
-        max-width: 80vw;
+        /* max-width: 250px; */
     }
 }

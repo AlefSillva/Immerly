@@ -439,7 +439,7 @@
 
     .mainContent {
         max-width: 1200px;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .mainTexto {

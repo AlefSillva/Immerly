@@ -1,18 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CardRecurso from "../cards/cardRecurso/CardRecurso";
 import Paginacao from '../paginacao/Paginacao';
 import styles from './Carrossel.module.css'
 
 function Carrossel({ titulo, recursos }) {   
     const [paginaAtual, setPaginaAtual] = useState(1);
+    const [isMobile, setIsMobile] = useState(true);
 
     const TAMANHO_PAG = 3;
 
-    if (!recursos || recursos.length === 0) return null;
+    useEffect(() => {
+        const checarTela = () => {
+            setIsMobile(window.innerWidth <= 576);
+        };
 
-    const idx_inicial = (paginaAtual - 1) * TAMANHO_PAG;
-    const idx_final = idx_inicial + TAMANHO_PAG;
-    const recursosExibidos = recursos.slice(idx_inicial, idx_final);    
+        checarTela();
+        window.addEventListener('resize', checarTela);
+        return () => window.removeEventListener('resize', checarTela);
+    }, []);
+
+    if (!recursos || recursos.length === 0) return null;
+    
+    const recursosExibidos = isMobile
+        ? recursos
+        : recursos.slice((paginaAtual - 1) * TAMANHO_PAG, paginaAtual * TAMANHO_PAG);
+
+    // const idx_inicial = (paginaAtual - 1) * TAMANHO_PAG;
+    // const idx_final = idx_inicial + TAMANHO_PAG;
+    // const recursosExibidos = recursos.slice(idx_inicial, idx_final);    
 
     return (
         <div className={ styles.secao }>
