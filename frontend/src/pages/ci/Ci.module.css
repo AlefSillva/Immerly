@@ -237,7 +237,7 @@
     text-align: center;
 }
 
-@media (min-width: 576px)  {
+@media (min-width: 576px) {
     .conteudo {
         padding: 1.5rem;
         max-width: 700px;
@@ -315,7 +315,7 @@
 
 @media (min-width: 992px) {
     .conteudo {
-        max-width: 1000px;
+        max-width: 900px;
     }
 
     .formula {
@@ -337,4 +337,21 @@
     .descricao {
         font-size: 1.2rem;
     }
+
+    .secao {
+        width: 100%;
+    }
+
+    
+}
+
+@media (min-width: 1024px) {
+    .conteudo {
+        max-width: 1000px;
+    }
+
+    .linkCard {
+        width: 100%;
+    }
+    
 }

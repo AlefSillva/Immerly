@@ -1,27 +1,41 @@
-.tabela {
+.wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    max-width: 1200px;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.tabela {
+    display: table;
+    min-width: 745px;
+    width: 100%;
+    height: auto;
     border-collapse: collapse;
     background-color: var(--cor-superficie);
     border-radius: var(--raio-borda);
     overflow: hidden;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
 }
 
 .tabela th {
-    background-color: var(--cor-primaria);
-    color: var(--cor-texto);
+    background-color: var(--cor-texto-suave);
+    color: var(--cor-superficie);
     padding: 0.75rem 1rem;
     text-align: left;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--cor-borda);
+    border-bottom-left-radius: var(--raio-borda);
+    border-top-right-radius: var(--raio-borda);
 }
 
 .tabela td {
-    padding: 0.75rem 1rem;
-    color: var(--cor-texto-suave);
-    font-size: 0.9rem;
-    border-bottom: 1px solid var(--cor-fundo);
+    padding: 0 1rem;
+    color: var(--cor-secundaria);
+    font-size: 0.8rem;
+    line-height: 1.2;
+    font-weight: 400;
+    border-bottom: 1px solid var(--cor-texto);
 }
 
 .tabela tr:last-child td {
@@ -33,9 +47,9 @@
 }
 
 .tabela a {
-    color: var(--cor-primaria);
+    color: var(--cor-itens);
     text-decoration: none;
-    font-weight: 500;
+    font-size: 0.8rem;
 }
 
 .tabela a:hover {
@@ -44,6 +58,8 @@
 
 .acoes {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -52,8 +68,10 @@
     color: var(--cor-texto);
     border: none;
     border-radius: var(--raio-borda);
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
+    color: var(--cor-texto);
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
     transition: opacity 0.2s;
 }
@@ -67,12 +85,30 @@
     color: var(--cor-texto);
     border: none;
     border-radius: var(--raio-borda);
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
     transition: opacity 0.2s;
 }
 
 .botaoDeletar:hover {
     opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+
+    .wrapper {
+        width: 100%;
+    }
+
+    .acoes {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        width: 100%;
+    }
 }
