@@ -1,14 +1,14 @@
 .grupo {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 0.4rem;
 }
 
 .label {
-    font-size: 0.90rem;
+    font-size: 0.8rem;
     font-weight: 400;
     color: var(--cor-texto-suave);
-    margin-top: 0.5rem;
 }
 
 
@@ -16,9 +16,9 @@
     background-color: var(--cor-fundo-input);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
-    padding: 0.75rem 1rem;
+    padding: 0.4rem 0.8rem;
     color: var(--cor-texto-suave);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     transition: border-color 0.2s;
     cursor: pointer;
 }
@@ -29,16 +29,8 @@
     outline: none;
 }
 
-@media (max-width: 768px) {
-    .grupo {
-        /* height: 40px; */
-    }
-
-    .select {
-        padding: 0.5rem;
-    }
-
-    .label {
-        margin-top: 0;
+@media (min-width: 768px) {
+    .input {
+        padding: 1rem;
     }
 }

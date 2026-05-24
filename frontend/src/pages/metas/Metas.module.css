@@ -1,12 +1,13 @@
 .container {
     display: flex;
     align-items: center;
-    max-width: 600px;
+    width: 100%;
+    min-height: 100vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 2rem 0;
+    padding: 2rem 1.5rem;
 }
 
 .titulo {
@@ -27,16 +28,18 @@
 .progresso {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
+    width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .container {
         padding: 1rem;
     }
 
     .progresso {
         width: 100%;
+        max-width: 500px;
     }
 }

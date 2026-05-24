@@ -5,10 +5,9 @@
 }
 
 .label {
-    font-size: 0.90rem;
+    font-size: 0.8rem;
     font-weight: 400;
     color: var(--cor-texto-suave);
-    margin-top: 1.3rem;
 }
 
 .containerInput {
@@ -23,11 +22,9 @@
     background-color: var(--cor-fundo-input);    
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
-    padding: 0.60rem 1rem;
-    margin-bottom: 0.5rem;
-    height: fit-content;
+    padding: 0.4rem 0.4rem;
     color: var(--cor-texto-suave);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 500;
     transition: border-color 0.2s;  
 }
@@ -40,17 +37,16 @@
 
 .sufixo {
     color: var(--cor-texto-suave);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
+    margin-left: -0.3rem;
+    align-self: flex-end;
 }
 
-@media (max-width: 768px) {
-    .label {
-        margin: 0;
-    }
+@media (min-width: 768px) {
 
     .input {
-        padding: 0.48rem 0.5rem;
+        padding: 0.55rem;
         margin: 0;
     }
 }

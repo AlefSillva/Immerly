@@ -1,14 +1,14 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
     padding: 1.25rem;
-    width: 600px;
-    height: 7rem;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    height: auto;
 }
 
 .topo {
@@ -35,16 +35,19 @@
 }
 
 .barra {
-    height: 10px;
+    height: 14px;
     background-color: var(--cor-borda);
-    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .preenchimento {
     height: 100%;
-    border-radius: 999px;
     transition: width 0.6s ease;
+    border-radius: 3px;
+    background-color: var(--cor-primaria);
 }
 
 .rodape {
@@ -70,10 +73,10 @@
     font-weight: 600;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) {
     .container {
         width: 100%;
-        height: auto;
-        box-sizing: border-box;
+        max-width: 500px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
     }
 }
