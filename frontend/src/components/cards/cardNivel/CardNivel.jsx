@@ -44,7 +44,7 @@ function CardNivel({ totalHoras }) {
                     <span className={styles.maximo}>🏆 Nível máximo atingido!</span>
                 )}
 
-                <span className={styles.total}>{totalHoras}h acumuladas</span>
+                <span className={styles.total}>{porcentagem.toFixed(0)}% concluído</span>
             </div>
         </div>
         

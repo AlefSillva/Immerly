@@ -9,7 +9,6 @@
     gap: 0.75rem;
     width: 100%;
     height: auto;
-    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6); */
 }
 
 .topo {
@@ -24,28 +23,31 @@
 }
 
 .nivel {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
 .descricao {
     font-size: 0.9rem;
-    font-weight: 1rem;
+    font-weight: 500;
     color: var(--cor-texto-suave);
     margin-top: -0.5rem;
 }
 
 .barra {
-    height: 8px;
+    height: 14px;
     background-color: var(--cor-borda);
-    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .preenchimento {
     height: 100%;
-    border-radius: 999px;
     transition: width 0.6s ease;
+    border-radius: 3px;
+    background-color: var(--cor-primaria);
 }
 
 .rodape {
@@ -71,3 +73,8 @@
     color: var(--cor-texto-suave);
 }
 
+@media (min-width: 768px) {
+    .card {
+        box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
+    }
+}

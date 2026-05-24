@@ -10,7 +10,6 @@
     max-width: 100%;
     height: auto;
     text-align: center;
-    /* box-shadow:0 8px 16px 0 rgba(0,0,0,0.6) */
 }
 
 .titulo {
@@ -43,4 +42,11 @@
 .input:focus {
     outline: none;
     border-color: var(--cor-primaria);
+}
+
+
+@media (min-width: 768px) {
+    .card {
+        box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
+    }
 }
