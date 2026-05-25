@@ -83,6 +83,13 @@ const adminRoutes = require('./routes/admin');
 app.use('/api/admin', adminRoutes);
 //-----------------------------------------------
 
+// Importa as rotas de perfil
+const perfilRoutes = require('./routes/perfil');
+
+// Registra as rotas de perfil com o prefixo /api/perfil
+app.use('/api/perfil', perfilRoutes);
+//-----------------------------------------------
+
 
 //*************************************************************
 
