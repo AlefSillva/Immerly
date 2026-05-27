@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
+import CardMetrica from '../../components/cards/cardMetrica/CardMetrica';
+import CardNivel from '../../components/cards/cardNivel/CardNivel';
 import styles from './Perfil.module.css';
 
 function Perfil() {
     const [usuario, setUsuario] = useState(null);
+    const [metricas, setMetricas] = useState(null);
+    const [editando, setEditando] = useState(false);
+    const [alterandoSenha, setAlterandoSenha] = useState(false);
     const [formPerfil, setFormPerfil] = useState({ nome: '', email: '' });
     const [formSenha, setFormSenha] = useState({ senha_atual: '', nova_senha: '', confirmar_senha: '' });
     const [mensagemPerfil, setMensagemPerfil] = useState('');
@@ -13,13 +18,17 @@ function Perfil() {
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
-        const buscarPerfil = async () => {
+        const buscarDados = async () => {
             try {
-                const resposta = await api.get('/perfil');
-                setUsuario(resposta.data.usuario);
+                const [resPerfil, resMetricas] = await Promise.all([
+                    api.get('/perfil'),
+                    api.get('/metricas')
+                ]);
+                setUsuario(resPerfil.data.usuario);
+                setMetricas(resMetricas.data);
                 setFormPerfil({
-                    nome: resposta.data.usuario.nome,
-                    email: resposta.data.usuario.email
+                    nome: resPerfil.data.usuario.nome,
+                    email: resPerfil.data.usuario.email
                 });
             } catch (err) {
                 setErroPerfil(err.response?.data?.message || 'Erro ao carregar perfil.');
@@ -28,7 +37,7 @@ function Perfil() {
             }
         };
 
-        buscarPerfil();
+        buscarDados();
     }, []);
 
     const handleChangePerfil = (e) => {
@@ -46,19 +55,16 @@ function Perfil() {
 
         try {
             const resposta = await api.put('/perfil', formPerfil);
-
-            // Atualiza o localStorage com os novos dados
             const usuarioAtual = JSON.parse(localStorage.getItem('usuario'));
             localStorage.setItem('usuario', JSON.stringify({
                 ...usuarioAtual,
                 nome: resposta.data.usuario.nome,
                 email: resposta.data.usuario.email
             }));
-
             setUsuario(resposta.data.usuario);
             setMensagemPerfil('Perfil atualizado com sucesso!');
+            setEditando(false);
             setTimeout(() => setMensagemPerfil(''), 3000);
-
         } catch (err) {
             setErroPerfil(err.response?.data?.message || 'Erro ao atualizar perfil.');
         }
@@ -69,7 +75,6 @@ function Perfil() {
         setErroSenha('');
         setMensagemSenha('');
 
-        // Valida se as senhas coincidem antes de enviar
         if (formSenha.nova_senha !== formSenha.confirmar_senha) {
             setErroSenha('As senhas não coincidem.');
             return;
@@ -80,11 +85,10 @@ function Perfil() {
                 senha_atual: formSenha.senha_atual,
                 nova_senha: formSenha.nova_senha
             });
-
             setMensagemSenha('Senha alterada com sucesso!');
             setFormSenha({ senha_atual: '', nova_senha: '', confirmar_senha: '' });
+            setAlterandoSenha(false);
             setTimeout(() => setMensagemSenha(''), 3000);
-
         } catch (err) {
             setErroSenha(err.response?.data?.message || 'Erro ao alterar senha.');
         }
@@ -105,111 +109,114 @@ function Perfil() {
 
     if (carregando) return <p className={styles.carregando}>Carregando...</p>;
 
+    // Pega a inicial do nome para o avatar
+    const inicial = usuario?.nome?.charAt(0).toUpperCase();
+
     return (
         <div className={styles.container}>
             <h1 className={styles.titulo}>Meu Perfil</h1>
             <p className={styles.subtitulo}>Gerencie suas informações pessoais</p>
 
-            {/* Informações do perfil */}
-            <div className={styles.secao}>
-                <h2 className={styles.secaoTitulo}>Informações pessoais</h2>
-                <p className={styles.dataCadastro}>
-                    Membro desde {new Date(usuario.data_cadastro).toLocaleDateString('pt-BR')}
-                </p>
+            {/* Card de identidade */}
+            <div className={styles.cardIdentidade}>
+                <div className={styles.avatar}>{inicial}</div>
 
-                <form onSubmit={handleSubmitPerfil} className={styles.form}>
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Nome</label>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            name="nome"
-                            value={formPerfil.nome}
-                            onChange={handleChangePerfil}
-                            required
-                        />
+                {!editando ? (
+                    <div className={styles.infoUsuario}>
+                        <h2 className={styles.nomeUsuario}>{usuario.nome}</h2>
+                        <p className={styles.emailUsuario}>{usuario.email}</p>
+                        <p className={styles.dataCadastro}>
+                            Membro desde {new Date(usuario.data_cadastro).toLocaleDateString('pt-BR')}
+                        </p>
+                        {mensagemPerfil && <p className={styles.sucesso}>{mensagemPerfil}</p>}
+                        <button onClick={() => setEditando(true)} className={styles.botaoEditar}>
+                            Editar informações
+                        </button>
                     </div>
-
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Email</label>
-                        <input
-                            className={styles.input}
-                            type="email"
-                            name="email"
-                            value={formPerfil.email}
-                            onChange={handleChangePerfil}
-                            required
-                        />
-                    </div>
-
-                    {mensagemPerfil && <p className={styles.sucesso}>{mensagemPerfil}</p>}
-                    {erroPerfil && <p className={styles.erro}>{erroPerfil}</p>}
-
-                    <button type="submit" className={styles.botaoSalvar}>
-                        Salvar alterações
-                    </button>
-                </form>
+                ) : (
+                    <form onSubmit={handleSubmitPerfil} className={styles.formInline}>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Nome</label>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                name="nome"
+                                value={formPerfil.nome}
+                                onChange={handleChangePerfil}
+                                required
+                            />
+                        </div>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Email</label>
+                            <input
+                                className={styles.input}
+                                type="email"
+                                name="email"
+                                value={formPerfil.email}
+                                onChange={handleChangePerfil}
+                                required
+                            />
+                        </div>
+                        {erroPerfil && <p className={styles.erro}>{erroPerfil}</p>}
+                        <div className={styles.botoesForm}>
+                            <button type="submit" className={styles.botaoSalvar}>Salvar</button>
+                            <button type="button" onClick={() => setEditando(false)} className={styles.botaoCancelar}>Cancelar</button>
+                        </div>
+                    </form>
+                )}
             </div>
 
-            {/* Alteração de senha */}
+            {/* Resumo de atividade */}
+            {metricas && (
+                <div className={styles.secao}>
+                    <h2 className={styles.secaoTitulo}>Resumo de atividade</h2>
+                    <div className={styles.nivelWrapper}>
+                        <CardNivel totalHoras={metricas.total_horas} />
+                    </div>
+                    <div className={styles.gridMetricas}>
+                        <CardMetrica titulo="Total de horas" valor={(metricas.total_horas ?? 0).toFixed(1)} sufixo="h" />
+                        <CardMetrica titulo="Streak atual" valor={metricas.streak_dias} sufixo="dias" />
+                        <CardMetrica titulo="Média semanal" valor={(metricas.media_semanal_horas ?? 0).toFixed(1)} sufixo="h" />
+                        <CardMetrica titulo="Projeção 4 semanas" valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)} sufixo="h" />
+                    </div>
+                </div>
+            )}
+
+            {/* Ações da conta */}
             <div className={styles.secao}>
-                <h2 className={styles.secaoTitulo}>Alterar senha</h2>
+                <h2 className={styles.secaoTitulo}>Configurações da conta</h2>
 
-                <form onSubmit={handleSubmitSenha} className={styles.form}>
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Senha atual</label>
-                        <input
-                            className={styles.input}
-                            type="password"
-                            name="senha_atual"
-                            value={formSenha.senha_atual}
-                            onChange={handleChangeSenha}
-                            required
-                        />
+                {!alterandoSenha ? (
+                    <div className={styles.acoes}>
+                        {mensagemSenha && <p className={styles.sucesso}>{mensagemSenha}</p>}
+                        <button onClick={() => setAlterandoSenha(true)} className={styles.botaoAcao}>
+                            🔒 Alterar senha
+                        </button>
+                        <button onClick={handleDeletarConta} className={styles.botaoDeletar}>
+                            🗑️ Deletar minha conta
+                        </button>
                     </div>
-
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Nova senha</label>
-                        <input
-                            className={styles.input}
-                            type="password"
-                            name="nova_senha"
-                            value={formSenha.nova_senha}
-                            onChange={handleChangeSenha}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.grupo}>
-                        <label className={styles.label}>Confirmar nova senha</label>
-                        <input
-                            className={styles.input}
-                            type="password"
-                            name="confirmar_senha"
-                            value={formSenha.confirmar_senha}
-                            onChange={handleChangeSenha}
-                            required
-                        />
-                    </div>
-
-                    {mensagemSenha && <p className={styles.sucesso}>{mensagemSenha}</p>}
-                    {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
-
-                    <button type="submit" className={styles.botaoSalvar}>
-                        Alterar senha
-                    </button>
-                </form>
-            </div>
-
-            {/* Zona de perigo */}
-            <div className={styles.secaoDanger}>
-                <h2 className={styles.secaoTituloDanger}>Zona de perigo</h2>
-                <p className={styles.dangerTexto}>
-                    Ao deletar sua conta, todos os seus dados serão permanentemente removidos.
-                </p>
-                <button onClick={handleDeletarConta} className={styles.botaoDeletar}>
-                    Deletar minha conta
-                </button>
+                ) : (
+                    <form onSubmit={handleSubmitSenha} className={styles.formInline}>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Senha atual</label>
+                            <input className={styles.input} type="password" name="senha_atual" value={formSenha.senha_atual} onChange={handleChangeSenha} required />
+                        </div>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Nova senha</label>
+                            <input className={styles.input} type="password" name="nova_senha" value={formSenha.nova_senha} onChange={handleChangeSenha} required />
+                        </div>
+                        <div className={styles.grupo}>
+                            <label className={styles.label}>Confirmar nova senha</label>
+                            <input className={styles.input} type="password" name="confirmar_senha" value={formSenha.confirmar_senha} onChange={handleChangeSenha} required />
+                        </div>
+                        {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
+                        <div className={styles.botoesForm}>
+                            <button type="submit" className={styles.botaoSalvar}>Salvar</button>
+                            <button type="button" onClick={() => setAlterandoSenha(false)} className={styles.botaoCancelar}>Cancelar</button>
+                        </div>
+                    </form>
+                )}
             </div>
         </div>
     );
