@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 import CardMetrica from "../../components/cards/cardMetrica/CardMetrica";
 import CardNivel from "../../components/cards/cardNivel/CardNivel"
+import CalendarioStreak from '../../components/calendarioStreak/CalendarioStreak';
 import {
   BarChart,
   Bar,
@@ -173,6 +174,7 @@ function Dashboard() {
               </div>
             )}
           </div>
+          <CalendarioStreak porDia={historico?.por_dia} />
         </>
       ) : (
         !erro && <p className={styles.carregando}>Carregando...</p>

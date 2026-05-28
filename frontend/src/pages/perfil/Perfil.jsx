@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
-import CardMetrica from '../../components/cards/cardMetrica/CardMetrica';
-import CardNivel from '../../components/cards/cardNivel/CardNivel';
+import MetricasPerfil from '../../components/perfilComponents/metricasPerfil/MetricasPerfil';
+import  NivelPerfil from '../../components/perfilComponents/nivelPerfil/NivelPerfil';
 import styles from './Perfil.module.css';
 
 function Perfil() {
@@ -117,7 +117,6 @@ function Perfil() {
             <h1 className={styles.titulo}>Meu Perfil</h1>
             <p className={styles.subtitulo}>Gerencie suas informações pessoais</p>
 
-            {/* Card de identidade */}
             <div className={styles.cardIdentidade}>
                 <div className={styles.avatar}>{inicial}</div>
 
@@ -166,23 +165,20 @@ function Perfil() {
                 )}
             </div>
 
-            {/* Resumo de atividade */}
             {metricas && (
                 <div className={styles.secao}>
                     <h2 className={styles.secaoTitulo}>Resumo de atividade</h2>
-                    <div className={styles.nivelWrapper}>
-                        <CardNivel totalHoras={metricas.total_horas} />
-                    </div>
-                    <div className={styles.gridMetricas}>
-                        <CardMetrica titulo="Total de horas" valor={(metricas.total_horas ?? 0).toFixed(1)} sufixo="h" />
-                        <CardMetrica titulo="Streak atual" valor={metricas.streak_dias} sufixo="dias" />
-                        <CardMetrica titulo="Média semanal" valor={(metricas.media_semanal_horas ?? 0).toFixed(1)} sufixo="h" />
-                        <CardMetrica titulo="Projeção 4 semanas" valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)} sufixo="h" />
-                    </div>
+                    <NivelPerfil totalHoras={metricas.total_horas} />
+                    <MetricasPerfil
+                        totalHoras={metricas.total_horas ?? 0}
+                        streakDias={metricas.streak_dias}
+                        mediaSemanal={metricas.media_semanal_horas ?? 0}
+                        projecao={metricas.projecao_4_semanas_horas ?? 0}
+                    />
                 </div>
             )}
 
-            {/* Ações da conta */}
+            
             <div className={styles.secao}>
                 <h2 className={styles.secaoTitulo}>Configurações da conta</h2>
 

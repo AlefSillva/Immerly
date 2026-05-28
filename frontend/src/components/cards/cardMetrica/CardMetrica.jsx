@@ -7,7 +7,7 @@ function CardMetrica({ titulo, valor, sufixo }) {
                 
             <span className={styles.valor}>
                 { valor }
-                { sufixo && <span className={ styles.sufixo }>{ sufixo }</span>}
+                { sufixo && <span className={ styles.sufixo }> { sufixo }</span>}
             </span>
         </div>
     )
