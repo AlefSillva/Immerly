@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+    background-image: linear-gradient(rgba(233, 217, 213, 0.849), rgba(243, 230, 230, 0.6)), url('../../assets/fundo-immerly.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.codigo {
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--cor-primaria);
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cor-texto-suave);
+}
+
+.descricao {
+    font-size: 1rem;
+    color: var(--cor-texto-suave);
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+.botao {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-radius: var(--raio-borda);
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.botao:hover {
+    opacity: 0.85;
+    transform: translateY(-3px);
+}

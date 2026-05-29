@@ -12,6 +12,7 @@ import Ci from "./pages/ci/Ci";
 import RotaAdmin from "./components/RotaAdmin";
 import Admin from "./pages/admin/Admin";
 import Perfil from './pages/perfil/Perfil';
+import NaoEncontrado from './pages/naoEncontrado/NaoEncontrado';
 
 function App() {
   const usuario = localStorage.getItem("usuario");
@@ -34,6 +35,9 @@ function App() {
 
         {/* Rota padrão */}
         <Route path="/" element={<Navigate to="/landing" replace />} />
+        
+        {/* Rota 404 — captura qualquer rota não encontrada */}
+        <Route path="*" element={<NaoEncontrado />} />
 
         {/* Rotas públicas */}
         <Route path="/register" element={<Register />} />
