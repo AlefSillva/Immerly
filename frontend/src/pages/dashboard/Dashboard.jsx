@@ -15,7 +15,9 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import SkeletonDashboard from '../../components/skeleton/skeletonDashboard/SkeletonDashboard';
 import styles from "./Dashboard.module.css";
+
 
 const CORES = [
   "#6c63ff",
@@ -110,7 +112,7 @@ function Dashboard() {
                 <CardMetrica
                 titulo="Streak atual"
                 valor={metricas.streak_dias}
-                sufixo="dias"
+                sufixo=" dias"
                 />
             </div>
 
@@ -177,7 +179,7 @@ function Dashboard() {
           <CalendarioStreak porDia={historico?.por_dia} />
         </>
       ) : (
-        !erro && <p className={styles.carregando}>Carregando...</p>
+        !erro && <SkeletonDashboard />
       )}
     </div>
   );

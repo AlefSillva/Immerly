@@ -1,0 +1,15 @@
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--cor-superficie) 25%,
+        var(--cor-fundo) 50%,
+        var(--cor-superficie) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

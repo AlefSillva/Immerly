@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import api from '../../services/api'
 import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
 import styles from './Login.module.css'
@@ -39,6 +39,11 @@ function Login() {
             setErro(err.response?.data?.message || 'Email ou senha incorretos.');
         }
     };
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        return <Navigate to="/dashboard" replace />;
+    }
 
     return (
         <>

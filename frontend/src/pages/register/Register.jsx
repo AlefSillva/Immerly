@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import api from '../../services/api';
 import styles from './Register.module.css';
 import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
@@ -31,6 +31,11 @@ function Register() {
             setErro(err.response?.data?.message || 'Erro ao criar conta.');
         }
     };
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        return <Navigate to="/dashboard" replace />;
+    }
 
     return (
         <>

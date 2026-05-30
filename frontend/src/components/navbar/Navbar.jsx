@@ -36,7 +36,7 @@ function Navbar({ user }) {
                 
             <Link to="/perfil" className={ styles.link }>Meu Perfil</Link>
             <Link to="/dashboard" className={ styles.link }>Dashboard</Link>
-            <Link to="/sessoes" className={ styles.link }>Sessão</Link>
+            <Link to="/sessoes" className={ styles.link }>Registrar sessão</Link>
             <Link to="/metas" className={ styles.link }>Metas</Link>
             <Link to="/recursos" className={ styles.link }>Biblioteca</Link>
             <Link to="/ci" className={ styles.link }>Comprehensible Input</Link>
