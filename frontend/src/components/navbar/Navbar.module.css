@@ -68,6 +68,50 @@
     color: var(--cor-text-suave);
 }
 
+.botaoTema {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.toggleTrack {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition: background-color 0.3s;
+}
+
+.escuro .toggleTrack {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.toggleThumb {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    transform: translateX(0);
+}
+
+.escuro .toggleThumb {
+    transform: translateX(20px);
+}
+
+.toggleLabel {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+
 .logoutButton {
     text-decoration: none;
     font-size: 1.3rem;

@@ -355,3 +355,7 @@
     }
     
 }
+
+[data-tema="escuro"] .conteudo {
+    background-color: transparent;
+}

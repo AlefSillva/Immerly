@@ -16,3 +16,6 @@
     background-size: cover;
     background-attachment: fixed;
 }
+[data-tema="escuro"] main {
+    background-image: linear-gradient(rgba(13, 13, 31, 0.85), rgba(13, 13, 31, 0.75)), url('../../assets/fundo-immerly-escuro.png');
+}

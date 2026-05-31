@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-function Navbar({ user }) {
+function Navbar({ user, tema, alternarTema }) {
     const [ isOpen, setIsOpen ] = useState(false);
     const navigate = useNavigate();
 
@@ -45,7 +45,18 @@ function Navbar({ user }) {
             )}
                 
             <div className={ styles.userInfo }>
-
+                <button
+                    onClick={alternarTema}
+                    className={`${styles.botaoTema} ${tema === 'escuro' ? styles.escuro : ''}`}
+                    title={tema === 'escuro' ? 'Modo claro' : 'Modo escuro'}
+                    > 
+                    <span className={styles.toggleLabel}>
+                        {tema === 'escuro' ? '☀️' : '🌙'}
+                    </span>
+                    <span className={styles.toggleTrack}>
+                        <span className={styles.toggleThumb} />
+                    </span>
+                </button>
                 {isOpen && (
                     
                     <>

@@ -88,6 +88,10 @@
     font-weight: 700;
 }
 
+[data-tema="escuro"] .container {
+    background-image: linear-gradient(rgba(13, 13, 31, 0.85), rgba(13, 13, 31, 0.75)), url('../../assets/fundo-immerly-biblioteca-escuro.png');
+}
+
 /* @media (max-width: 768px) {
     .container {
         padding: 0 1.5rem;

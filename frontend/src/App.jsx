@@ -13,8 +13,11 @@ import RotaAdmin from "./components/RotaAdmin";
 import Admin from "./pages/admin/Admin";
 import Perfil from './pages/perfil/Perfil';
 import NaoEncontrado from './pages/naoEncontrado/NaoEncontrado';
+import useTema from './hooks/useTema';
 
 function App() {
+  const { tema, alternarTema } = useTema();
+
   const usuario = localStorage.getItem("usuario");
   let user = usuario ? JSON.parse(usuario) : null;
 
@@ -50,7 +53,7 @@ function App() {
           element={
             localStorage.getItem("token") ? (
               <RotaPrivada>
-                <Layout user={user}>
+                <Layout user={user} tema={tema} alternarTema={alternarTema}>
                   <Ci />
                 </Layout>
               </RotaPrivada>
@@ -65,7 +68,7 @@ function App() {
           path="/dashboard"
           element={
             <RotaPrivada>
-              <Layout user={user}>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
                 <Dashboard />
               </Layout>
             </RotaPrivada>
@@ -77,7 +80,7 @@ function App() {
           path="/sessoes"
           element={
             <RotaPrivada>
-              <Layout user={user}>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
                 <Sessoes />
               </Layout>
             </RotaPrivada>
@@ -89,7 +92,7 @@ function App() {
           path="/recursos"
           element={
             <RotaPrivada>
-              <Layout user={user}>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
                 <Biblioteca />
               </Layout>
             </RotaPrivada>
@@ -101,7 +104,7 @@ function App() {
           path="/metas"
           element={
             <RotaPrivada>
-              <Layout user={user}>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
                 <Metas />
               </Layout>
             </RotaPrivada>
@@ -113,7 +116,7 @@ function App() {
           path="/perfil"
           element={
             <RotaPrivada>
-              <Layout user={user}>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
                 <Perfil />
               </Layout>
             </RotaPrivada>

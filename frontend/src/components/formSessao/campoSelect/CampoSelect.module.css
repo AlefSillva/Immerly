@@ -16,7 +16,7 @@
     background-color: var(--cor-fundo-input);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
-    padding: 0.4rem 0.8rem;
+    padding: 0.75rem;
     color: var(--cor-texto-suave);
     font-size: 0.8rem;
     transition: border-color 0.2s;
@@ -29,8 +29,3 @@
     outline: none;
 }
 
-@media (min-width: 768px) {
-    .input {
-        padding: 1rem;
-    }
-}
