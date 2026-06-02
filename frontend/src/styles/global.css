@@ -34,16 +34,6 @@
     --raio-borda: 8px;
 }
 
-[data-tema="escuro"] body {
-    background-color: var(--cor-fundo);
-}
-
-[data-tema="escuro"] .container {
-    background-image: linear-gradient(rgba(13, 13, 31, 0.95), rgba(13, 13, 31, 0.85)), url('../../assets/fundo-immerly.png');
-    background-attachment: fixed;
-    background-size: cover;
-}
-
 body {
     background-color: var(--cor-fundo);
     font-family: 'Segoe UI', sans-serif;

@@ -5,7 +5,7 @@ function Layout({ children, user, tema, alternarTema }) {
     return (
         <div className={ styles.layout }>
             <Navbar user={user} tema={tema} alternarTema={alternarTema} />
-            <main>
+            <main className={ styles.main }>
                 { children }
             </main>
         </div>

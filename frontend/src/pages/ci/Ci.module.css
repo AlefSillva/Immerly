@@ -161,6 +161,10 @@
     border-color: var(--cor-primaria);
 }
 
+.linkCard:visited {
+    color: var(--cor-itens)
+}
+
 .linkNome {
     font-size: 0.95rem;
     font-weight: 600;
@@ -356,6 +360,11 @@
     
 }
 
+[data-tema="escuro"] .container {
+    background-image: linear-gradient(rgba(19, 19, 31, 0.85), rgba(19, 19, 31, 0.7)), url('../../assets/fundo-immerly-escuro.png');
+}
+
 [data-tema="escuro"] .conteudo {
     background-color: transparent;
+    background-image: none; /* garante que nenhuma imagem vaze pro conteudo */
 }

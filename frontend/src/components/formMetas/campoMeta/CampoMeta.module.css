@@ -47,3 +47,8 @@
         width: 100%;
     }
 }
+
+[data-tema="escuro"] .input {
+    background-color: var(--cor-fundo-input);
+    color: var(--cor-texto);
+}

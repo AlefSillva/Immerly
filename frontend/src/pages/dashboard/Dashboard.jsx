@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import CardMetrica from "../../components/cards/cardMetrica/CardMetrica";
-import CardNivel from "../../components/cards/cardNivel/CardNivel"
-import CalendarioStreak from '../../components/calendarioStreak/CalendarioStreak';
+import CardNivel from "../../components/cards/cardNivel/CardNivel";
+import CalendarioStreak from "../../components/calendarioStreak/CalendarioStreak";
 import {
   BarChart,
   Bar,
@@ -15,24 +15,20 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import SkeletonDashboard from '../../components/skeleton/skeletonDashboard/SkeletonDashboard';
+import SkeletonDashboard from "../../components/skeleton/skeletonDashboard/SkeletonDashboard";
 import styles from "./Dashboard.module.css";
-
-
-const CORES = [
-  "#6c63ff",
-  "#FF7A4D",
-  "#676F54",
-  "#2A4849",
-  "#FFA380",
-  "#FFCCB8",
-  "#FFEDE6",
-];
 
 function Dashboard() {
   const [metricas, setMetricas] = useState(null);
   const [historico, setHistorico] = useState(null);
   const [erro, setErro] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 576);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const buscarDados = async () => {
@@ -66,6 +62,45 @@ function Dashboard() {
     value: parseFloat(item.horas),
   }));
 
+  const temaAtual = localStorage.getItem("tema");
+
+  const CORES_CLARO = [
+    "#6c63ff",
+    "#FF7A4D",
+    "#676F54",
+    "#2A4849",
+    "#FFA380",
+    "#FFCCB8",
+    "#FFEDE6",
+  ];
+
+  const CORES_ESCURO = [
+    "#8b85ff",
+    "#FF7A4D",
+    "#a0a896",
+    "#00BCD4",
+    "#FFA380",
+    "#FFD700",
+    "#E91E63",
+  ];
+
+  const CORES = temaAtual === "escuro" ? CORES_ESCURO : CORES_CLARO;
+  const estiloTooltip =
+    temaAtual === "escuro"
+      ? {
+          backgroundColor: "#1e1e2e",
+          border: "1px solid #3a3a5c",
+          color: "#ffffff",
+        }
+      : {
+          backgroundColor: "#E5D4C0",
+          border: "1px solid #2A4849",
+          color: "#2A4849",
+        };
+
+  const estiloLabel =
+    temaAtual === "escuro" ? { color: "#ffffff" } : { color: "#2A4849" };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.titulo}>Dashboard</h1>
@@ -77,51 +112,49 @@ function Dashboard() {
         <>
           <p className={styles.mensagem}>{metricas.mensagem_motivacional}</p>
 
-
           <div className={styles.grid}>
             <div className={styles.nivel}>
               <CardNivel totalHoras={metricas.total_horas} />
             </div>
-            
 
             <div className={styles.totalHoras}>
-                <CardMetrica
+              <CardMetrica
                 titulo="Total de horas"
                 valor={(metricas.total_horas ?? 0).toFixed(1)}
                 sufixo="h"
-                />
+              />
             </div>
 
             <div className={styles.mediaSemanal}>
-                <CardMetrica
+              <CardMetrica
                 titulo="Média Semanal"
                 valor={(metricas.media_semanal_horas ?? 0).toFixed(1)}
                 sufixo="h"
-                />
+              />
             </div>
 
             <div className={styles.mensal}>
-                <CardMetrica
+              <CardMetrica
                 titulo="Média mensal"
                 valor={(metricas.media_mensal_horas ?? 0).toFixed(1)}
                 sufixo="h"
-                />
+              />
             </div>
 
             <div className={styles.streak}>
-                <CardMetrica
+              <CardMetrica
                 titulo="Streak atual"
                 valor={metricas.streak_dias}
                 sufixo=" dias"
-                />
+              />
             </div>
 
-            <div className={ styles.projecao}>
-                <CardMetrica
+            <div className={styles.projecao}>
+              <CardMetrica
                 titulo="Projeção 4 semanas"
                 valor={(metricas.projecao_4_semanas_horas ?? 0).toFixed(1)}
                 sufixo="h"
-                />
+              />
             </div>
           </div>
 
@@ -134,11 +167,8 @@ function Dashboard() {
                     <XAxis dataKey="dia" stroke="#a0a0a0" />
                     <YAxis stroke="#a0a0a0" />
                     <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#1a1a1a",
-                        border: "1px solid #2a2a2a",
-                      }}
-                      labelStyle={{ color: "#ffffff" }}
+                      contentStyle={estiloTooltip}
+                      labelStyle={estiloLabel}
                     />
                     <Bar dataKey="horas" fill="#6c63ff" radius={[4, 4, 0, 0]} />
                   </BarChart>
@@ -149,7 +179,7 @@ function Dashboard() {
             {dadosPorTipo && dadosPorTipo.length > 0 && (
               <div className={styles.grafico}>
                 <h2 className={styles.tituloGrafico}>Distribuição por tipo</h2>
-                <ResponsiveContainer width='100%' height={250}>
+                <ResponsiveContainer width="100%" height={250}>
                   <PieChart>
                     <Pie
                       data={dadosPorTipo}
@@ -158,7 +188,7 @@ function Dashboard() {
                       cx="50%"
                       cy="50%"
                       outerRadius={80}
-                      label={({ name, value }) => `${name} (${value}h)`}
+                      label={isMobile ? false : ({name , value}) => `${name} $(${value}h)`}
                     >
                       {dadosPorTipo.map((_, index) => (
                         <Cell key={index} fill={CORES[index % CORES.length]} />
@@ -166,10 +196,8 @@ function Dashboard() {
                     </Pie>
                     <Legend />
                     <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#1a1a1a",
-                        border: "1px solid #2a2a2a",
-                      }}
+                      contentStyle={estiloTooltip}
+                      labelStyle={estiloLabel}
                     />
                   </PieChart>
                 </ResponsiveContainer>
