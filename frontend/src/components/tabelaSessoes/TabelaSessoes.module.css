@@ -64,6 +64,7 @@
 
 @media (min-width: 992px) {
     .wrapper {
-        max-width: 1000px;
+        max-width: 1200px;
+        overflow-x: hidden;
     }
 }

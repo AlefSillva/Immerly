@@ -25,9 +25,67 @@
 }
 
 .tituloHistorico {
-    color: var(--cor-primaria);
+    color: var(--cor-texto);
+    background-image: linear-gradient( to right, transparent, var(--cor-texto-suave) 50%, transparent) ;
+    font-size: 1.2rem;
+    padding: 0.45rem;
+    min-width: 100%;
+    text-align: center;
     margin-top: 1rem;
     margin-bottom: -1rem;
+}
+
+.filtros {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.filtroGrupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0rem 1rem;
+}
+
+.filtroLabel {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--cor-texto-suave);
+}
+
+.filtroInput {
+    background-color: var(--cor-fundo-input);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.6rem 0.9rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.filtroInput:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+}
+
+.filtroClear {
+    background-color: transparent;
+    border: 1px solid var(--cor-itens);
+    border-radius: var(--raio-borda);
+    color: var(--cor-texto-suave);
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filtroClear:hover {
+    border-color: var(--cor-erro);
+    color: var(--cor-erro);
 }
 
 @media (min-width: 576px) {

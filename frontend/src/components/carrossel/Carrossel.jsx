@@ -25,10 +25,6 @@ function Carrossel({ titulo, recursos }) {
         ? recursos
         : recursos.slice((paginaAtual - 1) * TAMANHO_PAG, paginaAtual * TAMANHO_PAG);
 
-    // const idx_inicial = (paginaAtual - 1) * TAMANHO_PAG;
-    // const idx_final = idx_inicial + TAMANHO_PAG;
-    // const recursosExibidos = recursos.slice(idx_inicial, idx_final);    
-
     return (
         <div className={ styles.secao }>
             <h2 className={ styles.titulo }>{ titulo }</h2>
