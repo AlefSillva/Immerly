@@ -3,7 +3,7 @@ const { sessoesValidator } = require('../utils/sessoesValidator');
 const pool = require('../config/db');
 
 // Criar nova sessão de exposição
-const criar = async (req, res) => {
+const criar = async (req, res, next) => {
     const id_usuario = req.usuarioId;
     const validacao = sessoesValidator(req.body);
 
@@ -30,12 +30,12 @@ const criar = async (req, res) => {
         });
         
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Listar todas as sessões do usuário autenticado
-const listar = async (req, res) => {
+const listar = async (req, res, next) => {
     const id_usuario = req.usuarioId;
 
     // Buscar sessões do usuário no banco de dados, ordenando da mais recente para a mais antiga
@@ -50,7 +50,7 @@ const listar = async (req, res) => {
         res.json({ sessoes: sessoes.rows });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+        next(err);
     }
 };
 

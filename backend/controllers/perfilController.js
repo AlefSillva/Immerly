@@ -1,8 +1,10 @@
+const { validarAtualizarPerfil, validarAlterarSenha } = require('../utils/perfilValidator');
+
 const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 // Busca os dados do usuário logado
-const buscarPerfil = async (req, res) => {
+const buscarPerfil = async (req, res, next) => {
     try {
         const resultado = await pool.query(
             'SELECT id, nome, email, data_cadastro FROM usuarios WHERE id = $1',
@@ -16,13 +18,18 @@ const buscarPerfil = async (req, res) => {
         res.json({ usuario: resultado.rows[0] });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Atualiza nome e/ou email do usuário
-const atualizarPerfil = async (req, res) => {
+const atualizarPerfil = async (req, res, next) => {
     const { nome, email } = req.body;
+
+    const validacao = validarAtualizarPerfil(nome, email);
+    if (!validacao.valido) {
+        return res.status(400).json({ message: validacao.mensagem });
+    }
 
     try {
         // Verifica se o email já está em uso por outro usuário
@@ -45,13 +52,18 @@ const atualizarPerfil = async (req, res) => {
         res.json({ message: 'Perfil atualizado com sucesso!', usuario: resultado.rows[0] });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Altera a senha do usuário
-const alterarSenha = async (req, res) => {
+const alterarSenha = async (req, res, next) => {
     const { senha_atual, nova_senha } = req.body;
+
+    const validacao = validarAlterarSenha(senha_atual, nova_senha);
+    if (!validacao.valido) {
+        return res.status(400).json({ message: validacao.mensagem });
+    }
 
     try {
         // Busca a senha atual do banco
@@ -78,17 +90,17 @@ const alterarSenha = async (req, res) => {
         res.json({ message: 'Senha alterada com sucesso!' });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Deleta a conta do usuário
-const deletarConta = async (req, res) => {
+const deletarConta = async (req, res, next) => {
     try {
         await pool.query('DELETE FROM usuarios WHERE id = $1', [req.usuarioId]);
         res.json({ message: 'Conta deletada com sucesso.' });
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 

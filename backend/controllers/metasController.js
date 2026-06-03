@@ -2,7 +2,7 @@ const { validarCamposMetas } = require('../utils/metasValidator');
 
 const pool = require('../config/db');
 
-const criarMeta = async (req, res) => {
+const criarMeta = async (req, res, next) => {
     const id_usuario = req.usuarioId;
     const { meta_semanal, meta_mensal } = req.body;
 
@@ -38,12 +38,12 @@ const criarMeta = async (req, res) => {
         res.status(201).json({ meta: result.rows[0] });
 
     } catch (err) { 
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Atualiza a meta existente do usuário
-const atualizarMeta = async (req, res) => {
+const atualizarMeta = async (req, res, next) => {
     const id_usuario = req.usuarioId;
     const { meta_semanal, meta_mensal } = req.body;
 
@@ -72,12 +72,12 @@ const atualizarMeta = async (req, res) => {
 
         res.json({ meta: result.rows[0] });
     } catch (err) { 
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 
-const buscarMeta = async (req, res) => {
+const buscarMeta = async (req, res, next) => {
     const id_usuario = req.usuarioId;
 
     try {
@@ -93,7 +93,7 @@ const buscarMeta = async (req, res) => {
         res.json({ meta: result.rows[0] });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message })
+        next(err);
     }
 };
 

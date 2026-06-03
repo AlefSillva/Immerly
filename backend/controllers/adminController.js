@@ -1,19 +1,19 @@
 const pool = require('../config/db');
 
 // Lista todos os recursos (para exibir na tabela do admin)
-const listarRecursos = async (req, res) => {
+const listarRecursos = async (req, res, next) => {
     try {
         const resultado = await pool.query(
             'SELECT * FROM recursos ORDER BY tipo, nivel, nome'
         );
         res.json(resultado.rows);
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Cria um novo recurso
-const criarRecurso = async (req, res) => {
+const criarRecurso = async (req, res, next) => {
     const { nome, tipo, nivel, descricao, link_externo } = req.body;
 
     try {
@@ -23,12 +23,12 @@ const criarRecurso = async (req, res) => {
         );
         res.status(201).json(resultado.rows[0]);
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Atualiza um recurso existente
-const atualizarRecurso = async (req, res) => {
+const atualizarRecurso = async (req, res, next) => {
     const { id } = req.params;
     const { nome, tipo, nivel, descricao, link_externo } = req.body;
 
@@ -44,12 +44,12 @@ const atualizarRecurso = async (req, res) => {
 
         res.json(resultado.rows[0]);
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 
 // Deleta um recurso
-const deletarRecurso = async (req, res) => {
+const deletarRecurso = async (req, res, next) => {
     const { id } = req.params;
 
     try {
@@ -64,7 +64,7 @@ const deletarRecurso = async (req, res) => {
 
         res.json({ message: 'Recurso deletado com sucesso.' });
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 

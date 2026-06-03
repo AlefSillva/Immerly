@@ -1,6 +1,6 @@
 const pool = require('../config/db');
 
-const listarRecursos = async ( req, res ) => {
+const listarRecursos = async ( req, res, next ) => {
     const { nivel } = req.query;
 
     try {
@@ -23,7 +23,7 @@ const listarRecursos = async ( req, res ) => {
         res.json({ recursos: result.rows });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+        next(err);
     }
 };
 

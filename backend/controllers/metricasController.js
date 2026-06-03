@@ -1,6 +1,6 @@
 const pool = require('../config/db');
 
-const obter = async (req, res) => {
+const obter = async (req, res, next) => {
     const id_usuario = req.usuarioId;
 
     try {
@@ -121,11 +121,11 @@ const obter = async (req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+        next(err);
     }
 };
 
-const historico = async(req, res) => {
+const historico = async(req, res, next) => {
     const id_usuario = req.usuarioId;
 
     try {
@@ -160,7 +160,7 @@ const historico = async(req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+        next(err);
     }
 };
 module.exports = { obter, historico };

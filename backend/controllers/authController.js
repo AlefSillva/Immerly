@@ -1,9 +1,16 @@
+const { validarRegister, validarLogin } = require('../utils/authValidator');
+
 const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     const { nome, email, senha } = req.body;
+
+    const validacao = validarRegister(nome, email, senha);
+    if (!validacao.valido) {
+        return res.status(400).json({ message: validacao.mensagem });
+    }
 
     try {
         const userExists = await pool.query(
@@ -41,12 +48,17 @@ const register = async (req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor', error: err.message })
+        next(err);
     }
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     const { email, senha } = req.body;
+
+    const validacao = validarLogin(email, senha);
+    if (!validacao.valido) {
+        return res.status(400).json({ message: validacao.mensagem });
+    }
 
     try {
         const usuario = await pool.query(
@@ -73,7 +85,7 @@ const login = async (req, res) => {
         res.json({ token, usuario: { id: usuario.rows[0].id, nome: usuario.rows[0].nome, email: usuario.rows[0].email, is_admin: usuario.rows[0].is_admin } });
 
     } catch (err) {
-        res.status(500).json({ message: 'Erro interno do servidor.', error: err.message });
+        next(err);
     }
 };
 

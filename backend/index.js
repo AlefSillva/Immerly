@@ -90,6 +90,12 @@ const perfilRoutes = require('./routes/perfil');
 app.use('/api/perfil', perfilRoutes);
 //-----------------------------------------------
 
+const errorHandler = require('./middlewares/errorMiddleware');
+
+// Deve ser o último middleware registrado
+app.use(errorHandler);
+//-----------------------------------------------
+
 
 //*************************************************************
 
