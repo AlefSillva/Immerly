@@ -14,6 +14,7 @@ import Admin from "./pages/admin/Admin";
 import Perfil from './pages/perfil/Perfil';
 import NaoEncontrado from './pages/naoEncontrado/NaoEncontrado';
 import useTema from './hooks/useTema';
+import Toast from './components/toast/Toast';
 
 function App() {
   const { tema, alternarTema } = useTema();
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      
       <Routes>
         {/* Rota Admin: protegida por autenticação + permissão de admin */}
         <Route

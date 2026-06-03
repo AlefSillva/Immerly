@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 import MetricasPerfil from "../../components/perfilComponents/metricasPerfil/MetricasPerfil";
 import NivelPerfil from "../../components/perfilComponents/nivelPerfil/NivelPerfil";
+import { useToastContext } from "../../contexts/ToastContext";
 import styles from "./Perfil.module.css";
 
 function Perfil() {
+  const { adicionarToast } = useToastContext();
   const [usuario, setUsuario] = useState(null);
   const [metricas, setMetricas] = useState(null);
   const [editando, setEditando] = useState(false);
@@ -15,9 +17,7 @@ function Perfil() {
     nova_senha: "",
     confirmar_senha: "",
   });
-  const [mensagemPerfil, setMensagemPerfil] = useState("");
   const [erroPerfil, setErroPerfil] = useState("");
-  const [mensagemSenha, setMensagemSenha] = useState("");
   const [erroSenha, setErroSenha] = useState("");
   const [carregando, setCarregando] = useState(true);
   const [modalDeletar, setModalDeletar] = useState(false);
@@ -58,7 +58,6 @@ function Perfil() {
   const handleSubmitPerfil = async (e) => {
     e.preventDefault();
     setErroPerfil("");
-    setMensagemPerfil("");
 
     try {
       const resposta = await api.put("/perfil", formPerfil);
@@ -72,9 +71,8 @@ function Perfil() {
         }),
       );
       setUsuario(resposta.data.usuario);
-      setMensagemPerfil("Perfil atualizado com sucesso!");
+      adicionarToast("Perfil atualizado com sucesso!", "sucesso");
       setEditando(false);
-      setTimeout(() => setMensagemPerfil(""), 3000);
     } catch (err) {
       setErroPerfil(err.response?.data?.message || "Erro ao atualizar perfil.");
     }
@@ -83,7 +81,6 @@ function Perfil() {
   const handleSubmitSenha = async (e) => {
     e.preventDefault();
     setErroSenha("");
-    setMensagemSenha("");
 
     if (formSenha.nova_senha !== formSenha.confirmar_senha) {
       setErroSenha("As senhas não coincidem.");
@@ -95,10 +92,9 @@ function Perfil() {
         senha_atual: formSenha.senha_atual,
         nova_senha: formSenha.nova_senha,
       });
-      setMensagemSenha("Senha alterada com sucesso!");
       setFormSenha({ senha_atual: "", nova_senha: "", confirmar_senha: "" });
       setAlterandoSenha(false);
-      setTimeout(() => setMensagemSenha(""), 3000);
+      adicionarToast("Senha alterada com sucesso!", "sucesso");
     } catch (err) {
       setErroSenha(err.response?.data?.message || "Erro ao alterar senha.");
     }
@@ -111,7 +107,10 @@ function Perfil() {
       localStorage.removeItem("usuario");
       window.location.href = "/landing";
     } catch (err) {
-      setErroPerfil(err.response?.data?.message || "Erro ao deletar conta.");
+      adicionarToast(
+        err.response?.data?.message || "Erro ao deletar conta.",
+        "erro",
+      );
     }
   };
 
@@ -136,9 +135,7 @@ function Perfil() {
               Membro desde{" "}
               {new Date(usuario.data_cadastro).toLocaleDateString("pt-BR")}
             </p>
-            {mensagemPerfil && (
-              <p className={styles.sucesso}>{mensagemPerfil}</p>
-            )}
+            
             <button
               onClick={() => setEditando(true)}
               className={styles.botaoEditar}
@@ -205,7 +202,6 @@ function Perfil() {
 
         {!alterandoSenha ? (
           <div className={styles.acoes}>
-            {mensagemSenha && <p className={styles.sucesso}>{mensagemSenha}</p>}
             <button
               onClick={() => setAlterandoSenha(true)}
               className={styles.botaoAcao}

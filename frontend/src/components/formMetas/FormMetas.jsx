@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 import CampoMeta from "../formMetas/campoMeta/CampoMeta";
 import BotaoMetas from "../botoes/BotaoMetas";
+import { useToastContext } from "../../contexts/ToastContext";
 import styles from "./FormMetas.module.css";
 
 function FormMetas({ onSucesso }) {
+  const { adicionarToast } = useToastContext();
+
   const [form, setForm] = useState({
     meta_semanal: "",
     meta_mensal: "",
   });
 
   const [temMeta, setTemMeta] = useState(false);
-  const [erro, setErro] = useState("");
-  const [sucesso, setSucesso] = useState("");
 
   useEffect(() => {
     const buscarMeta = async () => {
@@ -27,7 +28,7 @@ function FormMetas({ onSucesso }) {
         }
       } catch (err) {
         if (err.response?.status !== 404) {
-          setErro("Erro ao carregar meta.");
+          adicionarToast("Erro ao buscar meta.", "erro");
         }
       }
     };
@@ -41,8 +42,6 @@ function FormMetas({ onSucesso }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErro("");
-    setSucesso("");
 
     try {
       if (temMeta) {
@@ -52,12 +51,11 @@ function FormMetas({ onSucesso }) {
         await api.post('/metas', form);
         setTemMeta(true);
       }
-      setSucesso("Meta Salva com sucesso!");
+      adicionarToast("Meta salva com sucesso!", "sucesso");
       if (onSucesso) onSucesso(); 
       setForm({ meta_semanal: '', meta_mensal: '' }); 
-      setTimeout(() => setSucesso(''), 3000); 
     } catch (err) {
-      setErro(err.response?.data?.message || "Erro ao salvar meta.");
+      adicionarToast(err.response?.data?.message || "Erro ao salvar meta.", "erro");
     }
   };
 
@@ -83,9 +81,6 @@ function FormMetas({ onSucesso }) {
         placeholder='ex: 40'
         required={true}
         />
-
-        {erro && <p className={styles.erro}>{erro}</p>}
-        {sucesso && <p className={styles.sucesso}>{sucesso}</p>}
 
       <BotaoMetas
         className={styles.botao}
