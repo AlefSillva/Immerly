@@ -124,12 +124,19 @@
     .grid {
         grid-template-columns: auto;
         grid-template-areas:
-        "nivel nivel nivel nivel nivel "
-        "totalHoras mediaSemanal projecao mensal streak";
+            "nivel nivel nivel nivel nivel "
+            "totalHoras mediaSemanal projecao mensal streak";
     }
 
     .graficos {
         flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+
+    .grafico {
+        flex: 1 1 280px;
+        min-width: auto;
     }
 }
 
@@ -139,6 +146,6 @@
     }
 
     .grafico {
-        box-shadow:0 8px 16px 0 rgba(0,0,0,0.6);
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
     }
 }

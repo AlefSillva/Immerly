@@ -23,6 +23,7 @@ function Dashboard() {
   const [historico, setHistorico] = useState(null);
   const [erro, setErro] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+  const [evolucao, setEvolucao] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 576);
@@ -33,12 +34,14 @@ function Dashboard() {
   useEffect(() => {
     const buscarDados = async () => {
       try {
-        const [resMetricas, resHistorico] = await Promise.all([
+        const [resMetricas, resHistorico, resEvolucao] = await Promise.all([
           api.get("/metricas"),
           api.get("/metricas/historico"),
+          api.get("/metricas/evolucao-nivel"),
         ]);
         setMetricas(resMetricas.data);
         setHistorico(resHistorico.data);
+        setEvolucao(resEvolucao.data.evolucao);
       } catch (err) {
         setErro(err.response?.data?.message || "Erro ao carregar dados");
       }
@@ -60,6 +63,12 @@ function Dashboard() {
   const dadosPorTipo = historico?.por_tipo.map((item) => ({
     name: item.tipo,
     value: parseFloat(item.horas),
+  }));
+
+  const dadosEvolucao = evolucao?.map(item => ({
+    dia: formatarDia(item.dia),
+    horas: item.horas_acumuladas,
+    nivel: item.nivel,
   }));
 
   const temaAtual = localStorage.getItem("tema");
@@ -188,7 +197,7 @@ function Dashboard() {
                       cx="50%"
                       cy="50%"
                       outerRadius={80}
-                      label={isMobile ? false : ({name , value}) => `${name} $(${value}h)`}
+                      label={isMobile ? false : ({name , value}) => `${name} (${value}h)`}
                     >
                       {dadosPorTipo.map((_, index) => (
                         <Cell key={index} fill={CORES[index % CORES.length]} />
@@ -203,6 +212,37 @@ function Dashboard() {
                 </ResponsiveContainer>
               </div>
             )}
+
+            {dadosEvolucao && dadosEvolucao.length > 0 && (
+              <div className={styles.grafico}>
+                  <h2 className={styles.tituloGrafico}>Evolução do nível</h2>
+                  <ResponsiveContainer width="100%" height={250}>
+                      <BarChart data={dadosEvolucao}>
+                          <XAxis dataKey="dia" stroke="#a0a0a0" />
+                          <YAxis stroke="#a0a0a0" />
+                          <Tooltip
+                              contentStyle={estiloTooltip}
+                              labelStyle={estiloLabel}
+                              itemStyle={estiloLabel}
+                              formatter={(value) => [`${value}h`, 'Horas acumuladas']}
+                          />
+                          <Bar dataKey="horas" radius={[4, 4, 0, 0]}>
+                              {dadosEvolucao.map((entry, index) => (
+                                  <Cell
+                                      key={index}
+                                      fill={
+                                          entry.nivel === 'A1' ? '#4caf50' :
+                                          entry.nivel === 'A2' ? '#2196f3' :
+                                          entry.nivel === 'B1' ? '#ff9800' :
+                                          entry.nivel === 'B2' ? '#e91e63' : '#9c27b0'
+                                      }
+                                  />
+                              ))}
+                          </Bar>
+                      </BarChart>
+                  </ResponsiveContainer>
+              </div>
+          )}
           </div>
           <CalendarioStreak porDia={historico?.por_dia} />
         </>
