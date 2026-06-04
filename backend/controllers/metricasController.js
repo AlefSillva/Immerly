@@ -163,4 +163,53 @@ const historico = async(req, res, next) => {
         next(err);
     }
 };
-module.exports = { obter, historico };
+
+const evolucaoNivel = async (req, res, next) => {
+    const id_usuario = req.usuarioId;
+
+    const NIVEIS = [
+        { min: 0, max: 50, nivel: 'A1' },
+        { min: 51, max: 150, nivel: 'A2' },
+        { min: 151, max: 400, nivel: 'B1' },
+        { min: 401, max: 800, nivel: 'B2' },
+        { min: 801, max: Infinity, nivel: 'C1' },
+    ];
+
+    const getNivel = (horas) => {
+        return NIVEIS.find(n => horas <= n.max)?.nivel || 'C1';
+    };
+
+    try {
+        // Busca todas as sessões ordenadas por data
+        const resultado = await pool.query(
+            `WITH horas_por_dia AS (
+                SELECT
+                    DATE(data) as dia,
+                    SUM(duracao_minutos) as minutos_dia
+                FROM sessoes
+                WHERE id_usuario = $1
+                GROUP BY DATE(data)
+                ORDER BY dia ASC
+            )
+            SELECT
+                dia,
+                ROUND(SUM(minutos_dia) OVER (ORDER BY dia) / 60.0, 1) as horas_acumuladas
+            FROM horas_por_dia
+            ORDER BY dia ASC`,
+            [id_usuario]
+        );
+
+        // Mapeia cada ponto com o nível correspondente
+        const evolucao = resultado.rows.map(row => ({
+            dia: row.dia,
+            horas_acumuladas: parseFloat(row.horas_acumuladas),
+            nivel: getNivel(parseFloat(row.horas_acumuladas))
+        }));
+
+        res.json({ evolucao });
+
+    } catch (err) {
+        next(err);
+    }
+};
+module.exports = { obter, historico, evolucaoNivel };
