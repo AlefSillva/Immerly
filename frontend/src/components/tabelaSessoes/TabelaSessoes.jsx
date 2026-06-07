@@ -19,7 +19,7 @@ const formatarData = (data) => {
     return d.toLocaleDateString('pt-BR');
 };
 
-function TabelaSessoes({ sessoes }) {
+function TabelaSessoes({ sessoes, onEditar, onDeletar }) {
     if (!sessoes || sessoes.length === 0) {
         return <p className={styles.semDados}>Nenhuma sessão registrada.</p>;
     }
@@ -35,6 +35,7 @@ function TabelaSessoes({ sessoes }) {
                         <th>Duração</th>
                         <th>Nível</th>
                         <th>Compreensão</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,6 +47,22 @@ function TabelaSessoes({ sessoes }) {
                             <td>{sessao.duracao_minutos}</td>
                             <td>{sessao.nivel_estimado}</td>
                             <td>{grauLabel(sessao.grau_compreensao)}</td>
+                            <td className={styles.acoes}>
+                                <button
+                                    className={styles.botaoEditar}
+                                    onClick={() => onEditar(sessao)}
+                                    title="Editar sessão"
+                                >
+                                    ✏️
+                                </button>
+                                <button
+                                    className={styles.botaoDeletar}
+                                    onClick={() => onDeletar(sessao.id)}
+                                    title="Deletar sessão"
+                                >
+                                    🗑️
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
