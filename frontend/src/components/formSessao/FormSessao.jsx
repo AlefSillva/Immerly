@@ -4,37 +4,13 @@ import CampoTexto from './campoTexto/CampoTexto';
 import CampoSelect from './campoSelect/CampoSelect';
 import CampoData from './campoData/CampoData';
 import CampoMinutos from './campoMinutos/CampoMinutos';
-import Botao from './botao/Botao';    
-
+import Botao from './botao/Botao';
+import { opcoesTipo, opcoesNivel, opcoesGrauCompreensao } from '../../constants/opcoesSessao';   
+import { useToastContext } from '../../contexts/ToastContext';
 import styles from './FormSessao.module.css';
 
-const opcoesTipo = [
-    { value: 'filme', label: 'Filme' },
-    { value: 'serie', label: 'Serie' },
-    { value: 'podcast', label: 'Podcast' },
-    { value: 'video', label: 'Video' },
-    { value: 'livro', label: 'Livro' },
-    { value: 'musica', label: 'Musica' },
-    { value: 'artigo', label: 'Artigo' },
-];
-
-const opcoesNivel = [
-    { value: 'A1', label: 'A1' },
-    { value: 'A2', label: 'A2' },
-    { value: 'B1', label: 'B1' },
-    { value: 'B2', label: 'B2' },
-    { value: 'C1', label: 'C1' },
-];
-
-const opcoesGrauCompreensao = [
-    { value: 1, label: 'Entendi pouco (0-25%)' },
-    { value: 2, label: 'Metade (26-50%)' },
-    { value: 3, label: 'A maioria (51-75%)' },
-    { value: 4, label: 'Quase tudo (76-90%)' },
-    { value: 5, label: 'Tudo (91-100%)' },
-];
-
-function FormSessao({ onSucesso}) { 
+function FormSessao({ onSucesso }) { 
+    const { adicionarToast } = useToastContext();
     const [ form, setForm ] = useState({
         nome_conteudo: '',
         tipo: '',
@@ -43,9 +19,6 @@ function FormSessao({ onSucesso}) {
         grau_compreensao: '',
         data: '',
     });
-
-    const [ erro, setErro ] = useState('');
-    const [sucesso, setSucesso] = useState('');
     
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -53,12 +26,10 @@ function FormSessao({ onSucesso}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErro('');
-        setSucesso('');
 
         try {
             await api.post('/sessoes', form);
-            setSucesso('Sessão registrada com sucesso!');
+            adicionarToast('Sessão registrada com sucesso!', 'sucesso');
             if (onSucesso) onSucesso();
             setForm({
                 nome_conteudo: '',
@@ -70,7 +41,7 @@ function FormSessao({ onSucesso}) {
             });
 
         } catch (err) {
-            setErro( err.response?.data?.message || 'Erro ao registrar sessão' );
+            adicionarToast(err.response?.data?.message || 'Erro ao registrar sessão', 'erro');
         }
     };
 
@@ -130,10 +101,6 @@ function FormSessao({ onSucesso}) {
                 options={opcoesGrauCompreensao}
                 required
             />
-
-            
-            { erro && <p className={styles.erro}>{erro}</p>}
-            {sucesso && <p className={styles.sucesso}>{sucesso}</p>}
             
             <Botao texto="Salvar Sessão" type="submit"/>
 

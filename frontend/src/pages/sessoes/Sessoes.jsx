@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import FormSessao from '../../components/formSessao/FormSessao';
 import TabelaSessoes from '../../components/tabelaSessoes/TabelaSessoes';
+import CampoTexto from '../../components/formSessao/campoTexto/CampoTexto';
+import CampoSelect from '../../components/formSessao/campoSelect/CampoSelect';
+import CampoMinutos from '../../components/formSessao/campoMinutos/CampoMinutos';
+import { opcoesTipo, opcoesNivel, opcoesGrauCompreensao } from '../../constants/opcoesSessao';
 import { useToastContext } from '../../contexts/ToastContext';
 import styles from './Sessoes.module.css';
     
 function Sessoes() {
     const { adicionarToast } = useToastContext();
     const [sessoes, setSessoes] = useState([]);
-    const [erro, setErro] = useState('');
     const [dataInicio, setDataInicio] = useState('');
     const [dataFim, setDataFim] = useState('');
     const [modalDeletar, setModalDeletar] = useState(null);
@@ -26,7 +29,7 @@ function Sessoes() {
             const resposta = await api.get('/sessoes');
             setSessoes(resposta.data.sessoes);
         } catch (err) {
-            setErro(err.response?.data?.message || 'Erro ao carregar sessões');
+            adicionarToast(err.response?.data?.message || 'Erro ao buscar sessões.', 'erro');
         }
     };
 
@@ -43,7 +46,7 @@ function Sessoes() {
         return true;
     });
 
-     // Abre modal de edição com os dados da sessão preenchidos
+     // Abre o modal de edição com os dados da sessão preenchidos
     const handleEditar = (sessao) => {
         setSessaoEditando(sessao);
         setFormEdicao({
@@ -120,8 +123,6 @@ function Sessoes() {
                 )}
             </div>
 
-            {erro && <p className={ styles.erro }>{ erro }</p> }
-
             <TabelaSessoes
                 sessoes={sessoesFiltradas}
                 onEditar={handleEditar}
@@ -148,46 +149,45 @@ function Sessoes() {
                     <div className={styles.modal}>
                         <h3 className={styles.modalTitulo}>Editar sessão</h3>
                         <form onSubmit={handleSubmitEdicao} className={styles.formEdicao}>
-                            <div className={styles.grupo}>
-                                <label className={styles.label}>Conteúdo</label>
-                                <input className={styles.input} type="text" name="nome_conteudo" value={formEdicao.nome_conteudo} onChange={handleChangeEdicao} required />
-                            </div>
-                            <div className={styles.grupo}>
-                                <label className={styles.label}>Tipo</label>
-                                <select className={styles.input} name="tipo" value={formEdicao.tipo} onChange={handleChangeEdicao} required>
-                                    <option value="filme">Filme</option>
-                                    <option value="serie">Série</option>
-                                    <option value="podcast">Podcast</option>
-                                    <option value="video">Vídeo</option>
-                                    <option value="livro">Livro</option>
-                                    <option value="musica">Música</option>
-                                    <option value="artigo">Artigo</option>
-                                </select>
-                            </div>
-                            <div className={styles.grupo}>
-                                <label className={styles.label}>Duração (min)</label>
-                                <input className={styles.input} type="number" name="duracao_minutos" value={formEdicao.duracao_minutos} onChange={handleChangeEdicao} min="1" required />
-                            </div>
-                            <div className={styles.grupo}>
-                                <label className={styles.label}>Nível</label>
-                                <select className={styles.input} name="nivel_estimado" value={formEdicao.nivel_estimado} onChange={handleChangeEdicao} required>
-                                    <option value="A1">A1</option>
-                                    <option value="A2">A2</option>
-                                    <option value="B1">B1</option>
-                                    <option value="B2">B2</option>
-                                    <option value="C1">C1</option>
-                                </select>
-                            </div>
-                            <div className={styles.grupo}>
-                                <label className={styles.label}>Grau de compreensão</label>
-                                <select className={styles.input} name="grau_compreensao" value={formEdicao.grau_compreensao} onChange={handleChangeEdicao} required>
-                                    <option value="1">Pouco (0-25%)</option>
-                                    <option value="2">Metade (26-50%)</option>
-                                    <option value="3">A maioria (51-75%)</option>
-                                    <option value="4">Quase tudo (76-90%)</option>
-                                    <option value="5">Tudo (91-100%)</option>
-                                </select>
-                            </div>
+                            <CampoTexto
+                                label="Conteúdo"
+                                name="nome_conteudo"
+                                value={formEdicao.nome_conteudo}
+                                onChange={handleChangeEdicao}
+                                placeholder="ex: The Rookie S01E01"
+                                required
+                            />
+                            <CampoSelect
+                                label="Tipo"
+                                name="tipo"
+                                value={formEdicao.tipo}
+                                onChange={handleChangeEdicao}
+                                options={opcoesTipo}
+                                required
+                            />
+                            <CampoMinutos
+                                label="Duração (min)"
+                                name="duracao_minutos"
+                                value={formEdicao.duracao_minutos}
+                                onChange={handleChangeEdicao}
+                                required
+                            />
+                            <CampoSelect
+                                label="Nível"
+                                name="nivel_estimado"
+                                value={formEdicao.nivel_estimado}
+                                onChange={handleChangeEdicao}
+                                options={opcoesNivel}
+                                required
+                            />
+                            <CampoSelect
+                                label="Grau de compreensão"
+                                name="grau_compreensao"
+                                value={formEdicao.grau_compreensao}
+                                onChange={handleChangeEdicao}
+                                options={opcoesGrauCompreensao}
+                                required
+                            />
                             <div className={styles.modalBotoes}>
                                 <button type="button" onClick={() => setSessaoEditando(null)} className={styles.botaoCancelar}>Cancelar</button>
                                 <button type="submit" className={styles.botaoSalvar}>Salvar</button>

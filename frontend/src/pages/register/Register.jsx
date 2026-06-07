@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import api from '../../services/api';
-import styles from './Register.module.css';
 import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
+import { useToastContext } from '../../contexts/ToastContext';
+import styles from './Register.module.css';
 
 function Register() {
+    const { adicionarToast } = useToastContext();
     const navigate = useNavigate();
 
     const [form, setForm] = useState({ nome: '', email: '', senha: '' });
-    const [erro, setErro] = useState('');
 
     const handleChange = (e) => {
         setForm({
@@ -19,7 +20,6 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErro('');
 
         try {
             const resposta = await api.post('/auth/register', form);
@@ -28,7 +28,7 @@ function Register() {
             navigate('/metas');
         
         } catch (err) {
-            setErro(err.response?.data?.message || 'Erro ao criar conta.');
+            adicionarToast(err.response?.data?.message || 'Erro ao criar conta.', 'erro');
         }
     };
 
@@ -83,7 +83,6 @@ function Register() {
                                 required
                             />
                         </div>
-                        { erro && <p className={ styles.erro }>{ erro }</p> }
                 
                         <button className={ styles.botao } type='submit'>
                             Criar conta

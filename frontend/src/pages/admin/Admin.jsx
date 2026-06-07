@@ -3,16 +3,16 @@ import api from '../../services/api';
 import styles from './Admin.module.css';
 import FormRecurso from '../../components/admin/FormRecurso';
 import TabelaRecursos from '../../components/admin/TabelaRecursos';
+import { useToastContext } from '../../contexts/ToastContext';
 
 // Formulário vazio padrão
 const FORM_VAZIO = { nome: '', tipo: 'listening', nivel: '', descricao: '', link_externo: '' };
 
 function Admin() {
+    const { adicionarToast } = useToastContext();
     const [recursos, setRecursos] = useState([]);
     const [form, setForm] = useState(FORM_VAZIO);
     const [editandoId, setEditandoId] = useState(null);
-    const [mensagem, setMensagem] = useState('');
-    const [erro, setErro] = useState('');
     const [carregando, setCarregando] = useState(true);
 
     // Busca todos os recursos ao carregar a página
@@ -25,7 +25,7 @@ function Admin() {
             const resposta = await api.get('/admin/recursos');
             setRecursos(resposta.data);
         } catch (err) {
-            setErro(err.response?.data?.message || 'Erro ao buscar recursos.');
+            adicionarToast(err.response?.data?.message || 'Erro ao buscar recursos.', 'erro');
         } finally {
             setCarregando(false);
         }
@@ -45,8 +45,6 @@ function Admin() {
             descricao: recurso.descricao,
             link_externo: recurso.link_externo
         });
-        setMensagem('');
-        setErro('');
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -55,14 +53,11 @@ function Admin() {
     const handleCancelar = () => {
         setEditandoId(null);
         setForm(FORM_VAZIO);
-        setMensagem('');
-        setErro('');
+
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMensagem('');
-        setErro('');
 
         // Envia nivel como null se estiver vazio (ferramentas)
         const dados = { ...form, nivel: form.nivel || null };
@@ -70,21 +65,18 @@ function Admin() {
         try {
             if (editandoId) {
                 await api.put(`/admin/recursos/${editandoId}`, dados);
-                setMensagem('Recurso atualizado com sucesso!');
+                adicionarToast('Recurso atualizado com sucesso!', 'sucesso');
             } else {
                 await api.post('/admin/recursos', dados);
-                setMensagem('Recurso criado com sucesso!');
+                adicionarToast('Recurso criado com sucesso!', 'sucesso');
             }
 
             setEditandoId(null);
             setForm(FORM_VAZIO);
             buscarRecursos();
 
-            // Limpa mensagem após 3 segundos
-            setTimeout(() => setMensagem(''), 3000);
-
         } catch (err) {
-            setErro(err.response?.data?.message || 'Erro ao salvar recurso.');
+            adicionarToast(err.response?.data?.message || 'Erro ao salvar recurso.', 'erro');
         }
     };
 
@@ -93,11 +85,10 @@ function Admin() {
 
         try {
             await api.delete(`/admin/recursos/${id}`);
-            setMensagem('Recurso deletado com sucesso!');
+            adicionarToast('Recurso deletado com sucesso!', 'sucesso');
             buscarRecursos();
-            setTimeout(() => setMensagem(''), 3000);
         } catch (err) {
-            setErro(err.response?.data?.message || 'Erro ao deletar recurso.');
+            adicionarToast(err.response?.data?.message || 'Erro ao deletar recurso.', 'erro');
         }
     };
 
@@ -108,8 +99,6 @@ function Admin() {
             <FormRecurso
                 form={form}
                 editandoId={editandoId}
-                mensagem={mensagem}
-                erro={erro}
                 onChange={handleChange}
                 onSubmit={handleSubmit}
                 onCancelar={handleCancelar}

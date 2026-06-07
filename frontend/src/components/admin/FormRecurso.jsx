@@ -5,7 +5,7 @@ const TIPOS = ['listening', 'speaking', 'reading', 'writing', 'grammar', 'vocabu
 const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 
 // Recebe o estado do formulário e as funções do Admin.jsx via props
-function FormRecurso({ form, editandoId, mensagem, erro, onChange, onSubmit, onCancelar }) {
+function FormRecurso({ form, editandoId, onChange, onSubmit, onCancelar }) {
     return (
         <form onSubmit={onSubmit} className={styles.form}>
             <h2 className={styles.subtitulo}>
@@ -65,9 +65,6 @@ function FormRecurso({ form, editandoId, mensagem, erro, onChange, onSubmit, onC
                 onChange={onChange}
                 required
             />
-
-            {mensagem && <p className={styles.sucesso}>{mensagem}</p>}
-            {erro && <p className={styles.erro}>{erro}</p>}
 
             <div className={styles.botoesForm}>
                 <button type="submit" className={styles.botaoSalvar}>
