@@ -54,5 +54,61 @@ const listar = async (req, res, next) => {
     }
 };
 
-module.exports = { criar, listar}
+// Atualizar sessão existente
+const atualizar = async (req, res, next) => {
+    const id_usuario = req.usuarioId;
+    const { id } = req.params;
+
+    const validacao = sessoesValidator(req.body);
+    if (!validacao.valido) {
+        return res.status(400).json({ message: validacao.message });
+    }
+
+    const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao } = req.body;
+
+    try {
+        const resultado = await pool.query(
+            `UPDATE sessoes
+            SET nome_conteudo = $1, tipo = $2, duracao_minutos = $3, nivel_estimado = $4, grau_compreensao = $5
+            WHERE id = $6 AND id_usuario = $7
+            RETURNING *`,
+            [nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, id, id_usuario]
+        );
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({ message: 'Sessão não encontrada.' });
+        }
+
+        res.json({ message: 'Sessão atualizada com sucesso!', sessao: resultado.rows[0] });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Deletar sessão
+const deletar = async (req, res, next) => {
+    const id_usuario = req.usuarioId;
+    const { id } = req.params;
+
+    try {
+        const resultado = await pool.query(
+            `DELETE FROM sessoes
+            WHERE id = $1 AND id_usuario = $2
+            RETURNING *`,
+            [id, id_usuario]
+        );
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({ message: 'Sessão não encontrada.' });
+        }
+
+        res.json({ message: 'Sessão deletada com sucesso.' });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { criar, listar, atualizar, deletar };
 
