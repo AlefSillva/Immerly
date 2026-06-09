@@ -40,6 +40,9 @@ function Navbar({ user, tema, alternarTema }) {
         <Link to="/metas" className={styles.link}>
           Metas
         </Link>
+        <Link to="/estatisticas" className={styles.link}>
+          Estatísticas
+        </Link>
         <Link to="/recursos" className={styles.link}>
           Biblioteca
         </Link>

@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Sessoes from "./pages/sessoes/Sessoes";
 import Biblioteca from "./pages/biblioteca/Biblioteca";
 import Metas from "./pages/metas/Metas";
+import Estatisticas from "./pages/estatisticas/Estatisticas";
 import Landing from "./pages/landing/Landing";
 import Ci from "./pages/ci/Ci";
 import RotaAdmin from "./components/RotaAdmin";
@@ -113,6 +114,18 @@ function App() {
           }
         />
 
+        {/* Rota Privada: Estatísticas */}
+        <Route
+          path="/estatisticas"
+          element={
+            <RotaPrivada>
+              <Layout user={user} tema={tema} alternarTema={alternarTema}>
+                <Estatisticas />
+              </Layout>
+            </RotaPrivada>
+          }
+        />
+        
         {/* Rota Privada: Perfil */}
         <Route
           path="/perfil"
