@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import CardEstatistica from '../../components/cards/cardEstatistica/CardEstatistica';
 import { useToastContext } from '../../contexts/ToastContext';
+import SkeletonEstatisticas from '../../components/skeleton/skeletonEstatisticas/SkeletonEstatisticas';
 import styles from './Estatisticas.module.css';
 
 function Estatisticas() {
     const { adicionarToast } = useToastContext();
 
     const [sessoes, setSessoes] = useState([]);
+    const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
         const buscarSessoes = async () => {
@@ -16,6 +18,8 @@ function Estatisticas() {
                 setSessoes(resposta.data.sessoes);
             } catch (err) {
                 adicionarToast(err.response?.data?.message || 'Erro ao carregar dados.', 'erro');
+            } finally {
+                setCarregando(false);
             }
         };
         buscarSessoes();
@@ -58,12 +62,16 @@ function Estatisticas() {
             <h1 className={styles.titulo}>Estatísticas</h1>
             <p className={styles.subtitulo}>Análise detalhada da sua imersão</p>
 
-            <div className={styles.cards}>
-                <CardEstatistica valor={totalSessoes} label="Total de sessões" />
-                <CardEstatistica valor={tipoFavorito()} label="Tipo favorito" />
-                <CardEstatistica valor={melhorDia()} label="Melhor dia da semana" />
-                <CardEstatistica valor={conteudoMaisLongo()} label="Conteúdo mais longo" />
-            </div>
+            {carregando ? (
+                <SkeletonEstatisticas />
+            ) : (
+                <div className={styles.cards}>
+                    <CardEstatistica valor={totalSessoes} label="Total de sessões" />
+                    <CardEstatistica valor={tipoFavorito()} label="Tipo favorito" />
+                    <CardEstatistica valor={melhorDia()} label="Melhor dia da semana" />
+                    <CardEstatistica valor={conteudoMaisLongo()} label="Conteúdo mais longo" />
+                </div>
+            )}
         </div>
     );
 }
