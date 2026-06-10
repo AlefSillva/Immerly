@@ -37,6 +37,26 @@
     font-size: 0.85rem;
 }
 
+.grafico {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.tituloGrafico {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 1rem;
+    color: var(--cor-texto-suave);
+}
+
 @media (min-width: 576px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);

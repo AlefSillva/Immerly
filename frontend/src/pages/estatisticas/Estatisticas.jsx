@@ -3,27 +3,32 @@ import api from '../../services/api';
 import CardEstatistica from '../../components/cards/cardEstatistica/CardEstatistica';
 import { useToastContext } from '../../contexts/ToastContext';
 import SkeletonEstatisticas from '../../components/skeleton/skeletonEstatisticas/SkeletonEstatisticas';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import styles from './Estatisticas.module.css';
 
 function Estatisticas() {
     const { adicionarToast } = useToastContext();
-
     const [sessoes, setSessoes] = useState([]);
+    const [porMes, setPorMes] = useState([]);
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
-        const buscarSessoes = async () => {
+        const buscarDados = async () => {
             try {
-                const resposta = await api.get('/sessoes');
-                setSessoes(resposta.data.sessoes);
+                const [resSessoes, resPorMes] = await Promise.all([
+                    api.get('/sessoes'),
+                    api.get('/metricas/horas-por-mes'),
+                ]);
+                setSessoes(resSessoes.data.sessoes);
+                setPorMes(resPorMes.data.por_mes);
             } catch (err) {
                 adicionarToast(err.response?.data?.message || 'Erro ao carregar dados.', 'erro');
             } finally {
                 setCarregando(false);
             }
         };
-        buscarSessoes();
-    }, []);
+        buscarDados();
+    }, [adicionarToast]);
 
     // Total de sessões
     const totalSessoes = sessoes.length;
@@ -57,6 +62,19 @@ function Estatisticas() {
         return sessoes.reduce((max, s) => s.duracao_minutos > max.duracao_minutos ? s : max).nome_conteudo;
     };
 
+    // Dados formatados pro gráfico
+    const dadosPorMes = porMes.map(item => ({
+        mes: item.mes,
+        horas: parseFloat(item.horas),
+    }));
+
+    // Estilos do tooltip baseados no tema
+    const temaAtual = localStorage.getItem('tema');
+    const estiloTooltip = temaAtual === 'escuro'
+        ? { backgroundColor: '#1e1e2e', border: '1px solid #3a3a5c', color: '#ffffff' }
+        : { backgroundColor: '#E5D4C0', border: '1px solid #2A4849', color: '#2A4849' };
+    const estiloLabel = temaAtual === 'escuro' ? { color: '#ffffff' } : { color: '#2A4849' };
+
     return (
         <div className={styles.container}>
             <h1 className={styles.titulo}>Estatísticas</h1>
@@ -65,12 +83,33 @@ function Estatisticas() {
             {carregando ? (
                 <SkeletonEstatisticas />
             ) : (
-                <div className={styles.cards}>
-                    <CardEstatistica valor={totalSessoes} label="Total de sessões" />
-                    <CardEstatistica valor={tipoFavorito()} label="Tipo favorito" />
-                    <CardEstatistica valor={melhorDia()} label="Melhor dia da semana" />
-                    <CardEstatistica valor={conteudoMaisLongo()} label="Conteúdo mais longo" />
-                </div>
+                <>
+                    <div className={styles.cards}>
+                        <CardEstatistica valor={totalSessoes} label="Total de sessões" />
+                        <CardEstatistica valor={tipoFavorito()} label="Tipo favorito" />
+                        <CardEstatistica valor={melhorDia()} label="Melhor dia da semana" />
+                        <CardEstatistica valor={conteudoMaisLongo()} label="Conteúdo mais longo" />
+                    </div>
+                    
+                    {dadosPorMes.length > 0 && (
+                        <div className={styles.grafico}>
+                            <h2 className={styles.tituloGrafico}>Horas por mês</h2>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={dadosPorMes}>
+                                    <XAxis dataKey="mes" stroke="#a0a0a0" />
+                                    <YAxis stroke="#a0a0a0" />
+                                    <Tooltip
+                                        contentStyle={estiloTooltip}
+                                        labelStyle={estiloLabel}
+                                        itemStyle={estiloLabel}
+                                        formatter={(value) => [`${value}h`, 'Horas']}
+                                    />
+                                    <Bar dataKey="horas" fill="#6c63ff" radius={[4, 4, 0, 0]} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );
