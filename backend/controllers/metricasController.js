@@ -212,4 +212,27 @@ const evolucaoNivel = async (req, res, next) => {
         next(err);
     }
 };
-module.exports = { obter, historico, evolucaoNivel };
+
+const horasPorMes = async (req, res, next) => {
+    const id_usuario = req.usuarioId;
+
+    try {
+        const resultado = await pool.query(
+            `SELECT
+                TO_CHAR(DATE_TRUNC('month', data), 'MM/YYYY') as mes,
+                ROUND(SUM(duracao_minutos) / 60.0, 1) as horas
+            FROM sessoes
+            WHERE id_usuario = $1
+            GROUP BY DATE_TRUNC('month', data)
+            ORDER BY DATE_TRUNC('month', data) ASC`,
+            [id_usuario]
+        );
+
+        res.json({ por_mes: resultado.rows });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { obter, historico, evolucaoNivel, horasPorMes };
