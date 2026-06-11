@@ -3,24 +3,40 @@ import api from '../../services/api';
 import CardEstatistica from '../../components/cards/cardEstatistica/CardEstatistica';
 import { useToastContext } from '../../contexts/ToastContext';
 import SkeletonEstatisticas from '../../components/skeleton/skeletonEstatisticas/SkeletonEstatisticas';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+    BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+    LineChart, Line, Legend
+} from 'recharts';
 import styles from './Estatisticas.module.css';
+
+const CORES_TIPOS = {
+    filme: '#6c63ff',
+    serie: '#FF521B',
+    podcast: '#4caf50',
+    video: '#2196f3',
+    livro: '#ff9800',
+    musica: '#e91e63',
+    artigo: '#00BCD4',
+};
 
 function Estatisticas() {
     const { adicionarToast } = useToastContext();
     const [sessoes, setSessoes] = useState([]);
     const [porMes, setPorMes] = useState([]);
+    const [porTipoMes, setPorTipoMes] = useState([]);
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
         const buscarDados = async () => {
             try {
-                const [resSessoes, resPorMes] = await Promise.all([
+                const [resSessoes, resPorMes, resPorTipoMes] = await Promise.all([
                     api.get('/sessoes'),
                     api.get('/metricas/horas-por-mes'),
+                    api.get('/metricas/horas-por-tipo-mes'),
                 ]);
                 setSessoes(resSessoes.data.sessoes);
                 setPorMes(resPorMes.data.por_mes);
+                setPorTipoMes(resPorTipoMes.data.por_tipo_mes);
             } catch (err) {
                 adicionarToast(err.response?.data?.message || 'Erro ao carregar dados.', 'erro');
             } finally {
@@ -62,11 +78,23 @@ function Estatisticas() {
         return sessoes.reduce((max, s) => s.duracao_minutos > max.duracao_minutos ? s : max).nome_conteudo;
     };
 
-    // Dados formatados pro gráfico
+    // Dados formatados pro gráfico de barras
     const dadosPorMes = porMes.map(item => ({
         mes: item.mes,
         horas: parseFloat(item.horas),
     }));
+
+     // Dados formatados pro gráfico de linha — agrupa por mês com cada tipo como chave
+    const tiposUnicos = [...new Set(porTipoMes.map(item => item.tipo))];
+    const mesesUnicos = [...new Set(porTipoMes.map(item => item.mes))];
+    const dadosPorTipoMes = mesesUnicos.map(mes => {
+        const ponto = { mes };
+        tiposUnicos.forEach(tipo => {
+            const encontrado = porTipoMes.find(item => item.mes === mes && item.tipo === tipo);
+            ponto[tipo] = encontrado ? parseFloat(encontrado.horas) : 0;
+        });
+        return ponto;
+    });
 
     // Estilos do tooltip baseados no tema
     const temaAtual = localStorage.getItem('tema');
@@ -106,6 +134,35 @@ function Estatisticas() {
                                     />
                                     <Bar dataKey="horas" fill="#6c63ff" radius={[4, 4, 0, 0]} />
                                 </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        )}
+                        
+                    {dadosPorTipoMes.length > 0 && (
+                        <div className={styles.grafico}>
+                            <h2 className={styles.tituloGrafico}>Horas por tipo ao longo do tempo</h2>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <LineChart data={dadosPorTipoMes}>
+                                    <XAxis dataKey="mes" stroke="#a0a0a0" />
+                                    <YAxis stroke="#a0a0a0" />
+                                    <Tooltip
+                                        contentStyle={estiloTooltip}
+                                        labelStyle={estiloLabel}
+                                        itemStyle={estiloLabel}
+                                        formatter={(value) => [`${value}h`, '']}
+                                    />
+                                    <Legend />
+                                    {tiposUnicos.map(tipo => (
+                                        <Line
+                                            key={tipo}
+                                            type="monotone"
+                                            dataKey={tipo}
+                                            stroke={CORES_TIPOS[tipo] || '#8884d8'}
+                                            strokeWidth={2}
+                                            dot={{ r: 4 }}
+                                        />
+                                    ))}
+                                </LineChart>
                             </ResponsiveContainer>
                         </div>
                     )}
