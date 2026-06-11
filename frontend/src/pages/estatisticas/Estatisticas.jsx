@@ -5,7 +5,7 @@ import { useToastContext } from '../../contexts/ToastContext';
 import SkeletonEstatisticas from '../../components/skeleton/skeletonEstatisticas/SkeletonEstatisticas';
 import {
     BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-    LineChart, Line, Legend
+    LineChart, Line, Legend, Cell
 } from 'recharts';
 import styles from './Estatisticas.module.css';
 
@@ -78,7 +78,7 @@ function Estatisticas() {
         return sessoes.reduce((max, s) => s.duracao_minutos > max.duracao_minutos ? s : max).nome_conteudo;
     };
 
-    // Dados formatados pro gráfico de barras
+    // Dados formatados pro gráfico de barras mensal
     const dadosPorMes = porMes.map(item => ({
         mes: item.mes,
         horas: parseFloat(item.horas),
@@ -95,6 +95,23 @@ function Estatisticas() {
         });
         return ponto;
     });
+
+    // Média de compreensão por tipo — calculado no frontend
+    const mediaCompreensaoPorTipo = () => {
+        if (!sessoes.length) return [];
+        const agrupado = {};
+        sessoes.forEach(s => {
+            if (!agrupado[s.tipo]) agrupado[s.tipo] = { total: 0, count: 0 };
+            agrupado[s.tipo].total += Number(s.grau_compreensao);
+            agrupado[s.tipo].count += 1;
+        });
+        return Object.entries(agrupado).map(([tipo, dados]) => ({
+            tipo,
+            media: parseFloat((dados.total / dados.count).toFixed(1)),
+        })).sort((a, b) => b.media - a.media);
+    };
+
+    const dadosCompreensao = mediaCompreensaoPorTipo();
 
     // Estilos do tooltip baseados no tema
     const temaAtual = localStorage.getItem('tema');
@@ -163,6 +180,32 @@ function Estatisticas() {
                                         />
                                     ))}
                                 </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                        )}
+                        
+                    {dadosCompreensao.length > 0 && (
+                        <div className={styles.grafico}>
+                            <h2 className={styles.tituloGrafico}>Média de compreensão por tipo</h2>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={dadosCompreensao} layout="vertical">
+                                    <XAxis type="number" domain={[0, 5]} stroke="#a0a0a0" />
+                                    <YAxis type="category" dataKey="tipo" stroke="#a0a0a0" width={60} />
+                                    <Tooltip
+                                        contentStyle={estiloTooltip}
+                                        labelStyle={estiloLabel}
+                                        itemStyle={estiloLabel}
+                                        formatter={(value) => [`${value}/5`, 'Média de compreensão']}
+                                    />
+                                    <Bar dataKey="media" radius={[0, 4, 4, 0]}>
+                                        {dadosCompreensao.map((entry) => (
+                                            <Cell
+                                                key={entry.tipo}
+                                                fill={CORES_TIPOS[entry.tipo] || '#8884d8'}
+                                            />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
                             </ResponsiveContainer>
                         </div>
                     )}
