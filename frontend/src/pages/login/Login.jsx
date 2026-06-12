@@ -28,7 +28,7 @@ function Login() {
 
         try {
             const resposta = await api.post('/auth/login', form);
-
+            localStorage.setItem('token', resposta.data.token);
             // Armazenar token e informações do usuário no localStorage 
             localStorage.setItem('usuario', JSON.stringify(resposta.data.usuario));
             navigate('/dashboard');
