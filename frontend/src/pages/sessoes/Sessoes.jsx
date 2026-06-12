@@ -132,8 +132,15 @@ function Sessoes() {
             {/* Modal de confirmação de deletar */}
             {modalDeletar && (
                 <div className={styles.modalOverlay}>
-                    <div className={styles.modal}>
-                        <h3 className={styles.modalTitulo}>Deletar sessão</h3>
+                    <div
+                        className={styles.modal}
+                        role="dialog" aria-modal="true" aria-labelledby="titulo-deletar-sessao"
+                    >
+                        <h3
+                            className={styles.modalTitulo}
+                            id="titulo-deletar-sessao"
+                        >
+                            Deletar sessão</h3>
                         <p className={styles.modalTexto}>Tem certeza que deseja deletar esta sessão? Esta ação é irreversível.</p>
                         <div className={styles.modalBotoes}>
                             <button onClick={() => setModalDeletar(null)} className={styles.botaoCancelar}>Cancelar</button>
@@ -146,8 +153,15 @@ function Sessoes() {
             {/* Modal de edição */}
             {sessaoEditando && (
                 <div className={styles.modalOverlay}>
-                    <div className={styles.modal}>
-                        <h3 className={styles.modalTitulo}>Editar sessão</h3>
+                    <div
+                        className={styles.modal}
+                        role="dialog" aria-modal="true" aria-labelledby="titulo-editar-sessao"
+                    >
+                        <h3
+                            className={styles.modalTitulo}
+                            id="titulo-editar-sessao"
+                        >
+                            Editar sessão</h3>
                         <form onSubmit={handleSubmitEdicao} className={styles.formEdicao}>
                             <CampoTexto
                                 label="Conteúdo"

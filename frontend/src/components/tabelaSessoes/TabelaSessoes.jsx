@@ -52,6 +52,7 @@ function TabelaSessoes({ sessoes, onEditar, onDeletar }) {
                                     className={styles.botaoEditar}
                                     onClick={() => onEditar(sessao)}
                                     title="Editar sessão"
+                                    aria-label={`Editar sessão de ${sessao.nome_conteudo}`}
                                 >
                                     ✏️
                                 </button>
@@ -59,6 +60,7 @@ function TabelaSessoes({ sessoes, onEditar, onDeletar }) {
                                     className={styles.botaoDeletar}
                                     onClick={() => onDeletar(sessao.id)}
                                     title="Deletar sessão"
+                                    aria-label={`Deletar sessão de ${sessao.nome_conteudo}`}
                                 >
                                     🗑️
                                 </button>

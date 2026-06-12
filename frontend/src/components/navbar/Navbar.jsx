@@ -18,13 +18,21 @@ function Navbar({ user, tema, alternarTema }) {
   return (
     <>
       {!isOpen && (
-        <button onClick={toggleMenu} className={styles.openbtn}>
+        <button
+          className={styles.openbtn}
+          onClick={toggleMenu}
+          aria-label="Abrir menu"
+        >
           &#9776;
         </button>
       )}
 
       <div className={styles.navbar} style={{ width: isOpen ? "250px" : "0" }}>
-        <button className={styles.closebtn} onClick={toggleMenu}>
+        <button
+          className={styles.closebtn}
+          onClick={toggleMenu}
+          aria-label="Fechar menu"
+        >
           &times;
         </button>
 
@@ -62,6 +70,7 @@ function Navbar({ user, tema, alternarTema }) {
                 onClick={alternarTema}
                 className={`${styles.botaoTema} ${tema === "escuro" ? styles.escuro : ""}`}
                 title={tema === "escuro" ? "Modo claro" : "Modo escuro"}
+                aria-label={tema === "escuro" ? "Mudar para modo claro" : "Mudar para modo escuro"}
               >
                 <span className={styles.toggleLabel}>
                   {tema === "escuro" ? "☀️" : "🌙"}
@@ -71,7 +80,11 @@ function Navbar({ user, tema, alternarTema }) {
                 </span>
               </button>
               <span>{user?.nome}</span>
-              <button onClick={handleLogout} className={styles.logoutButton}>
+              <button
+                className={styles.logoutButton}
+                onClick={handleLogout}
+                aria-label="Sair da conta"
+              >
                 Sair
               </button>
             </>

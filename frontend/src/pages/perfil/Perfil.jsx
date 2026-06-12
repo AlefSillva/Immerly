@@ -268,8 +268,19 @@ function Perfil() {
       </div>
       {modalDeletar && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
-            <h3 className={styles.modalTitulo}>Deletar conta</h3>
+          <div
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-deletar-conta"
+          >
+            <h3
+              className={styles.modalTitulo}
+              id="titulo-deletar-conta"
+            >
+              Deletar conta
+            </h3>
+            
             <p className={styles.modalTexto}>
               Tem certeza? Esta ação é irreversível e todos os seus dados serão
               perdidos.
