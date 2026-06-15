@@ -8,12 +8,24 @@ import CampoMinutos from '../../components/formSessao/campoMinutos/CampoMinutos'
 import { opcoesTipo, opcoesNivel, opcoesGrauCompreensao } from '../../constants/opcoesSessao';
 import { useToastContext } from '../../contexts/ToastContext';
 import styles from './Sessoes.module.css';
-    
+
+
+// Opções de filtro por tipo incluindo "Todos"
+const opcoesFiltroTipo = [
+    { value: '', label: 'Todos' },
+    ...opcoesTipo,
+];
+
 function Sessoes() {
     const { adicionarToast } = useToastContext();
     const [sessoes, setSessoes] = useState([]);
     const [dataInicio, setDataInicio] = useState('');
     const [dataFim, setDataFim] = useState('');
+    const [filtroTipo, setFiltroTipo] = useState('');
+    const [paginaAtual, setPaginaAtual] = useState(1);
+    const [totalPaginas, setTotalPaginas] = useState(1);
+    const [total, setTotal] = useState(0);
+    const limit = 5;
     const [modalDeletar, setModalDeletar] = useState(null);
     const [sessaoEditando, setSessaoEditando] = useState(null);
     const [formEdicao, setFormEdicao] = useState({
@@ -24,18 +36,25 @@ function Sessoes() {
         grau_compreensao: '',
     });
 
-    const buscarSessoes = async () => {
+    const buscarSessoes = async (page = paginaAtual, tipo = filtroTipo) => {
         try {
-            const resposta = await api.get('/sessoes');
+            const params = new URLSearchParams({ page, limit });
+            if (tipo) params.append('tipo', tipo);
+
+            const resposta = await api.get(`/sessoes?${params.toString()}`);
+
             setSessoes(resposta.data.sessoes);
+            setTotalPaginas(resposta.data.paginacao.totalPaginas);
+            setTotal(resposta.data.paginacao.total);
+
         } catch (err) {
             adicionarToast(err.response?.data?.message || 'Erro ao buscar sessões.', 'erro');
         }
     };
 
     useEffect(() => {
-        buscarSessoes();
-    }, []);
+        buscarSessoes(paginaAtual, filtroTipo);
+    }, [paginaAtual, filtroTipo]);
 
     const sessoesFiltradas = sessoes.filter((sessao) => {
         const data = new Date(sessao.data);
@@ -45,6 +64,12 @@ function Sessoes() {
         if (fim && data > fim) return false;
         return true;
     });
+
+    // Reseta a página para 1 ao mudar o filtro de tipo
+    const handleFiltroTipo = (e) => {
+        setFiltroTipo(e.target.value);
+        setPaginaAtual(1);
+    };
 
      // Abre o modal de edição com os dados da sessão preenchidos
     const handleEditar = (sessao) => {
@@ -113,21 +138,62 @@ function Sessoes() {
                         onChange={(e) => setDataFim(e.target.value)}
                     />
                 </div>
-                {(dataInicio || dataFim) && (
+
+                <div className={styles.filtroGrupo}>
+                    <label className={styles.filtroLabel}>Tipo</label>
+                    <select
+                        className={styles.filtroInput}
+                        value={filtroTipo}
+                        onChange={handleFiltroTipo}
+                    >
+                        {opcoesFiltroTipo.map(op => (
+                            <option key={op.value} value={op.value}>{op.label}</option>
+                        ))}
+                    </select>
+                </div>
+
+                {(dataInicio || dataFim || filtroTipo) && (
                     <button
                         className={styles.filtroClear}
-                        onClick={() => { setDataInicio(''); setDataFim(''); }}
+                        onClick={() => { setDataInicio(''); setDataFim(''); setFiltroTipo(''); }}
                     >
-                        Limpar filtro
+                        Limpar filtros
                     </button>
                 )}
             </div>
+
+            <p className={styles.totalSessoes}>{total} sessão(ões) encontrada(s)</p>
 
             <TabelaSessoes
                 sessoes={sessoesFiltradas}
                 onEditar={handleEditar}
                 onDeletar={(id) => setModalDeletar(id)}
             />
+
+             {/* Paginação */}
+            {totalPaginas > 1 && (
+                <div className={styles.paginacao}>
+                    <button
+                        className={styles.botaoPagina}
+                        onClick={() => setPaginaAtual(p => p - 1)}
+                        disabled={paginaAtual === 1}
+                        aria-label="Página anterior"
+                    >
+                        ← Anterior
+                    </button>
+                    <span className={styles.paginaInfo}>
+                        {paginaAtual} / {totalPaginas}
+                    </span>
+                    <button
+                        className={styles.botaoPagina}
+                        onClick={() => setPaginaAtual(p => p + 1)}
+                        disabled={paginaAtual === totalPaginas}
+                        aria-label="Próxima página"
+                    >
+                        Próxima →
+                    </button>
+                </div>
+            )}
             
             {/* Modal de confirmação de deletar */}
             {modalDeletar && (

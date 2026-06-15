@@ -85,7 +85,8 @@
 
 .filtroClear:hover {
     border-color: var(--cor-erro);
-    color: var(--cor-erro);
+    background-color: var(--cor-erro);
+    color: var(--cor-texto);
 }
 
 .modalOverlay {
@@ -205,6 +206,47 @@
 
 .botaoSalvar:hover {
     opacity: 0.85;
+}
+
+.totalSessoes {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    width: 100%;
+    text-align: center;
+}
+
+.paginacao {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.botaoPagina {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: var(--raio-borda);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.botaoPagina:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+.botaoPagina:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.paginaInfo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    font-weight: 500;
 }
 
 @media (min-width: 576px) {
