@@ -34,20 +34,47 @@ const criar = async (req, res, next) => {
     }
 };
 
-// Listar todas as sessões do usuário autenticado
+// Listar sessões do usuário com paginação e filtro por tipo
 const listar = async (req, res, next) => {
     const id_usuario = req.usuarioId;
 
-    // Buscar sessões do usuário no banco de dados, ordenando da mais recente para a mais antiga
+    // Parâmetros de paginação e filtro via query string
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const tipo = req.query.tipo || null;
+    const offset = (page - 1) * limit;
+
     try {
+        // Conta o total de sessões para calcular o total de páginas
+        const totalResult = await pool.query(
+            `SELECT COUNT(*) FROM sessoes
+            WHERE id_usuario = $1
+            ${tipo ? 'AND tipo = $2' : ''}`,
+            tipo ? [id_usuario, tipo] : [id_usuario]
+        );
+
+        const total = parseInt(totalResult.rows[0].count);
+        const totalPaginas = Math.ceil(total / limit);
+
+        // Busca as sessões com paginação e filtro
         const sessoes = await pool.query(
             `SELECT * FROM sessoes
             WHERE id_usuario = $1
-            ORDER BY data DESC` ,
-            [id_usuario]
+            ${tipo ? 'AND tipo = $2' : ''}
+            ORDER BY data DESC
+            LIMIT $${tipo ? 3 : 2} OFFSET $${tipo ? 4 : 3}`,
+            tipo ? [id_usuario, tipo, limit, offset] : [id_usuario, limit, offset]
         );
 
-        res.json({ sessoes: sessoes.rows });
+        res.json({
+            sessoes: sessoes.rows,
+            paginacao: {
+                total,
+                totalPaginas,
+                paginaAtual: page,
+                limit
+            }
+        });
 
     } catch (err) {
         next(err);
