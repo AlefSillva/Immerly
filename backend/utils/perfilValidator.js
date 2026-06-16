@@ -1,15 +1,15 @@
 // Valida os campos de atualização de perfil
 const validarAtualizarPerfil = (nome, email) => {
-    if (!nome || !email) {
-        return { valido: false, mensagem: 'Nome e email são obrigatórios.' };
+    if (!nome && !email) {
+        return { valido: false, mensagem: 'Informe ao menos nome ou email.' };
     }
 
-    if (nome.trim().length < 2) {
+    if (nome && nome.trim().length < 2) {
         return { valido: false, mensagem: 'Nome deve ter pelo menos 2 caracteres.' };
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (email && !emailRegex.test(email)) {
         return { valido: false, mensagem: 'Email inválido.' };
     }
 
