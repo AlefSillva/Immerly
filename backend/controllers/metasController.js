@@ -10,7 +10,7 @@ const criarMeta = async (req, res, next) => {
 
     // Se a validação falhar, retorna um erro com a mensagem apropriada
     if ( !validacao.valido ) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
     try {
@@ -23,7 +23,7 @@ const criarMeta = async (req, res, next) => {
 
         // Se já existir uma meta para o usuário, retorna um erro informando que ele deve usar PUT para atualizar
         if ( metaExistente.rows.length > 0 ) {
-            return res.status(409).json({ message: 'Você já possui uma meta cadastrada. Atualize os campos e clique em Salvar.' });
+            return res.status(409).json({ message: 'Você já possui uma meta cadastrada. Atualize os campos e clique em Salvar.', code: 'META_DUPLICADA' });
         }
 
         // Insere a nova meta no banco de dados
@@ -51,7 +51,7 @@ const atualizarMeta = async (req, res, next) => {
 
     // Se a validação falhar, retorna um erro com a mensagem apropriada
     if ( !validacao.valido ) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
 
@@ -67,7 +67,7 @@ const atualizarMeta = async (req, res, next) => {
 
         //Se nenhuma linha foi afetada, o usuário não possui uma meta cadastrada
         if(result.rows.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma meta encontrada. Use POST para criar uma.' });
+            return res.status(404).json({ message: 'Nenhuma meta encontrada. Use POST para criar uma.', code: 'META_NAO_ENCONTRADA' });
         }
 
         res.json({ meta: result.rows[0] });
@@ -87,7 +87,7 @@ const buscarMeta = async (req, res, next) => {
         );
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma meta encontrada.' });
+            return res.status(404).json({ message: 'Nenhuma meta encontrada.', code: 'META_NAO_ENCONTRADA' });
         }
 
         res.json({ meta: result.rows[0] });

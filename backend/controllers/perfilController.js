@@ -12,7 +12,7 @@ const buscarPerfil = async (req, res, next) => {
         );
 
         if (resultado.rows.length === 0) {
-            return res.status(404).json({ message: 'Usuário não encontrado.' });
+            return res.status(404).json({ message: 'Usuário não encontrado.', code: 'USUARIO_NAO_ENCONTRADO' });
         }
 
         res.json({ usuario: resultado.rows[0] });
@@ -28,7 +28,7 @@ const atualizarPerfil = async (req, res, next) => {
 
     const validacao = validarAtualizarPerfil(nome, email);
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
     try {
@@ -40,7 +40,7 @@ const atualizarPerfil = async (req, res, next) => {
             );
 
             if (emailExiste.rows.length > 0) {
-                return res.status(400).json({ message: 'Email já está em uso.' });
+                return res.status(400).json({ message: 'Email já está em uso.', code: 'EMAIL_EM_USO' });
             }
         }
 
@@ -62,7 +62,7 @@ const alterarSenha = async (req, res, next) => {
 
     const validacao = validarAlterarSenha(senha_atual, nova_senha);
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
     try {
@@ -75,7 +75,7 @@ const alterarSenha = async (req, res, next) => {
         const senhaValida = await bcrypt.compare(senha_atual, resultado.rows[0].senha);
 
         if (!senhaValida) {
-            return res.status(400).json({ message: 'Senha atual incorreta.' });
+            return res.status(400).json({ message: 'Senha atual incorreta.', code: 'SENHA_INCORRETA' });
         }
 
         // Criptografa a nova senha

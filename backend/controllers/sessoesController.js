@@ -8,7 +8,7 @@ const criar = async (req, res, next) => {
     const validacao = sessoesValidator(req.body);
 
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.message });
+        return res.status(400).json({ message: validacao.message, code: validacao.code  });
     }
 
     const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao } = req.body;
@@ -88,7 +88,7 @@ const atualizar = async (req, res, next) => {
 
     const validacao = sessoesValidator(req.body);
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.message });
+        return res.status(400).json({ message: validacao.message, code: validacao.code });
     }
 
     const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao } = req.body;
@@ -103,7 +103,7 @@ const atualizar = async (req, res, next) => {
         );
 
         if (resultado.rows.length === 0) {
-            return res.status(404).json({ message: 'Sessão não encontrada.' });
+            return res.status(404).json({ message: 'Sessão não encontrada.', code: 'SESSAO_NAO_ENCONTRADA' });
         }
 
         res.json({ message: 'Sessão atualizada com sucesso!', sessao: resultado.rows[0] });
@@ -127,7 +127,7 @@ const deletar = async (req, res, next) => {
         );
 
         if (resultado.rows.length === 0) {
-            return res.status(404).json({ message: 'Sessão não encontrada.' });
+            return res.status(404).json({ message: 'Sessão não encontrada.', code: 'SESSAO_NAO_ENCONTRADA' });
         }
 
         res.json({ message: 'Sessão deletada com sucesso.' });

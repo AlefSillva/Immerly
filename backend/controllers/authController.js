@@ -9,7 +9,7 @@ const register = async (req, res, next) => {
 
     const validacao = validarRegister(nome, email, senha);
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
     try {
@@ -19,7 +19,7 @@ const register = async (req, res, next) => {
         );
 
         if (userExists.rows.length > 0) {
-            return res.status(409).json({ message: 'Email já cadastrado' });
+            return res.status(409).json({ message: 'Email já cadastrado', code: 'EMAIL_DUPLICADO' });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -57,7 +57,7 @@ const login = async (req, res, next) => {
 
     const validacao = validarLogin(email, senha);
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.mensagem });
+        return res.status(400).json({ message: validacao.mensagem, code: validacao.code });
     }
 
     try {
@@ -67,13 +67,13 @@ const login = async (req, res, next) => {
         );
 
         if (usuario.rows.length === 0) {
-            return res.status(401).json({ message: 'Email ou senha inválidos.' })
+            return res.status(401).json({ message: 'Email ou senha inválidos.', code: 'CREDENCIAIS_INVALIDAS' })
         }
 
         const senhaValida = await bcrypt.compare(senha, usuario.rows[0].senha);
 
         if (!senhaValida) {
-            return res.status(401).json({ message: 'Email ou senha inválidos.' })
+            return res.status(401).json({ message: 'Email ou senha inválidos.', code: 'CREDENCIAIS_INVALIDAS' })
         }
 
         const token = jwt.sign(
