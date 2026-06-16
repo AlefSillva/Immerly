@@ -19,7 +19,7 @@ const register = async (req, res, next) => {
         );
 
         if (userExists.rows.length > 0) {
-            return res.status(400).json({ message: 'Email já cadastrado' });
+            return res.status(409).json({ message: 'Email já cadastrado' });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -67,13 +67,13 @@ const login = async (req, res, next) => {
         );
 
         if (usuario.rows.length === 0) {
-            return res.status(400).json({ message: 'Email ou senha inválidos.' })
+            return res.status(401).json({ message: 'Email ou senha inválidos.' })
         }
 
         const senhaValida = await bcrypt.compare(senha, usuario.rows[0].senha);
 
         if (!senhaValida) {
-            return res.status(400).json({ message: 'Email ou senha inválidos.' })
+            return res.status(401).json({ message: 'Email ou senha inválidos.' })
         }
 
         const token = jwt.sign(
