@@ -19,9 +19,13 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('usuario');
-            window.location.href = '/login';
+            const code = error.response.data?.code;
+
+            if (code !== 'CREDENCIAIS_INVALIDAS') { 
+                localStorage.removeItem('token');
+                localStorage.removeItem('usuario');
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }

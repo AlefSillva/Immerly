@@ -1,12 +1,6 @@
 // Importa o framework Express para criar o servidor
 const express = require('express');
 
-// Importa o dotenv para carregar as variáveis do arquivo .env
-const dotenv = require('dotenv');
-
-// Carrega as variáveis de ambiente do .env
-dotenv.config();
-
 // Cria a instância do servidor Express
 const app = express();
 

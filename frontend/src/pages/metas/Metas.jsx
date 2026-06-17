@@ -1,32 +1,10 @@
-import { useState, useEffect } from 'react';
-import api from '../../services/api'
+import useMetas from '../../hooks/useMetas';
 import FormMetas from '../../components/formMetas/FormMetas';
 import ProgressoMeta from '../../components/progressoMeta/ProgressoMeta'
 import styles from './Metas.module.css';
 
 function Metas() {
-    const [metricas, setMetricas] = useState(null);
-    const [meta, setMeta] = useState({ meta_semanal: 0, meta_mensal: 0 });
-
-    const buscarDados = async () => {
-        try {
-            const [resMetricas, resMeta] = await Promise.all([
-                api.get('/metricas'),
-                api.get('/metas')
-            ]);
-            setMetricas(resMetricas.data);
-            // Se tiver meta definida usa ela, senão mantém 0
-            if (resMeta.data.meta) {
-                setMeta(resMeta.data.meta);
-            }
-        } catch (err) {
-            console.error(err.response?.data?.message || '');
-        }
-    };
-
-    useEffect(() => {
-        buscarDados();
-    }, []);
+    const { metricas, meta, buscarDados } = useMetas();
     
     return (
         <div className={styles.container}>

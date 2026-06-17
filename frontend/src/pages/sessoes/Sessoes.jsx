@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import { useState } from 'react';
+import useSessoes from '../../hooks/useSessoes';
 import FormSessao from '../../components/formSessao/FormSessao';
 import TabelaSessoes from '../../components/tabelaSessoes/TabelaSessoes';
 import CampoTexto from '../../components/formSessao/campoTexto/CampoTexto';
 import CampoSelect from '../../components/formSessao/campoSelect/CampoSelect';
 import CampoMinutos from '../../components/formSessao/campoMinutos/CampoMinutos';
 import { opcoesTipo, opcoesNivel, opcoesGrauCompreensao } from '../../constants/opcoesSessao';
-import { useToastContext } from '../../contexts/ToastContext';
 import styles from './Sessoes.module.css';
 
 
@@ -17,15 +16,21 @@ const opcoesFiltroTipo = [
 ];
 
 function Sessoes() {
-    const { adicionarToast } = useToastContext();
-    const [sessoes, setSessoes] = useState([]);
+    const {
+        sessoes,
+        filtroTipo,
+        paginaAtual,
+        totalPaginas,
+        total,
+        buscarSessoes,
+        editarSessao,
+        deletarSessao,
+        handleFiltroTipo,
+        setPaginaAtual,
+    } = useSessoes();
+
     const [dataInicio, setDataInicio] = useState('');
     const [dataFim, setDataFim] = useState('');
-    const [filtroTipo, setFiltroTipo] = useState('');
-    const [paginaAtual, setPaginaAtual] = useState(1);
-    const [totalPaginas, setTotalPaginas] = useState(1);
-    const [total, setTotal] = useState(0);
-    const limit = 5;
     const [modalDeletar, setModalDeletar] = useState(null);
     const [sessaoEditando, setSessaoEditando] = useState(null);
     const [formEdicao, setFormEdicao] = useState({
@@ -36,25 +41,6 @@ function Sessoes() {
         grau_compreensao: '',
     });
 
-    const buscarSessoes = async (page = paginaAtual, tipo = filtroTipo) => {
-        try {
-            const params = new URLSearchParams({ page, limit });
-            if (tipo) params.append('tipo', tipo);
-
-            const resposta = await api.get(`/sessoes?${params.toString()}`);
-
-            setSessoes(resposta.data.sessoes);
-            setTotalPaginas(resposta.data.paginacao.totalPaginas);
-            setTotal(resposta.data.paginacao.total);
-
-        } catch (err) {
-            adicionarToast(err.response?.data?.message || 'Erro ao buscar sessões.', 'erro');
-        }
-    };
-
-    useEffect(() => {
-        buscarSessoes(paginaAtual, filtroTipo);
-    }, [paginaAtual, filtroTipo]);
 
     const sessoesFiltradas = sessoes.filter((sessao) => {
         const data = new Date(sessao.data);
@@ -64,12 +50,6 @@ function Sessoes() {
         if (fim && data > fim) return false;
         return true;
     });
-
-    // Reseta a página para 1 ao mudar o filtro de tipo
-    const handleFiltroTipo = (e) => {
-        setFiltroTipo(e.target.value);
-        setPaginaAtual(1);
-    };
 
      // Abre o modal de edição com os dados da sessão preenchidos
     const handleEditar = (sessao) => {
@@ -89,25 +69,13 @@ function Sessoes() {
 
     const handleSubmitEdicao = async (e) => {
         e.preventDefault();
-        try {
-            await api.put(`/sessoes/${sessaoEditando.id}`, formEdicao);
-            adicionarToast('Sessão atualizada com sucesso!', 'sucesso');
-            setSessaoEditando(null);
-            buscarSessoes();
-        } catch (err) {
-            adicionarToast(err.response?.data?.message || 'Erro ao atualizar sessão.', 'erro');
-        }
+        const sucesso = await editarSessao(sessaoEditando.id, formEdicao);
+        if (sucesso) setSessaoEditando(null);
     };
 
     const handleDeletar = async () => {
-        try {
-            await api.delete(`/sessoes/${modalDeletar}`);
-            adicionarToast('Sessão deletada com sucesso!', 'sucesso');
-            setModalDeletar(null);
-            buscarSessoes();
-        } catch (err) {
-            adicionarToast(err.response?.data?.message || 'Erro ao deletar sessão.', 'erro');
-        }
+        const sucesso = await deletarSessao(modalDeletar);
+        if (sucesso) setModalDeletar(null);
     };
 
     return (
@@ -155,7 +123,7 @@ function Sessoes() {
                 {(dataInicio || dataFim || filtroTipo) && (
                     <button
                         className={styles.filtroClear}
-                        onClick={() => { setDataInicio(''); setDataFim(''); setFiltroTipo(''); }}
+                        onClick={() => { setDataInicio(''); setDataFim(''); handleFiltroTipo({ target: { value: '' } }); }}
                     >
                         Limpar filtros
                     </button>

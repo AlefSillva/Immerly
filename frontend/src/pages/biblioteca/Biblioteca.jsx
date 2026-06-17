@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import api from '../../services/api';
+import { useState } from 'react';
+import useRecursos from '../../hooks/useRecursos';
 import Carrossel from '../../components/carrossel/Carrossel';
+import SkeletonBiblioteca from '../../components/skeleton/skeletonBiblioteca/SkeletonBiblioteca';
 import styles from './Biblioteca.module.css'
 
 
@@ -8,10 +9,11 @@ const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 const TIPOS = ['listening', 'speaking', 'reading', 'writing', 'grammar', 'vocabulary', 'reference'];
 
 function Biblioteca() {
-    const [recursos, setRecursos] = useState([]);
-    const [erro, setErro] = useState('');
+    const { recursos, erro, carregando } = useRecursos();
     const [nivelAtivo, setNivelAtivo] = useState('Todos');
     const [tipoAtivo, setTipoAtivo] = useState('Todos');
+
+    if (carregando) return <SkeletonBiblioteca />;
 
     const handleNivel = (nivel) => {
         if (nivel === nivelAtivo) {
@@ -29,18 +31,6 @@ function Biblioteca() {
         }
     }
 
-    useEffect(() => {
-        const buscarRecursos = async () => {
-            try {
-                const resposta = await api.get('/recursos');
-                setRecursos(resposta.data.recursos);
-            } catch (err) {
-                setErro(err.data.message || 'Erro ao carregar recursos.')
-            }
-        };
-
-        buscarRecursos();
-    }, [])
 
     // Filtra recursos por nível
     const porNivel = (nivel) => { 
