@@ -1,15 +1,16 @@
 const { Pool } = require('pg');
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({
-        path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
-    });
+if (process.env.NODE_ENV === 'test') {
+    require('dotenv').config({ path: '.env.test' });
+
+} else if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
 }
 
 
 const pool = process.env.DATABASE_URL
     ? new Pool({
-        conectionString: process.env.DATABASE_URL,
+        connectionString: process.env.DATABASE_URL,
         ssl: { rejectUnauthorized: false}
     })
     : new Pool({
