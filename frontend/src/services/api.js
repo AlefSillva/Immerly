@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instância do Axios apontando para a URL base da API
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL:  import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
 });
 
 // Interceptador que injeta o token JWT em toda requisição automaticamente
@@ -19,7 +19,7 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            const code = error.response.data?.code;
+            const code = error.response?.data?.code;
 
             if (code !== 'CREDENCIAIS_INVALIDAS') { 
                 localStorage.removeItem('token');
