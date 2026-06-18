@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Landing.module.css';
-import NavbarPublica from '../../components/navbarPublica/navbarPublica';
+import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
 
 function Landing() { 
     return (
