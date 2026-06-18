@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+
 const app = require('./index');
 
 // Define a porta do servidor — usa a do .env ou 3000 como padrão
