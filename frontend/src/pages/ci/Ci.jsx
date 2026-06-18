@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import NavbarPublica from '../../components/navbarPublica/navbarPublica';
+import NavbarPublica from '../../components/navbarPublica/NavbarPublica';
 import styles from './Ci.module.css';
 
 function Ci() {
