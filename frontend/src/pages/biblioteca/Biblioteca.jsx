@@ -13,8 +13,6 @@ function Biblioteca() {
     const [nivelAtivo, setNivelAtivo] = useState('Todos');
     const [tipoAtivo, setTipoAtivo] = useState('Todos');
 
-    if (carregando) return <SkeletonBiblioteca />;
-
     const handleNivel = (nivel) => {
         if (nivel === nivelAtivo) {
             setNivelAtivo('Todos');
@@ -57,6 +55,9 @@ function Biblioteca() {
 
     return ( 
         <div className={styles.container}>
+            {carregando && <SkeletonBiblioteca />}
+
+            
             <h1 className={styles.titulo}>Biblioteca</h1>
             <p className={styles.subtitulo}>Recursos para ajudar na sua imersão</p>
 
