@@ -104,15 +104,15 @@ const atualizar = async (req, res, next) => {
         return res.status(400).json({ message: validacao.message, code: validacao.code });
     }
 
-    const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao } = req.body;
+    const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, data } = req.body;
 
     try {
         const resultado = await pool.query(
             `UPDATE sessoes
-            SET nome_conteudo = $1, tipo = $2, duracao_minutos = $3, nivel_estimado = $4, grau_compreensao = $5
-            WHERE id = $6 AND id_usuario = $7
+            SET nome_conteudo = $1, tipo = $2, duracao_minutos = $3, nivel_estimado = $4, grau_compreensao = $5, data = COALESCE($6, data)
+            WHERE id = $7 AND id_usuario = $8
             RETURNING *`,
-            [nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, id, id_usuario]
+            [nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, data || null, id, id_usuario]
         );
 
         if (resultado.rows.length === 0) {
