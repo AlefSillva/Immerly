@@ -5,6 +5,7 @@ import TabelaSessoes from '../../components/tabelaSessoes/TabelaSessoes';
 import CampoTexto from '../../components/formSessao/campoTexto/CampoTexto';
 import CampoSelect from '../../components/formSessao/campoSelect/CampoSelect';
 import CampoMinutos from '../../components/formSessao/campoMinutos/CampoMinutos';
+import CampoData from '../../components/formSessao/campoData/CampoData';
 import { opcoesTipo, opcoesNivel, opcoesGrauCompreensao } from '../../constants/opcoesSessao';
 import styles from './Sessoes.module.css';
 
@@ -43,6 +44,7 @@ function Sessoes() {
         duracao_minutos: '',
         nivel_estimado: '',
         grau_compreensao: '',
+        data: '',
     });
 
      // Abre o modal de edição com os dados da sessão preenchidos
@@ -54,6 +56,7 @@ function Sessoes() {
             duracao_minutos: sessao.duracao_minutos,
             nivel_estimado: sessao.nivel_estimado,
             grau_compreensao: sessao.grau_compreensao,
+            data: sessao.data?.split('T')[0],
         });
     };
 
@@ -214,6 +217,15 @@ function Sessoes() {
                                 onChange={handleChangeEdicao}
                                 required
                             />
+
+                            <CampoData
+                                label="Data"
+                                name="data"
+                                value={formEdicao.data}
+                                onChange={handleChangeEdicao}
+                                required
+                            />
+
                             <CampoSelect
                                 label="Nível"
                                 name="nivel_estimado"
