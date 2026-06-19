@@ -1,3 +1,4 @@
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import styles from './TabelaSessoes.module.css';
 
 // Mapeia o grau de compreensão numérico para texto legível
@@ -54,7 +55,7 @@ function TabelaSessoes({ sessoes, onEditar, onDeletar }) {
                                     title="Editar sessão"
                                     aria-label={`Editar sessão de ${sessao.nome_conteudo}`}
                                 >
-                                    ✏️
+                                    <FiEdit2 />
                                 </button>
                                 <button
                                     className={styles.botaoDeletar}
@@ -62,7 +63,7 @@ function TabelaSessoes({ sessoes, onEditar, onDeletar }) {
                                     title="Deletar sessão"
                                     aria-label={`Deletar sessão de ${sessao.nome_conteudo}`}
                                 >
-                                    🗑️
+                                    <FiTrash2 />
                                 </button>
                             </td>
                         </tr>
