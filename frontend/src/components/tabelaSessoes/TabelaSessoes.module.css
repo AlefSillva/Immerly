@@ -59,13 +59,22 @@
     align-items: center;
 }
 
+.botaoEditar {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+}
+
+.botaoDeletar {
+    background-color: var(--cor-erro);
+    color: var(--cor-texto);
+}
+
 .botaoEditar,
 .botaoDeletar {
-    /* background: transparent; */
     border: none;
     cursor: pointer;
-    font-size: 1rem;
-    padding: 0.25rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
     border-radius: var(--raio-borda);
     transition: transform 0.1s;
 }
