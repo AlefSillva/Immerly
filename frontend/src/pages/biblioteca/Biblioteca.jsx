@@ -53,9 +53,16 @@ function Biblioteca() {
     
     const mostrarFerramentas = nivelAtivo === 'Todos' || nivelAtivo === 'Ferramentas';
 
+    if (carregando) {
+        return (
+            <div className={styles.container}>
+                <SkeletonBiblioteca />
+            </div>
+        );
+    }
+
     return ( 
         <div className={styles.container}>
-            {carregando && <SkeletonBiblioteca />}
 
             
             <h1 className={styles.titulo}>Biblioteca</h1>
