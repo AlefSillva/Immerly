@@ -6,24 +6,18 @@ const pool = require('../config/db');
 const criar = async (req, res, next) => {
     const id_usuario = req.usuarioId;
     const validacao = sessoesValidator(req.body);
-
     if (!validacao.valido) {
-        return res.status(400).json({ message: validacao.message, code: validacao.code  });
+        return res.status(400).json({ message: validacao.message, code: validacao.code });
     }
-
-    const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao } = req.body;
-
-    // Inserir nova sessão no banco de dados
+    const { nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, data } = req.body;
     try {
         const novaSessao = await pool.query(
             `INSERT INTO sessoes
-            (id_usuario, nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao) 
-            VALUES ( $1, $2, $3, $4, $5, $6 )
+            (id_usuario, nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, data) 
+            VALUES ( $1, $2, $3, $4, $5, $6, COALESCE($7, CURRENT_DATE) )
             RETURNING *`,
-            [id_usuario, nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao]
+            [id_usuario, nome_conteudo, tipo, duracao_minutos, nivel_estimado, grau_compreensao, data || null]
         );
-
-        // Retornar a nova sessão criada
         res.status(201).json({
             message: 'Sessão registrada com sucesso!',
             sessao: novaSessao.rows[0]
