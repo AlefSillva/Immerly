@@ -30,7 +30,7 @@
 }
 
 .tabela td {
-    padding: 0 1rem;
+    padding: 1rem;
     color: var(--cor-secundaria);
     font-size: 0.8rem;
     line-height: 1.2;
