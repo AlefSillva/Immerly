@@ -6,15 +6,20 @@ const useSessoes = () => {
     const { adicionarToast } = useToastContext();
     const [sessoes, setSessoes] = useState([]);
     const [filtroTipo, setFiltroTipo] = useState('');
+    const [dataInicio, setDataInicio] = useState('');
+    const [dataFim, setDataFim] = useState('');
     const [paginaAtual, setPaginaAtual] = useState(1);
     const [totalPaginas, setTotalPaginas] = useState(1);
     const [total, setTotal] = useState(0);
     const limit = 5;
 
-    const buscarSessoes = useCallback(async (page = paginaAtual, tipo = filtroTipo) => {
+    const buscarSessoes = useCallback(async (page = paginaAtual, tipo = filtroTipo, inicio = dataInicio, fim = dataFim) => {
         try {
             const params = new URLSearchParams({ page, limit });
             if (tipo) params.append('tipo', tipo);
+            if (inicio) params.append('dataInicio', inicio);
+            if (fim) params.append('dataFim', fim);
+
             const resposta = await api.get(`/sessoes?${params.toString()}`);
             setSessoes(resposta.data.sessoes);
             setTotalPaginas(resposta.data.paginacao.totalPaginas);
@@ -22,11 +27,11 @@ const useSessoes = () => {
         } catch (err) {
             adicionarToast(err.response?.data?.message || 'Erro ao buscar sessões.', 'erro');
         }
-    }, [paginaAtual, filtroTipo]);
+    }, [paginaAtual, filtroTipo, dataInicio, dataFim]);
 
     useEffect(() => {
-        buscarSessoes(paginaAtual, filtroTipo);
-    }, [paginaAtual, filtroTipo]);
+        buscarSessoes(paginaAtual, filtroTipo, dataInicio, dataFim);
+    }, [paginaAtual, filtroTipo, dataInicio, dataFim]);
 
     const editarSessao = async (id, dados) => {
         try {
@@ -57,9 +62,28 @@ const useSessoes = () => {
         setPaginaAtual(1);
     };
 
+    const handleDataInicio = (valor) => {
+        setDataInicio(valor);
+        setPaginaAtual(1);
+    };
+
+    const handleDataFim = (valor) => {
+        setDataFim(valor);
+        setPaginaAtual(1);
+    };
+
+    const limparFiltros = () => {
+        setFiltroTipo('');
+        setDataInicio('');
+        setDataFim('');
+        setPaginaAtual(1);
+    };
+
     return {
         sessoes,
         filtroTipo,
+        dataInicio,
+        dataFim,
         paginaAtual,
         totalPaginas,
         total,
@@ -67,6 +91,9 @@ const useSessoes = () => {
         editarSessao,
         deletarSessao,
         handleFiltroTipo,
+        handleDataInicio,
+        handleDataFim,
+        limparFiltros,
         setPaginaAtual,
     };
 };

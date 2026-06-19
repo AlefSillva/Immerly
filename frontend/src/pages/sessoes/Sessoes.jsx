@@ -19,6 +19,8 @@ function Sessoes() {
     const {
         sessoes,
         filtroTipo,
+        dataInicio,
+        dataFim,
         paginaAtual,
         totalPaginas,
         total,
@@ -26,11 +28,13 @@ function Sessoes() {
         editarSessao,
         deletarSessao,
         handleFiltroTipo,
+        handleDataInicio,
+        handleDataFim,
+        limparFiltros,
         setPaginaAtual,
     } = useSessoes();
 
-    const [dataInicio, setDataInicio] = useState('');
-    const [dataFim, setDataFim] = useState('');
+    
     const [modalDeletar, setModalDeletar] = useState(null);
     const [sessaoEditando, setSessaoEditando] = useState(null);
     const [formEdicao, setFormEdicao] = useState({
@@ -39,16 +43,6 @@ function Sessoes() {
         duracao_minutos: '',
         nivel_estimado: '',
         grau_compreensao: '',
-    });
-
-
-    const sessoesFiltradas = sessoes.filter((sessao) => {
-        const data = new Date(sessao.data);
-        const inicio = dataInicio ? new Date(dataInicio) : null;
-        const fim = dataFim ? new Date(dataFim) : null;
-        if (inicio && data < inicio) return false;
-        if (fim && data > fim) return false;
-        return true;
     });
 
      // Abre o modal de edição com os dados da sessão preenchidos
@@ -94,7 +88,7 @@ function Sessoes() {
                         type="date"
                         className={styles.filtroInput}
                         value={dataInicio}
-                        onChange={(e) => setDataInicio(e.target.value)}
+                        onChange={(e) => handleDataInicio(e.target.value)}
                     />
                 </div>
                 <div className={styles.filtroGrupo}>
@@ -103,7 +97,7 @@ function Sessoes() {
                         type="date"
                         className={styles.filtroInput}
                         value={dataFim}
-                        onChange={(e) => setDataFim(e.target.value)}
+                        onChange={(e) => handleDataFim(e.target.value)}
                     />
                 </div>
 
@@ -123,7 +117,7 @@ function Sessoes() {
                 {(dataInicio || dataFim || filtroTipo) && (
                     <button
                         className={styles.filtroClear}
-                        onClick={() => { setDataInicio(''); setDataFim(''); handleFiltroTipo({ target: { value: '' } }); }}
+                        onClick={limparFiltros}
                     >
                         Limpar filtros
                     </button>
@@ -133,7 +127,7 @@ function Sessoes() {
             <p className={styles.totalSessoes}>{total} sessão(ões) encontrada(s)</p>
 
             <TabelaSessoes
-                sessoes={sessoesFiltradas}
+                sessoes={sessoes}
                 onEditar={handleEditar}
                 onDeletar={(id) => setModalDeletar(id)}
             />
