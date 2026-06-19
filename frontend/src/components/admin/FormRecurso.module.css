@@ -16,8 +16,7 @@
     font-weight: 600;
 }
 
-.input,
-.select {
+.input {
     background-color: var(--cor-fundo-input);
     border: 1px solid var(--cor-borda);
     border-radius: var(--raio-borda);
@@ -28,6 +27,24 @@
     transition: border-color 0.2s;
     box-sizing: border-box;
 }
+
+.select {
+    background-color: var(--cor-fundo-input);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    padding: 0.7rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: auto;
+}
+
 
 .input:focus,
 .select:focus {
@@ -84,10 +101,4 @@
     color: var(--cor-erro);
     font-size: 0.9rem;
     font-weight: 600;
-}
-
-@media (min-width: 576px) {
-    .form {
-
-    }
 }
