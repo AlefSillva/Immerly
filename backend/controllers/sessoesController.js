@@ -61,7 +61,7 @@ const listar = async (req, res, next) => {
         }
         if (dataFim) {
             valores.push(dataFim);
-            condicoes.push(`data <= $${valores.length}`);
+            condicoes.push(`data < $${valores.length}::date + INTERVAL '1 day'`);
         }
 
         const whereClause = condicoes.join(' AND ');
