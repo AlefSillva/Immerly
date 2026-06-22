@@ -17,20 +17,20 @@
 
 ### Dashboard
 <p>
-  <img src="./assets/dashboard-preview-1.png" width="49%"/>
-  <img src="./assets/dashboard-preview-2.png" width="49%"/>
+  <img src="./frontend/assets/dashboard-preview-1.png" width="49%"/>
+  <img src="./frontend/assets/dashboard-preview-2.png" width="49%"/>
 </p>
 
 ### Estatísticas
 <p>
-  <img src="./assets/estatisticas-preview-1.png" width="49%"/>
-  <img src="./assets/estatisticas-preview-2.png" width="49%"/>
+  <img src="./frontend/assets/estatisticas-preview-1.png" width="49%"/>
+  <img src="./frontend/assets/estatisticas-preview-2.png" width="49%"/>
 </p>
 
 ### Sessões
 <p>
-  <img src="./assets/sessoes-preview-1.png" width="49%"/>
-  <img src="./assets/sessoes-preview-2.png" width="49%"/>
+  <img src="./frontend/assets/sessoes-preview-1.png" width="49%"/>
+  <img src="./frontend/assets/sessoes-preview-2.png" width="49%"/>
 </p>
 
 ---
