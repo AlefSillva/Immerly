@@ -104,6 +104,7 @@ function Admin() {
                 onCancelar={handleCancelar}
             />
 
+            // Exibe mensagem de carregamento ou a tabela de recursos
             {carregando ? (
                 <p className={styles.carregando}>Carregando recursos...</p>
             ) : (
